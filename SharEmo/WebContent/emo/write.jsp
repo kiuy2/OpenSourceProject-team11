@@ -18,7 +18,7 @@
      	제목 : <input type=text name='title'><br/>
 		작성자 : <input type=text name='author'><br/>
 		내용 : <textarea name='content' rows='5'></textarea><br/>
-        <input type=submit value="저장">
+        <input type=submit value="저장"> 
 	</form>
 	<a href='list.do'>목록보기</a>
    </body>
