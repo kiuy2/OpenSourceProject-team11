@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dao.BoardDAO;
 
-//BoardWriteCommand´Â ±Û¾²±â È­¸é¿¡¼­ ÀúÀå ¹öÆ°À» ´­·¶À»¶§ ½ÇÇàµÇ´Â ±â´ÉÀÔ´Ï´Ù.
+//BoardWriteCommandëŠ” ê¸€ì“°ê¸° í™”ë©´ì—ì„œ ì €ì¥ ë²„íŠ¼ì„ ëˆŒë €ì„ë•Œ ì‹¤í–‰ë˜ëŠ” ê¸°ëŠ¥ì…ë‹ˆë‹¤.
 public class BoardWriteCommand implements BoardCommand {
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		//½ÇÇà½Ã »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ Á¤º¸¸¦ ¹Ş¾Æ¿Í¼­ DAO¸¦ ÅëÇØ DB¿¡ »õ·Î¿î row¸¦ »ğÀÔÇÕ´Ï´Ù.
+		//ì‹¤í–‰ì‹œ ì‚¬ìš©ìê°€ ì…ë ¥í•œ ì •ë³´ë¥¼ ë°›ì•„ì™€ì„œ DAOë¥¼ í†µí•´ DBì— ìƒˆë¡œìš´ rowë¥¼ ì‚½ì…í•©ë‹ˆë‹¤.
 		String title =request.getParameter("title");
 		String author =request.getParameter("author");
 		String content =request.getParameter("content");
