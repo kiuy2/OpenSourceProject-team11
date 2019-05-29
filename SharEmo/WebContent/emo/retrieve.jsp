@@ -15,9 +15,9 @@
     <input type="hidden" name="num" value="${retrieve.num}">
     글번호: ${retrieve.num} &nbsp;&nbsp;&nbsp;&nbsp;
     조회수: ${retrieve.readcnt}<br/>
-    제목<input type="text" name="title" value="${retrieve.title}"><br>
-    작성자<input type="text" name="author" value="${retrieve.author}"><br>
-    내용<textarea name="content" rows="10">${retrieve.content}</textarea><br>
+    타이틀<input type="text" name="title" required value="${retrieve.title}"><br>
+    작성자<input type="text" name="author" required value="${retrieve.author}"><br>
+    내용<textarea name="content" rows="10" cols="50">${retrieve.content}</textarea><br>
     <input type="submit" value="수정">
   </form>
   
