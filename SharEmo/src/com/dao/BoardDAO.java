@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -13,12 +12,13 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.entity.BoardDTO;
+import com.entity.PageTO;
 
 public class BoardDAO {
 	
 	DataSource ds;
 	
-	//»ı¼ºÀÚ
+	//ìƒì„±ì
 	public BoardDAO(){
 		try {
 			Context ctx = new InitialContext();
@@ -29,7 +29,7 @@ public class BoardDAO {
 		}
 	}
 	
-	//¸ñ·Ï º¸±â
+	//ê²Œì‹œë¬¼ ë¦¬ìŠ¤íŠ¸ ë³´ì—¬ì£¼ê¸°
 	public ArrayList<BoardDTO> list(){
 		
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
@@ -82,7 +82,7 @@ public class BoardDAO {
 		return list;
 	}
 	
-	//±Û¾²±â
+	//ê¸€ ì“°ê¸°
 	public void write(String _title, String _author, String _content) {
 		
 		Connection con = null;
@@ -120,7 +120,7 @@ public class BoardDAO {
 		}
 	}
 	
-	//Á¶È¸¼ö 1 Áõ°¡
+	// ì¡°íšŒìˆ˜ 1ì¦ê°€
 	public void readCount(String _num) {
 		
 		Connection con = null;
@@ -145,10 +145,10 @@ public class BoardDAO {
 		}
 	}
 	
-	//±Û ÀÚ¼¼È÷ º¸±â
+	//ê²Œì‹œë¬¼ ìì„¸íˆ ë³´ê¸°
 	public BoardDTO retrieve(String _num) {
 		
-		//Á¶È¸¼ö Áõ°¡
+		//ì¡°íšŒìˆ˜ 1ì¦ê°€
 		readCount(_num);
 		
 		Connection con = null;
@@ -193,7 +193,7 @@ public class BoardDAO {
 		return data;
 	}
 	
-	//±Û ¼öÁ¤ÇÏ±â
+	//ê²Œì‹œë¬¼ ìˆ˜ì •
 	public void update(String _num, String _title, String _author, String _content) {
 
 		Connection con = null;
@@ -225,7 +225,7 @@ public class BoardDAO {
 		}
 	}
 	
-	//±Û »èÁ¦ÇÏ±â
+	//ê²Œì‹œë¬¼ ì‚­ì œ
 	public void delete(String _num) {
 		
 		Connection con = null;
@@ -251,10 +251,7 @@ public class BoardDAO {
 		}
 	}
 	
-	//±Û °Ë»öÇÏ±â (¹Ì±¸Çö)
-	
-	
-	//´äº¯±Û ÀÔ·Â Æû º¸±â
+	//ë‹µë³€ ê¸€ ì“°ê¸° UI ë¡œë“œ
 	public BoardDTO replyui(String _num) {
 
 		Connection con = null;
@@ -296,7 +293,7 @@ public class BoardDAO {
 		return data;
 	}
 	
-	//´äº¯±ÛÀÇ ±âÁ¸ repStep 1 Áõ°¡
+	//ë‹µë³€ì‹œ repStep 1 ì¦ê°€
 	public void makeReply(String _root, String _step) {
 
 		Connection con = null;
@@ -326,7 +323,7 @@ public class BoardDAO {
 		}
 	}
 	
-	//´äº¯´Ş±â
+	//ë‹µë³€ë‹¬ê¸°
 	public void reply(String _num, String _title, String _author, String _content,
 			String _repRoot, String _repStep, String _repIndent) {
 		
@@ -364,5 +361,154 @@ public class BoardDAO {
 		}
 	}
 	
+	//ê¸€ ê²€ìƒ‰í•˜ê¸°
+	public ArrayList<BoardDTO> search(String _searchName, String _searchValue){
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		
+		try {
+			con = ds.getConnection();
+			String query = "SELECT num, author, title,SELECT num,author,title,content," + 
+					"DATE_FORMAT(writeday,'%Y/%M/%D') writeday, readcnt FROM board";
+			if( _searchName.equals("title")) {
+				query+="WHERE title LIKE ?";
+			}
+			else {
+				query+="WHERE author LIKE ?";
+			}
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%"+_searchValue+"%");
+			rs = pstmt.executeQuery();
+			while( rs.next()) {
+				int num=rs.getInt("num");
+				String author =rs.getString("author");
+				String title = rs.getString("title");
+				String content =rs.getString("content");
+				String writeday = rs.getString("writeday");
+				int readcnt=rs.getInt("readcnt");
+				
+				BoardDTO data =new BoardDTO();
+				data.setNum(num);
+				data.setAuthor(author);
+				data.setTitle(title);
+				data.setContent(content);
+				data.setWriteday(writeday);
+				data.setReadcnt(readcnt);
+				
+				list.add(data);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 	
+	public int totalCount() {
+		
+		int count=0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		
+		try {
+			con = ds.getConnection();
+			String query = "SELECT count(*) FROM board";
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	
+	//í˜ì´ì§€ êµ¬í˜„
+	public PageTO page(int curPage) {
+		PageTO to = new PageTO();
+		int totalCount =totalCount();
+		
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		
+		try {
+			con = ds.getConnection();
+			String query = "SELECT num,author,title,content,"
+					+ "DATE_FORMAT(writeday,'%Y/%M/%D') writeday,"
+					+ "readcnt,repRoot, repStep, repIndent FROM "
+					+ "board order by repRoot desc, repStep asc";
+			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			rs = pstmt.executeQuery();
+			
+			int perPage=to.getPerPage();//5
+			
+			int skip = (curPage -1 ) * perPage;
+			
+			if( skip>0) {
+				rs.absolute(skip);
+			}
+			for( int i=0; i<perPage && rs.next(); i++) {
+				int num=rs.getInt("num");
+				String author =rs.getString("author");
+				String title = rs.getString("title");
+				String content =rs.getString("content");
+				String writeday = rs.getString("writeday");
+				int readcnt=rs.getInt("readcnt");
+				int repRoot=rs.getInt("repRoot");
+				int repStep=rs.getInt("repStep");
+				int repIndent=rs.getInt("repIndent");
+				
+				BoardDTO data =new BoardDTO();
+				data.setNum(num);
+				data.setAuthor(author);
+				data.setTitle(title);
+				data.setContent(content);
+				data.setWriteday(writeday);
+				data.setReadcnt(readcnt);
+				data.setRepRoot(repRoot);
+				data.setRepStep(repStep);
+				data.setRepIndent(repIndent);
+				list.add(data);
+			}
+			to.setList(list);
+			to.setTotalCount(totalCount);
+			to.setCurPage(curPage);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return to;
+	}
 }
