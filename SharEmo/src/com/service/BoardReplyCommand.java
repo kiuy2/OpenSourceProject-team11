@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dao.BoardDAO;
 
-//BoardReplyCommand´Â ´äº¯±Û ¾²±â È­¸é¿¡¼­ ´äº¯´Ş±â ¹öÆ°À» ´­·¶À»¶§ ½ÇÇàµÇ´Â ±â´ÉÀÔ´Ï´Ù.
+//BoardReplyCommandëŠ” ë‹µë³€ê¸€ ì“°ê¸° í™”ë©´ì—ì„œ ë‹µë³€ë‹¬ê¸° ë²„íŠ¼ì„ ëˆŒë €ì„ë•Œ ì‹¤í–‰ë˜ëŠ” ê¸°ëŠ¥ì…ë‹ˆë‹¤.
 public class BoardReplyCommand implements BoardCommand {
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		//½ÇÇà½Ã ±Û¾²±â ±â´É°ú À¯»çÇÑ ÀıÂ÷¸¦ ¼öÇàÇÏÁö¸¸ ´äº¯±ÛÀÌ Ç¥½ÃµÇ´Â ¹æ½ÄÀ» Á¦´ë·Î ±¸ÇöÇÏ±â À§ÇØ¼­ 
-		//repRoot(¿ø±Û), repStep(¿ø±Û¿¡ ´ëÇÑ ¼ø¼­), repIndent(´äº¯ ±íÀÌ) ÀÎÀÚ°¡ Ãß°¡ÀûÀ¸·Î ÇÊ¿äÇÕ´Ï´Ù.
+		//ì‹¤í–‰ì‹œ ê¸€ì“°ê¸° ê¸°ëŠ¥ê³¼ ìœ ì‚¬í•œ ì ˆì°¨ë¥¼ ìˆ˜í–‰í•˜ì§€ë§Œ ë‹µë³€ê¸€ì´ í‘œì‹œë˜ëŠ” ë°©ì‹ì„ ã…”ëŒ€ë¡œ êµ¬í˜„í•˜ê¸° ìœ„í•´ì„œ
+		//repRoot(ì›ê¸€), repStep(ì›ê¸€ì— ëŒ€í•œ ìˆœì„œ), repIndent(ë‹µë³€ ê¸¸ì´) ì¸ìê°€ ì¶”ê°€ì ìœ¼ë¡œ í•„ìš”í•©ë‹ˆë‹¤.
 		String num = request.getParameter("num");
 		String title = request.getParameter("title");
 		String author = request.getParameter("author");

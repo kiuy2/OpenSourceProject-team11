@@ -3,8 +3,8 @@ package com.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//BoardCommand´Â °Ô½ÃÆÇ¿¡¼­ ¿äÃ»ÇÏ´Â ¿©·¯ ±â´ÉµéÀ» »ó¼ÓÇÏ´Â ÇÏ³ªÀÇ ÀÎÅÍÆäÀÌ½ºÀÔ´Ï´Ù.
-//Controller ºÎºĞ¿¡¼­ command.execute¶ó´Â ´Ü¼øÇÑ ÇÏ³ªÀÇ ¹®Àå¸¸À¸·Î ´Ù¾çÇÑ ±â´ÉÀ» ¼öÇàÇÒ ¼ö ÀÖ°Ô ÇØÁİ´Ï´Ù.
+//BoardCommandëŠ” ê²Œì‹œíŒì—ì„œ ìš”ì²­í•˜ëŠ” ì—¬ëŸ¬ ê¸°ëŠ¥ë“¤ì„ ìƒì†í•˜ëŠ” í•˜ë‚˜ì˜ ì¸í„°í˜ì´ìŠ¤ì…ë‹ˆë‹¤.
+//Controller ë¶€ë¶„ì—ì„œ command.executeë¼ëŠ” ë‹¨ìˆœí•œ í•˜ë‚˜ì˜ ë¬¸ì¥ë§Œìœ¼ë¡œ ë‹¤ì–‘í•œ ê¸°ëŠ¥ì„ ìˆ˜í–‰í•  ìˆ˜ ìˆê²Œ í•´ì¤ë‹ˆë‹¤.
 public interface BoardCommand {
 	public void execute(HttpServletRequest request, HttpServletResponse response);
 }
