@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import com.entity.BoardDTO;
 import com.entity.PageTO;
+import com.entity.User;
 
 
 public class BoardDAO {

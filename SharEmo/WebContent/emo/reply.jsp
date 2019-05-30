@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.entity.PageTO"%>
-<%@ page import="com.dao.User"%>
+<%@ page import="com.entity.User"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -26,8 +26,7 @@
 	<ul id="navbar-top-right">
 		<li class="nav-top-item"><c:choose>
 				<c:when test="${user != null}">
-					<% User user=(User)session.getAttribute("user");%>
-					<a href='mypage.do'><%out.println(user.id); %>님</a></li>
+					<a href='mypage.do'>${user.id}님</a></li>
 		<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
 				<a href='loginUI.do'> Login </a>
 			</c:otherwise> </c:choose></li>
@@ -76,13 +75,7 @@
 			타이틀<input type="text" name="title" required value="re: ${replyui.title}"><br>
 			
 			
-			작성자 : <span name="author">
-			<%
-			if(session.getAttribute("user")!= null){
-				User user=(User)session.getAttribute("user");
-				out.println(user.nickname);
-			}
-			%>
+			작성자 : <span name="author">${user.nickname}
 			</span><br> 내용
 			<textarea id="ir2" name="content" rows="10" cols="50">${replyui.content}</textarea>
 			<br> <input type="submit" id="save" value="답변달기">

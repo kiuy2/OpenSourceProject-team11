@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.dao.User"%>
+<%@ page import="com.entity.User"%>
 <%@ page import="com.entity.BoardDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -26,8 +26,7 @@
 	<ul id="navbar-top-right">
 		<li class="nav-top-item"><c:choose>
 				<c:when test="${user != null}">
-					<% User user=(User)session.getAttribute("user");%>
-					<a href='mypage.do'><%out.println(user.id); %>님</a></li>
+					<a href='mypage.do'>${user.id}님</a></li>
 		<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
 				<a href='loginUI.do'> Login </a>
 			</c:otherwise> </c:choose></li>
