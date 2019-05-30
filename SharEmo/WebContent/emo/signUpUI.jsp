@@ -40,43 +40,73 @@ function writeCheck()
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>회원가입</title>
+
+<style>
+    th{
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 20px;
+        margin-top:20px;
+        
+        padding-top: 30px;
+    }
+  
+    body{
+        background-image: url('emo/images/trash/cheap_diagonal_fabric.png');
+    }
+
+</style>
+
 </head>
 <body>
+<br />
+<div>
+    <img src="emo/images/sharEmo_logo_2.png">
+</div>
+<br />
+<br />
+<br />
+<form action ="signUp.do" method="post" >
+   
+    <table class="table table-striped table-bordered table-hover" style="text-align:center; height: 800px; width:600px; margin:auto; background-color:whitesmoke ">
 
-<form action ="signUp.do" method="post">
-	<table class="table table-striped table-bordered table-hover" style="text-align:center">
+            <tr>
+                    <th style="text-align:center;padding-top: 30px" colspan="2" >
+                            <h2 align="center" > signUp </h2> 
+                    </th>
+                </tr>
 	<tr>
-		<th>ID</th>
-		<th><input type="text" name="id"></th>
+		<th style="text-align:center;padding-top: 30px">ID</th>
+		<th style="text-align:center;padding-top: 30px"><input type="text" name="id"></th>
 	</tr>
 	<tr>	
-		<th>PASSWORD</th>
-		<th><input type="password" name="password"></th>
+		<th style="text-align:center;padding-top: 30px">PASSWORD</th>
+		<th style="text-align:center;padding-top: 30px"><input type="password" name="password"></th>
 	</tr>
 	<tr>	
-		<th>NAME</th>
-		<th><input type="text" name="name"></th>
+		<th style="text-align:center;padding-top: 30px">NAME</th>
+		<th style="text-align:center;padding-top: 30px"><input type="text" name="name"></th>
 	</tr>
 	<tr>	
-		<th>NICKNAME</th>
-		<th><input type="text" name="nickname"></th>
+		<th style="text-align:center;padding-top: 30px">NICKNAME</th>
+		<th style="text-align:center;padding-top: 30px"><input type="text" name="nickname"></th>
 	</tr>
 	<tr>	
-		<th>PHONE</th>
-		<th><input type="tel" name="phone"></th>
+		<th style="text-align:center;padding-top: 30px">PHONE</th>
+		<th style="text-align:center;padding-top: 30px"><input type="tel" name="phone"></th>
 	</tr>
 	<tr>	
-		<th>EMAIL</th>
-		<th><input type="email" name="email"></th>
+		<th style="text-align:center;padding-top: 30px">EMAIL</th>
+		<th style="text-align:center;padding-top: 30px"><input type="email" name="email"></th>
 	</tr>	
 	<tr>
-		<th></th>
-		<th style="text-align:right">
-			<input type=submit class="btn btn-success" value="등록" Onclick="javascript:writeCheck();">
-			<input type=button class="btn btn-secondary" value="취소" OnClick="window.location='loginUI.do'">
+		<th style="text-align:center;padding-top:30px ; " colspan="2" >
+			<input  style="background-image:url(emo/images/trash/halftone-yellow.png); border: 0px; color: black " type=submit class="btn btn-success" value="등록" Onclick="javascript:writeCheck();">
+			<input  style="background-image:url(emo/images/trash/halftone-yellow.png); border: 0px; color: black " type=button class="btn btn-secondary" value="취소" OnClick="window.location='loginUI.do'">
 		</th>
 	</tr>
-	</table>
+    </table>
+
 
 </form>
 </body>
