@@ -1,24 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%
 	String ctx = request.getContextPath();    //콘텍스트명 얻어오기.
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-   		<title>게시판 등록</title>
+<title>게시판 등록</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
-<script type="text/javascript" src="<%=ctx %>/SE2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript"
+	src="<%=ctx %>/SE2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<script type="text/javascript">
+<!-- 스마트에디터 -->
+ <!--  script type="text/javascript">
 var oEditors = [];
 $(function(){
       nhn.husky.EZCreator.createInIFrame({
@@ -51,21 +53,21 @@ $(function(){
       });    
 });
  
-</script>
+</script>-->
 
-	</head>
-   <body>
-         <h2>게시판 등록</h2>
+</head>
+<body>
+	<h2>게시판 등록</h2>
 	<form id="frm" name=form1 action='write.do' method=post enctype="">
-     	타이틀 : <input type=text name='title' required><br/>
-		작성자 : <input type=text name='author' required><br/>
-		이미지 : <input type="file" name="filename1" size=20 accept=".jpg, .jpeg, .png .gif"><br/>
-		내용 : <br/>
-		<textarea id='ir1' name='content' rows='10' cols='50' ></textarea><br/>
-        <input type=submit id="save" value="저장">
+		타이틀 : <input type=text name='title' required><br /> 작성자 : <input
+			type=text name='author' required><br /> 이미지 : <input
+			type="file" name="filename1" size=20 accept=".jpg, .jpeg, .png .gif"><br />
+		내용 : <br />
+		<textarea id='ir1' name='content' rows='10' cols='50'></textarea>
+		<br /> <input type=submit id="save" value="저장">
 	</form>
 	<a href='list.do'>목록보기</a>
-   </body>
+</body>
 </html>
 
 
