@@ -52,32 +52,36 @@ public class BoardFrontController extends HttpServlet {
 			command.execute(request, response);
 			nextPage = "emo/main.jsp";
 		}
-		
 
 		// 로그인 화면
 		if (com.equals("/loginUI.do")) {
 			nextPage = "emo/loginUI.jsp";
 		}
-		
+
 		// 로그인
 		if (com.equals("/login.do")) {
 			command = new BoardLoginCommand();
 			command.execute(request, response);
 			nextPage = "emo/login.jsp";
 		}
-		
+
+		// 로그아웃
+		if (com.equals("/logout.do")) {
+			nextPage = "emo/logout.jsp";
+		}
+
 		// 회원가입 페이지 이동
 		if (com.equals("/signUpUI.do")) {
 			nextPage = "emo/signUpUI.jsp";
 		}
-		
+
 		// 회원가입
 		if (com.equals("/signUp.do")) {
 			command = new BoardSignUpCommand();
 			command.execute(request, response);
-			nextPage = "emo/main.jsp";
+			nextPage = "emo/join.jsp";
 		}
-		
+
 		// 홈페이지
 		if (com.equals("/main.do")) {
 			command = new BoardPageCommand();
@@ -99,7 +103,7 @@ public class BoardFrontController extends HttpServlet {
 		if (com.equals("/write.do")) {
 			command = new BoardWriteCommand();
 			command.execute(request, response);
-			nextPage = "list.do";
+			nextPage = "main.do";
 		}
 		// 글 자세히 보기
 		if (com.equals("/retrieve.do")) {
@@ -111,13 +115,13 @@ public class BoardFrontController extends HttpServlet {
 		if (com.equals("/update.do")) {
 			command = new BoardUpdateCommand();
 			command.execute(request, response);
-			nextPage = "list.do";
+			nextPage = "main.do";
 		}
 		// 글 삭제하기
 		if (com.equals("/delete.do")) {
 			command = new BoardDeleteCommand();
 			command.execute(request, response);
-			nextPage = "list.do";
+			nextPage = "main.do";
 		}
 		// 글 검색하기
 		if (com.equals("/search.do")) {
@@ -137,7 +141,7 @@ public class BoardFrontController extends HttpServlet {
 		if (com.equals("/reply.do")) {
 			command = new BoardReplyCommand();
 			command.execute(request, response);
-			nextPage = "list.do";
+			nextPage = "main.do";
 		}
 
 		// 지정한 경로로 제어를 이동(리다이렉트)시키기 위한 코드입니다.
