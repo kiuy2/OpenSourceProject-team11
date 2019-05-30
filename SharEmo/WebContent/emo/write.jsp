@@ -59,14 +59,14 @@ $(function(){
 <body>
 	<h2>게시판 등록</h2>
 	<form id="frm" name=form1 action='write.do' method=post enctype="">
-		타이틀 : <input type=text name='title' required><br /> 작성자 : <input
-			type=text name='author' required><br /> 이미지 : <input
-			type="file" name="filename1" size=20 accept=".jpg, .jpeg, .png .gif"><br />
+		타이틀 : <input type=text name='title' required><br /> 
+		작성자 : ${user.nickname}<br /> 
+		이미지 : <input type="file" name="filename1" size=20 accept=".jpg, .jpeg, .png .gif"><br />
 		내용 : <br />
 		<textarea id='ir1' name='content' rows='10' cols='50'></textarea>
 		<br /> <input type=submit id="save" value="저장">
 	</form>
-	<a href='list.do'>목록보기</a>
+	<a href='main.do'>목록보기</a>
 </body>
 </html>
 

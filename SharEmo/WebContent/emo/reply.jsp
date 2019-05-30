@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.entity.PageTO"%>
+<%@ page import="com.dao.User"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -23,7 +24,16 @@
 		src="emo/images/sharEmo_logo_2.png">
 	</a>
 	<ul id="navbar-top-right">
-		<li class="nav-top-item"><a href="loginUI.do">Login</a></li>
+		<li class="nav-top-item">
+			<%
+				if(session.getAttribute("user")!= null){
+					User user=(User)session.getAttribute("user");
+					out.println(user.id+"님 <a href='logout.do'> LogOut");
+				}
+				else{
+					out.println("<a href='loginUI.do'> Login");
+				}
+			%></a></li>
 		<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
 	</ul>
 	</nav>
@@ -60,10 +70,10 @@
 		<form id="frm2" action="reply.do" method="post">
 
 			<!-- 답변글 필요 -->
-			<input type="hidden" name="num" value="${retrieve.num}"> <input
-				type="hidden" name="repRoot" value="${replyui.repRoot}"> <input
-				type="hidden" name="repStep" value="${replyui.repStep}"> <input
-				type="hidden" name="repIndent" value="${replyui.repIndent}">
+			<input type="hidden" name="num" value="${retrieve.num}"> 
+			<input type="hidden" name="repRoot" value="${replyui.repRoot}"> 
+			<input type="hidden" name="repStep" value="${replyui.repStep}"> 
+			<input type="hidden" name="repIndent" value="${replyui.repIndent}">
 
 			원래글번호:${replyui.num}&nbsp;&nbsp;&nbsp;&nbsp; 조회수:${replyui.readcnt}<br>
 			타이틀<input type="text" name="title" required value="re: ${replyui.title}"><br>
