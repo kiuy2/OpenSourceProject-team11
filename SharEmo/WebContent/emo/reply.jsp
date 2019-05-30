@@ -24,16 +24,13 @@
 		src="emo/images/sharEmo_logo_2.png">
 	</a>
 	<ul id="navbar-top-right">
-		<li class="nav-top-item">
-			<%
-				if(session.getAttribute("user")!= null){
-					User user=(User)session.getAttribute("user");
-					out.println(user.id+"님 <a href='logout.do'> LogOut");
-				}
-				else{
-					out.println("<a href='loginUI.do'> Login");
-				}
-			%></a></li>
+		<li class="nav-top-item"><c:choose>
+				<c:when test="${user != null}">
+					<% User user=(User)session.getAttribute("user");%>
+					<a href='mypage.do'><%out.println(user.id); %>님</a></li>
+		<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
+				<a href='loginUI.do'> Login </a>
+			</c:otherwise> </c:choose></li>
 		<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
 	</ul>
 	</nav>
@@ -77,7 +74,16 @@
 
 			원래글번호:${replyui.num}&nbsp;&nbsp;&nbsp;&nbsp; 조회수:${replyui.readcnt}<br>
 			타이틀<input type="text" name="title" required value="re: ${replyui.title}"><br>
-			작성자<input type="text" name="author" required><br> 내용
+			
+			
+			작성자 : <span name="author">
+			<%
+			if(session.getAttribute("user")!= null){
+				User user=(User)session.getAttribute("user");
+				out.println(user.nickname);
+			}
+			%>
+			</span><br> 내용
 			<textarea id="ir2" name="content" rows="10" cols="50">${replyui.content}</textarea>
 			<br> <input type="submit" id="save" value="답변달기">
 		</form>

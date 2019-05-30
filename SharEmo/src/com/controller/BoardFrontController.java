@@ -46,6 +46,7 @@ public class BoardFrontController extends HttpServlet {
 		String nextPage = null;
 		// 이렇게 추출한 com 변수를 각각 적합한 처리 모델에 넘겨서 일을 처리하고
 		// 그다음에 수행할 요청 혹은 띄울 페이지를 설정해줍니다.
+
 		// 목록 보기
 		if (com.equals("/")) {
 			command = new BoardPageCommand();
@@ -68,6 +69,16 @@ public class BoardFrontController extends HttpServlet {
 		// 로그아웃
 		if (com.equals("/logout.do")) {
 			nextPage = "emo/logout.jsp";
+		}
+
+		// 로그인 에러
+		if (com.equals("/loginerror.do")) {
+			nextPage = "emo/loginerror.jsp";
+		}
+
+		// 로그인 에러
+		if (com.equals("/mypage.do")) {
+			nextPage = "emo/mypage.jsp";
 		}
 
 		// 회원가입 페이지 이동

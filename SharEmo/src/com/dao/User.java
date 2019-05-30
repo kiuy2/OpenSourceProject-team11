@@ -12,5 +12,7 @@ public class User {
 		id="";
 		name="";
 		nickname="";
+		phone="";
+		email="";
 	}
 }

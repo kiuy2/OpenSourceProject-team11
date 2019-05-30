@@ -18,8 +18,8 @@ public class BoardLoginCommand implements BoardCommand {
 		BoardDAO dao = new BoardDAO();
 		User user=dao.login(id, password);
 		if(user.islogin) {
+			//user 세션 데이터 저장
 			session.setAttribute("user", user);
 		}
-		//login.jsp에서 페이징 처리 데이터 저장
 	}
 }

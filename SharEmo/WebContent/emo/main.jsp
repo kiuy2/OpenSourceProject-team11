@@ -25,17 +25,13 @@
 		src="emo/images/sharEmo_logo_2.png">
 	</a>
 	<ul id="navbar-top-right">
-		<li class="nav-top-item">
-			<%
-				if(session.getAttribute("user")!= null){
-					User user=(User)session.getAttribute("user");
-					out.println(user.id+"님 <a href='logout.do'> LogOut");
-				}
-				else{
-					out.println("<a href='loginUI.do'> Login");
-				}
-			%>
-		</a></li>
+		<li class="nav-top-item"><c:choose>
+				<c:when test="${user != null}">
+					<% User user=(User)session.getAttribute("user");%>
+					<a href='mypage.do'><%out.println(user.id); %>님</a></li>
+		<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
+				<a href='loginUI.do'> Login </a>
+			</c:otherwise> </c:choose></li>
 		<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
 	</ul>
 	</nav>

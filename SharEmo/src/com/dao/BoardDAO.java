@@ -18,7 +18,6 @@ import com.entity.PageTO;
 public class BoardDAO {
 
 	DataSource ds;
-	public User user=new User();
 	// 생성자
 	public BoardDAO() {
 		try {
@@ -128,7 +127,7 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		User user=new User();
 		try {
 			con = ds.getConnection();
 			String query = "select * from user where id = '" + _id + "' and password = '" + _password + "';";
@@ -178,6 +177,8 @@ public class BoardDAO {
 			String sql = "select ifnull(max(num), 0)+1 from board";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			if (pstmt != null)
+				pstmt.close();
 			int currval = 1;
 			if (rs.next())
 				currval = rs.getInt(1);
@@ -190,7 +191,7 @@ public class BoardDAO {
 			pstmt.setString(2, _author);
 			pstmt.setString(3, _content);
 			pstmt.setInt(4, currval);
-			int n = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -220,7 +221,7 @@ public class BoardDAO {
 
 			pstmt = con.prepareStatement(query);
 
-			int n = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -303,7 +304,7 @@ public class BoardDAO {
 			pstmt.setString(3, _content);
 			pstmt.setInt(4, Integer.parseInt(_num));
 
-			int n = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -331,7 +332,7 @@ public class BoardDAO {
 
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, Integer.parseInt(_num));
-			int n = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -407,7 +408,7 @@ public class BoardDAO {
 			pstmt.setInt(1, Integer.parseInt(_root));
 			pstmt.setInt(2, Integer.parseInt(_step));
 
-			int n = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -447,7 +448,7 @@ public class BoardDAO {
 			pstmt.setInt(5, Integer.parseInt(_repStep) + 1);
 			pstmt.setInt(6, Integer.parseInt(_repIndent) + 1);
 
-			int n = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();

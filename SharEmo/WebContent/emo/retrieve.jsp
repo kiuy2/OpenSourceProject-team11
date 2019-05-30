@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dao.User"%>
+<%@ page import="com.entity.BoardDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -23,15 +24,13 @@
 		src="emo/images/sharEmo_logo_2.png">
 	</a>
 	<ul id="navbar-top-right">
-			<%
-				if(session.getAttribute("user")!= null){
-					User user=(User)session.getAttribute("user");
-					out.println(user.id+"님 <a href='logout.do'> LogOut");
-				}
-				else{
-					out.println("<a href='loginUI.do'> Login");
-				}
-			%>
+		<li class="nav-top-item"><c:choose>
+				<c:when test="${user != null}">
+					<% User user=(User)session.getAttribute("user");%>
+					<a href='mypage.do'><%out.println(user.id); %>님</a></li>
+		<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
+				<a href='loginUI.do'> Login </a>
+			</c:otherwise> </c:choose></li>
 		<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
 	</ul>
 	</nav>
@@ -67,21 +66,29 @@
 	<div class="container-main">
 		<form action="update.do" method="post">
 			<!-- 글 수정시 필요 -->
-			<input type="hidden" name="num" value="${retrieve.num}"> 
-			글번호: ${retrieve.num} &nbsp;&nbsp;&nbsp;&nbsp; 
-			조회수: ${retrieve.readcnt}<br />
-			타이틀 : <input type="text" name="title" required value="${retrieve.title}"><br>
-			작성자 : ${retrieve.author}<br> 내용
+			<input type="hidden" name="num" value="${retrieve.num}"> 글번호:
+			${retrieve.num} &nbsp;&nbsp;&nbsp;&nbsp; 조회수: ${retrieve.readcnt}<br />
+			타이틀 : <input type="text" name="title" required
+				value="${retrieve.title}"><br> 작성자 : ${retrieve.author}<br>
+			내용
 			<textarea name="content" rows="10" cols="50">${retrieve.content}</textarea>
 			<br> <input type="submit" value="수정">
 		</form>
 
-		<a href="">목록</a> &nbsp;
-		<a href="delete.do?num=${retrieve.num}">삭제</a> &nbsp;
-		<a href="replyui.do?num=${retrieve.num}">답변달기</a>
+		<a href="">목록</a> &nbsp; <a href="delete.do?num=${retrieve.num}">삭제</a>
+		&nbsp;
+
+		<c:choose>
+			<c:when test="${user != null}">
+				<a href='replyui.do?num=${retrieve.num}'>답변달기</a>
+			</c:when>
+			<c:otherwise>
+				<a href='loginerror.do'>답변달기</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	</section>
-	
+
 	<section class="emoticon-container">
 	<div class="container-header">
 		<h2>New Emoticon</h2>
@@ -91,8 +98,8 @@
 		<div class="container-main">
 			<c:forEach var="dto" items="${list}">
 				<div class="emoticon-package">
-					<a href="retrieve.do?num=${dto.num}"> 
-						<img src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
+					<a href="retrieve.do?num=${dto.num}"> <img
+						src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
 					</a>
 					<p class="title">
 						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
