@@ -67,12 +67,12 @@ public class BoardFrontController extends HttpServlet {
 		}
 		
 		// 회원가입 페이지 이동
-		if (com.equals("/signupUI.do")) {
+		if (com.equals("/signUpUI.do")) {
 			nextPage = "emo/signUpUI.jsp";
 		}
 		
 		// 회원가입
-		if (com.equals("/signup.do")) {
+		if (com.equals("/signUp.do")) {
 			command = new BoardSignUpCommand();
 			command.execute(request, response);
 			nextPage = "emo/main.jsp";

@@ -36,7 +36,7 @@
 				<th>
 					<input type="button" class="btn btn-primary" value="로그인" onClick="login()" />
 					<input type="button" class="btn btn-secondary" value="취소" onClick="window.location=''" />
-					<input type="button" class="btn btn-success" value="회원가입" onClick="window.location='signupUI.do'" />
+					<input type="button" class="btn btn-success" value="회원가입" onClick="window.location='signUpUI.do'" />
 				</th>
 			</tr>
 		</table>
