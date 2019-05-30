@@ -18,28 +18,56 @@
 		document.form.reset();
 	}	
 </script>
+<style>
+    th{
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 25px;
+        margin-top:20px;
+        
+        padding-top: 30px;
+    }
+  
+    body{
+     background-image: url('emo/images/trash/cheap_diagonal_fabric.png');
+    }
+
+</style>
+
 </head>
 <body>
-	<form action="login.do" method="post" name="form">
-		<table class="table table-striped table-bordered table-hover">
-			<caption style="text-align:center">로그인</caption>
+<br />
+<div>
+       <img src="emo/images/sharEmo_logo_2.png">
+</div>
+<br />
+<br />
+<br />
+<form action="login.do" method="post" name="form">
+		<table class="table table-striped table-bordered table-hover" style="text-align:center; height: 300px; width:600px; margin:auto; background-color:whitesmoke ">
+            
+            <tr>
+                    <th colspan="2" style="text-align:center; padding-top:20px ;" >LOGIN</th> 
+                   
+                </tr>
 			<tr>
-				<th>ID</th> 
-				<th><input type="text" name="id" /></th>
+				<th style="text-align:center; font-size: 22px; padding-top:20px ;" >ID</th> 
+				<th style="text-align:center; font-size: 22px; padding-top:20px ;" ><input type="text" name="id" /></th>
 			</tr>
 			<tr>
-				<th>PW</th>
-				<th><input type="password" name="password" /></th>
+				<th style="text-align:center; font-size: 22px;  padding-top:20px ;" >PW</th>
+				<th style="text-align:center; font-size: 22px;  padding-top:20px ;" ><input type="password" name="password" /></th>
 			</tr>
 			<tr>
-				<th></th>
-				<th>
-					<input type="button" class="btn btn-primary" value="로그인" onClick="login()" />
-					<input type="button" class="btn btn-secondary" value="취소" onClick="window.location=''" />
-					<input type="button" class="btn btn-success" value="회원가입" onClick="window.location='signUpUI.do'" />
+			
+				<th style="text-align:center; padding-top:15px ;"  colspan="2">
+					<input style="background-image:url(emo/images/trash/halftone-yellow.png); border: 0px; color: black " type="button" class="btn btn-primary" value="Login" onClick="login()" />
+					<input style="background-image:url(emo/images/trash/halftone-yellow.png); border: 0px; color: black " type="button" class="btn btn-secondary" value="Cancel" onClick="window.location=''" />
+					<input style="background-image:url(emo/images/trash/halftone-yellow.png); border: 0px; color: black " type="button" class="btn btn-success" value="Signup" onClick="window.location='signUpUI.do'" />
 				</th>
 			</tr>
 		</table>
 	</form>
+
 </body>
 </html>

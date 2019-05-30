@@ -20,7 +20,8 @@
 
 <body>
 
-	<nav id="navbar-top"> <a href=""> <img
+	<nav id="navbar-top"> <a href=""> 
+	<img
 		src="emo/images/sharEmo_logo_2.png">
 	</a>
 	<ul id="navbar-top-right">
