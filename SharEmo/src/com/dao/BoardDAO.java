@@ -14,10 +14,11 @@ import javax.sql.DataSource;
 import com.entity.BoardDTO;
 import com.entity.PageTO;
 
+
 public class BoardDAO {
 
 	DataSource ds;
-
+	public User user=new User();
 	// 생성자
 	public BoardDAO() {
 		try {
@@ -102,7 +103,8 @@ public class BoardDAO {
 			pstmt.setString(4, _nickname);
 			pstmt.setString(5, _phone);
 			pstmt.setString(6, _email);
-			int n = pstmt.executeUpdate();
+
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,29 +123,30 @@ public class BoardDAO {
 	}
 
 	// 로그인
-	public void login(String _id, String _password) {
+	public User login(String _id, String _password) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 			con = ds.getConnection();
 			String query = "select * from user where id = '" + _id + "' and password = '" + _password + "';";
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();
-
-			Boolean isLogin = false;
+			
 
 			while (rs.next()) {
-				isLogin = true;
+				user.islogin=true;
+				user.id = rs.getString("id");
+				user.name = rs.getString("name");
+				user.nickname = rs.getString("nickname");
+				user.phone = rs.getString("phone");
+				user.email = rs.getString("email");
 			}
 			
-			if (isLogin) {
-				//session.setAttribute("id", _id);
-				
-			} else if (!isLogin && _id != null) {
-				//return "loginerror2.jsp";
+			if (!user.islogin && _id != null) {
+				user.islogin=false;
 			}
 
 		} catch (Exception e) {
@@ -160,6 +163,7 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
+		return user;
 	}
 
 	// 글 쓰기

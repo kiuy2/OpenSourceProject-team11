@@ -43,7 +43,7 @@ function writeCheck()
 </head>
 <body>
 
-<form action ="join.do" method="post">
+<form action ="signUp.do" method="post">
 	<table class="table table-striped table-bordered table-hover" style="text-align:center">
 	<tr>
 		<th>ID</th>

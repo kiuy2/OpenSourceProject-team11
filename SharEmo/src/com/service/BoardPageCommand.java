@@ -7,6 +7,7 @@ import com.dao.BoardDAO;
 import com.entity.PageTO;
 
 public class BoardPageCommand implements BoardCommand{
+	static boolean start=false;
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		int curPage =1;
 		if(request.getParameter("curPage") !=null) {
@@ -18,6 +19,9 @@ public class BoardPageCommand implements BoardCommand{
 		
 		//listPage.jsp에서 목록 리스트 데이터 저장
 		request.setAttribute("list", list.getList());
+
+		//login 확인
+		request.setAttribute("islogin",dao.user.islogin);
 		
 		//page.jsp에서 페이징 처리 데이터 저장
 		request.setAttribute("page", list);

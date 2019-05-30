@@ -2,8 +2,10 @@ package com.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
+import com.dao.User;
 
 //BoardWriteCommand는 글쓰기 화면에서 저장 버튼을 눌렀을때 실행되는 기능입니다.
 public class BoardLoginCommand implements BoardCommand {
@@ -12,8 +14,12 @@ public class BoardLoginCommand implements BoardCommand {
 		//실행시 사용자가 입력한 정보를 받아와서 DAO를 통해 DB에 새로운 row를 삽입합니다.
 		String id =request.getParameter("id");
 		String password =request.getParameter("password");
-		
+		HttpSession session=request.getSession();
 		BoardDAO dao = new BoardDAO();
-		dao.login(id, password);
+		User user=dao.login(id, password);
+		if(user.islogin) {
+			session.setAttribute("user", user);
+		}
+		//login.jsp에서 페이징 처리 데이터 저장
 	}
 }

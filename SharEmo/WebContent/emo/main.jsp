@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.entity.PageTO"%>
+<%@ page import="com.dao.User"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -10,7 +11,8 @@
 
 <head>
 
-<link type="text/css" rel="stylesheet" href="emo/assets/css/main_style.css">
+<link type="text/css" rel="stylesheet"
+	href="emo/assets/css/main_style.css">
 
 <title>SharEmo - Free Emoticon Share Website</title>
 
@@ -22,7 +24,17 @@
 		src="emo/images/sharEmo_logo_2.png">
 	</a>
 	<ul id="navbar-top-right">
-		<li class="nav-top-item"><a href="loginUI.do">Login</a></li>
+		<li class="nav-top-item">
+			<%
+				if(session.getAttribute("user")!= null){
+					User user=(User)session.getAttribute("user");
+					out.println(user.id+"님 <a href='logout.do'> LogOut");
+				}
+				else{
+					out.println("<a href='loginUI.do'> Login");
+				}
+			%>
+		</a></li>
 		<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
 	</ul>
 	</nav>
@@ -61,13 +73,16 @@
 				<a href="retrieve.do?num=${dto.num}"> <img
 					src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
 				</a>
-				<p class="title">Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a></p>
+				<p class="title">
+					Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+				</p>
 				<p class="artist">Artist: ${dto.author}</p>
-				<p class="">Retrieve: ${dto.readcnt}</p>
+				<p class="artist">Retrieve: ${dto.readcnt}</p>
 			</div>
 		</c:forEach>
 		<div class="emoticon-package">
-			<a href=""> <img src="emo/images/thumbnail/옴팡지게앙증해옴팡이_thumbnail.png">
+			<a href=""> <img
+				src="emo/images/thumbnail/옴팡지게앙증해옴팡이_thumbnail.png">
 			</a>
 			<p class="title">Title: 옴팡지게 앙증해 옴팡이</p>
 			<p class="artist">Artist: 애소</p>
