@@ -621,4 +621,37 @@ public class BoardDAO {
 		}
 		return to;
 	}
+
+	public boolean IdCheck(String _id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String query = "SELECT id FROM user where id=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, _id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 }
