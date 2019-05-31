@@ -8,13 +8,13 @@ import com.entity.BoardDTO;
 
 public class BoardReplyUICommand implements BoardCommand {
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String num = request.getParameter("num");
 		BoardDAO dao = new BoardDAO();
 		
 		BoardDTO data = dao.replyui(num);
 		request.setAttribute("replyui", data);
-		
+		return "emo/reply.jsp";
 	}
 }

@@ -8,13 +8,13 @@ import com.entity.BoardDTO;
 
 public class BoardRetrieveCommand implements BoardCommand {
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String num = request.getParameter("num");
 		BoardDAO dao = new BoardDAO();
 		BoardDTO data = dao.retrieve(num);
 		
 		request.setAttribute("retrieve", data);
-		
+		return "emo/retrieve.jsp";
 	}
 }

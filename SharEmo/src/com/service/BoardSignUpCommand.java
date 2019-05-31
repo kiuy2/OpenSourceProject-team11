@@ -7,7 +7,7 @@ import com.dao.BoardDAO;
 
 public class BoardSignUpCommand implements BoardCommand {
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
@@ -18,6 +18,7 @@ public class BoardSignUpCommand implements BoardCommand {
 		
 		BoardDAO dao = new BoardDAO();
 		dao.signUp(id, password, name, nickname, phone, email);
+		return "emo/join.jsp";
 	}
 
 }

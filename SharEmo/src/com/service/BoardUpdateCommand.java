@@ -7,7 +7,7 @@ import com.dao.BoardDAO;
 
 public class BoardUpdateCommand implements BoardCommand {
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String num = request.getParameter("num");
 		String title = request.getParameter("title");
@@ -16,6 +16,7 @@ public class BoardUpdateCommand implements BoardCommand {
 		
 		BoardDAO dao = new BoardDAO();
 		dao.update(num, title, author, content);
+		return "main.do";
 	}
 
 }

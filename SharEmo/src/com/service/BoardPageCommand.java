@@ -8,7 +8,7 @@ import com.entity.PageTO;
 
 public class BoardPageCommand implements BoardCommand{
 	static boolean start=false;
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		int curPage =1;
 		if(request.getParameter("curPage") !=null) {
 			curPage=Integer.parseInt(request.getParameter("curPage"));
@@ -22,5 +22,6 @@ public class BoardPageCommand implements BoardCommand{
 		
 		//page.jsp에서 페이징 처리 데이터 저장
 		request.setAttribute("page", list);
+		return "emo/main.jsp";
 	}
 }

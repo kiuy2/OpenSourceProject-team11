@@ -2,17 +2,15 @@ package com.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
+import com.entity.User;
 
-public class BoardDeleteCommand implements BoardCommand {
-
+public class BoardLoginErrorCommand implements BoardCommand {
+	
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		String num = request.getParameter("num");
-		
-		BoardDAO dao = new BoardDAO();
-		dao.delete(num);
-		return "main.do";
+			return "emo/loginerror.jsp";
 	}
 }

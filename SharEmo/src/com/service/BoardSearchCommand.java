@@ -10,13 +10,13 @@ import com.entity.BoardDTO;
 
 public class BoardSearchCommand implements BoardCommand {
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String searchName=request.getParameter("searchName");
 		String searchValue=request.getParameter("searchValue");
 		BoardDAO dao = new BoardDAO();
 		ArrayList<BoardDTO> list = dao.search(searchName,searchValue);
 		
 		request.setAttribute("list", list);
-		
+		return "emo/listPage.jsp";
 	}
 }
