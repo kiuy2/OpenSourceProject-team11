@@ -1,129 +1,232 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.entity.User"%>
-<%@ page import="com.entity.BoardDTO"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<! DOCTYPE html>
 <html>
 
 <head>
 
+<link href='https://fonts.googleapis.com/css?family=Dekko'
+	rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Didact Gothic'
+	rel='stylesheet'>
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
 <link type="text/css" rel="stylesheet"
-	href="emo/assets/css/main_style.css">
+	href="emo/assets/css/recieve_style.css">
 
 <title>SharEmo - Free Emoticon Share Website</title>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+
+						$(".nav-mid-item>a")
+								.hover(
+										function() {
+											$(this).css("color", "grey");
+											$(this).parent().find(
+													".nav-mid-item-drop")
+													.slideDown('normal').show();
+											$(this)
+													.parent()
+													.find(
+															".nav-mid-item-drop li")
+													.hover(
+															function() {
+																$(this)
+																		.css(
+																				"background-color",
+																				"rgba(255, 255, 255, 0.3)");
+
+																$(this)
+																		.mouseleave(
+																				function() {
+																					$(
+																							this)
+																							.css(
+																									"background-color",
+																									"");
+																				});
+															});
+
+											$(this)
+													.parent()
+													.mouseleave(
+															function() {
+																$(this)
+																		.find(
+																				">a")
+																		.css(
+																				"color",
+																				"white");
+																$(this)
+																		.find(
+																				".nav-mid-item-drop")
+																		.slideUp(
+																				'fast');
+															});
+
+										});
+					});
+</script>
 
 </head>
 
 <body>
 
-	<nav id="navbar-top"> <a href=""> <img
-		src="emo/images/sharEmo_logo_2.png">
-	</a>
-	<ul id="navbar-top-right">
-		<li class="nav-top-item"><c:choose>
-				<c:when test="${user != null}">
-					<a href='mypage.do'>${user.id}님</a></li>
-		<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
-				<a href='loginUI.do'> Login </a>
-			</c:otherwise> </c:choose></li>
-		<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
-	</ul>
-	</nav>
-
 	<section id="header">
-	<div id="header-content">
-		<img src="emo/images/sharEmo_logo_3.png">
-		<p>Find your emoticon whatever you want!!</p>
-		<form action="search.do" method="">
+		<div id="navbar-top">
+			<a href="main.do"> <img src="emo/images/sharEmo_logo_2.png">
+			</a>
+			<ul id="navbar-top-right">
+				<li class="nav-top-item"><c:choose>
+						<c:when test="${user != null}">
+							<a href='mypage.do'>${user.id}님</a></li>
+				<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
+						<a href='loginUI.do'> Login </a>
+					</c:otherwise> </c:choose></li>
+				<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<nav id="navbar-mid">
+		<form action="" method="">
 			<input type="search" name="q"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
 				<img src="emo/images/musica-searcher.png" width="20px" height="20px">
 			</button>
 		</form>
-	</div>
-	</section>
-
-	<nav id="navbar-mid">
-	<ul>
-		<li class="nav-mid-item"><a href="">Home</a></li>
-		<li class="nav-mid-item"><a href="">Emotion</a></li>
-		<li class="nav-mid-item"><a href="">Artist</a></li>
-		<li class="nav-mid-item"><a href="">MyGallery</a></li>
-	</ul>
+		<ul>
+			<li class="nav-mid-item"><a href="#">Home</a></li>
+			<li class="nav-mid-item"><a href="#">Emotion</a>
+				<div class="nav-mid-item-drop">
+					<ul>
+						<li><a href="#">New</a></li>
+						<li><a href="#">Popular</a></li>
+						<li><a href="#">Recent</a></li>
+						<li><a href="#">Category</a></li>
+					</ul>
+				</div></li>
+			<li class="nav-mid-item"><a href="#">Artist</a>
+				<div class="nav-mid-item-drop">
+					<ul>
+						<li><a href="#">New</a></li>
+						<li><a href="#">Popular</a></li>
+						<li><a href="#">Recent</a></li>
+						<li><a href="#">Most<br />followed
+						</a></li>
+					</ul>
+				</div></li>
+			<li class="nav-mid-item"><a href="#">MyGallery</a>
+				<div class="nav-mid-item-drop">
+					<ul>
+						<li><a href="#">Likes</a></li>
+						<li><a href="#">Following</a></li>
+						<li><a href="#">Upload</a></li>
+						<li><a href="#">Gallery</a></li>
+					</ul>
+				</div></li>
+		</ul>
 	</nav>
 
-	<section class="emoticon-container">
-	<div class="container-header">
-		<h2>${retrieve.title}</h2>
-		<button type="button">→ Browse</button>
-	</div>
-	<div class="container-main">
-		<form action="update.do" method="post">
-			<!-- 글 수정시 필요 -->
-			<input type="hidden" name="num" value="${retrieve.num}"> 글번호:
-			${retrieve.num} &nbsp;&nbsp;&nbsp;&nbsp; 조회수: ${retrieve.readcnt}<br />
-			타이틀 : <input type="text" name="title" required
-				value="${retrieve.title}"><br> 작성자 : ${retrieve.author}<br>
-			내용
-			<textarea name="content" rows="10" cols="50">${retrieve.content}</textarea>
-			<br> <input type="submit" value="수정">
-		</form>
-
-		<a href="">목록</a> &nbsp; <a href="delete.do?num=${retrieve.num}">삭제</a>
-		&nbsp;
-
-		<c:choose>
-			<c:when test="${user != null}">
-				<a href='replyui.do?num=${retrieve.num}'>답변달기</a>
-			</c:when>
-			<c:otherwise>
-				<a href='loginerror.do'>답변달기</a>
-			</c:otherwise>
-		</c:choose>
-	</div>
-	</section>
-
-	<section class="emoticon-container">
-	<div class="container-header">
-		<h2>New Emoticon</h2>
-		<button type="button">→ Browse</button>
-	</div>
-	<div class="container-main">
-		<div class="container-main">
-			<c:forEach var="dto" items="${list}">
-				<div class="emoticon-package">
-					<a href="retrieve.do?num=${dto.num}"> <img
-						src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
-					</a>
-					<p class="title">
-						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
-					</p>
-					<p class="artist">Artist: ${dto.author}</p>
-					<p class="">Retrieve: ${dto.readcnt}</p>
+	<section id="container">
+		<nav id="nav-mid-left">
+			<ul>
+				<li><a href="listPage.do">New Emoticon</a></li>
+				<li><a href="#">Popular Emoticon</a></li>
+				<li><a href="#">Recent Emoticon</a></li>
+				<li><a href="#">Category</a></li>
+			</ul>
+		</nav>
+		<section id="content">
+			<div id="content-wrapper">
+				<p>view : ${retrieve.readcnt}</p>
+				<h2>${retrieve.title}</h2>
+				<div id="detail-wrapper">
+					<div id="detail-image">
+						<img src="emo/images/emoticon_pack/도라에몽/1.png"><br />
+						<button id="likes" type="button" onclick="">
+							<img src="emo/images/likes_white.png">
+						</button>
+						<button id="follow" type="button" onclick="">
+							<img src="emo/images/follow_white.png">
+						</button>
+					</div>
+					<fieldset id="detail">
+						<legend>detail</legend>
+						<p>
+							<b>ARTIST :</b> ${retrieve.author}
+						</p>
+						<p>
+							<b>LIKES : </b>15
+						</p>
+						<p>
+							<b>FOLLOW : </b>9
+						</p>
+						<p>
+							<b>DESCRIPTION</b>
+						</p>
+						<textarea rows="6" cols="50">${retrieve.content}</textarea>
+					</fieldset>
 				</div>
-			</c:forEach>
-			<div class="emoticon-package">
-				<a href=""> <img
-					src="emo/images/thumbnail/옴팡지게앙증해옴팡이_thumbnail.png">
-				</a>
-				<p class="title">Title: 옴팡지게 앙증해 옴팡이</p>
-				<p class="artist">Artist: 애소</p>
+				<div id="tags">
+					<p>tags</p>
+					<ul>
+						<li><a href="#">#animation</a></li>
+						<li><a href="#">#cat</a></li>
+						<li><a href="#">#japan</a></li>
+						<li><a href="#">#cute</a></li>
+						<li><a href="#">#doraemon</a></li>
+					</ul>
+				</div>
+				<div id="emoticon-package">
+					<table>
+						<tr>
+							<td><img src="emo/images/emoticon_pack/도라에몽/1.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/2.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/3.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/4.png"></td>
+						</tr>
+						<tr>
+							<td><img src="emo/images/emoticon_pack/도라에몽/5.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/6.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/7.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/8.png"></td>
+						</tr>
+						<tr>
+							<td><img src="emo/images/emoticon_pack/도라에몽/9.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/10.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/11.png"></td>
+							<td><img src="emo/images/emoticon_pack/도라에몽/12.png"></td>
+						</tr>
+					</table>
+					<button type="button" onclick="">DOWNLOAD</button>
+				</div>
 			</div>
-			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
+		</section>
+		<div id="ad">
+			<a href="https://www.idowell.co.kr/home/" target="_blank"><img
+				src="emo/images/ad/winnerstel.png"></a> <a
+				href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F"
+				target="_blank"><img src="emo/images/ad/duo.jpg"></a>
 		</div>
 	</section>
 
-	<section id="footer"> </section>
+	<section id="footer">
+		<img src="emo/images/cbnu_white.png" width="221" height="67">
+		<p>2019, 오픈소스 전문 프로젝트, TEAM 11, 조 ??</p>
+		<p>윤송희 ~ 전준호, 정희주, 장형규</p>
+		<p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 / TEL : 043)261-2114</p>
+	</section>
 
 </body>
 

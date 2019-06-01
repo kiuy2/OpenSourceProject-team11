@@ -1,236 +1,335 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.entity.PageTO"%>
-<%@ page import="com.entity.User"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<! DOCTYPE html>
 <html>
 
 <head>
 
-<link type="text/css" rel="stylesheet"
-	href="emo/assets/css/main_style.css">
+<link type="text/css" rel="stylesheet" href="emo/assets/css/main_style.css">
+<link href='https://fonts.googleapis.com/css?family=Didact Gothic'
+	rel='stylesheet'>
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Dekko'
+	rel='stylesheet'>
 
 <title>SharEmo - Free Emoticon Share Website</title>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	    $(document).ready(function(){  
+
+            
+	        $(".nav-mid-item>a").hover(function() {
+                $(this).css("color", "grey");
+                $(this).parent().find(".nav-mid-item-drop").fadeIn('normal').show(); 
+                $(this).parent().find(".nav-mid-item-drop li").hover(function() {
+                    $(this).css("background-color", "#e6e6e6");
+
+                    $(this).mouseleave(function() { 
+                        $(this).css("background-color", "white");
+                    });                    
+                });
+
+                $(this).parent().mouseleave(function() { 
+                    $(this).find(">a").css("color", "white");
+                    $(this).find(".nav-mid-item-drop").fadeOut('fast'); 
+                });
+                
+            });  
+	    });  
+    </script>
 
 </head>
 
 <body>
 
-	<nav id="navbar-top"> <a href=""> 
-	<img
-		src="emo/images/sharEmo_logo_2.png">
-	</a>
-	<ul id="navbar-top-right">
-		<li class="nav-top-item"><c:choose>
-				<c:when test="${user != null}">
-					<a href='mypage.do'>${user.id}님</a></li>
-		<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
-				<a href='loginUI.do'> Login </a>
-			</c:otherwise> </c:choose></li>
-		<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
-	</ul>
+	<nav id="navbar-top">
+		<a href="main.do"> <img src="emo/images/sharEmo_logo_2.png">
+		</a>
+		<ul id="navbar-top-right">
+			<li class="nav-top-item"><c:choose>
+					<c:when test="${user != null}">
+						<a href='mypage.do'>${user.id}님</a></li>
+			<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
+					<a href='loginUI.do'> Login </a>
+				</c:otherwise> </c:choose></li>
+			<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
+		</ul>
 	</nav>
 
 	<section id="header">
-	<div id="header-content">
-		<img src="emo/images/sharEmo_logo_3.png">
-		<p>Find your emoticon whatever you want!!</p>
-		<form action="search.do" method="">
-			<input type="search" name="q"
-				placeholder="Search for emoticons e.g. happy, sad, angry...">
-			<button type="submit">
-				<img src="emo/images/musica-searcher.png" width="20px" height="20px">
-			</button>
-		</form>
-	</div>
+		<div id="header-content">
+			<img src="emo/images/sharEmo_logo_3.png">
+			<p>Find your emoticon whatever you want!!</p>
+			<form action="" method="">
+				<input type="search" name="q"
+					placeholder="Search for emoticons e.g. happy, sad, angry...">
+				<button type="submit">
+					<img src="emo/images/musica-searcher.png" width="20px" height="20px">
+				</button>
+			</form>
+		</div>
 	</section>
 
 	<nav id="navbar-mid">
-	<ul>
-		<li class="nav-mid-item"><a href="">Home</a></li>
-		<li class="nav-mid-item"><a href="">Emotion</a></li>
-		<li class="nav-mid-item"><a href="">Artist</a></li>
-		<li class="nav-mid-item"><a href="">MyGallery</a></li>
-	</ul>
+		<ul>
+			<li class="nav-mid-item"><a href="#">Home</a></li>
+			<li class="nav-mid-item"><a href="#">Emotion</a>
+				<div class="nav-mid-item-drop">
+					<img src="emo/images/말꼬리.png" width="180px" height="40px">
+					<ul>
+						<li><a href="listPage.do">New Emoticon</a></li>
+						<li><a href="listPage.do">Popular Emoticon</a></li>
+						<li><a href="listPage.do">Recent Emoticon</a></li>
+						<li><a href="listPage.do">Category</a></li>
+					</ul>
+				</div></li>
+			<li class="nav-mid-item"><a href="#">Artist</a>
+				<div class="nav-mid-item-drop">
+					<img src="emo/images/말꼬리.png" width="180px" height="40px">
+					<ul>
+						<li><a href="#">New Artist</a></li>
+						<li><a href="#">Popular Artist</a></li>
+						<li><a href="#">Recent Emoticon</a></li>
+						<li><a href="#">Most followed</a></li>
+					</ul>
+				</div></li>
+			<li class="nav-mid-item"><a href="#">MyGallery</a>
+				<div class="nav-mid-item-drop">
+					<img src="emo/images/말꼬리.png" width="180px" height="40px">
+					<ul>
+						<li><a href="#">Liked Emoticon</a></li>
+						<li><a href="#">Following Artist</a></li>
+						<li><a href="#">Upload Emoticon</a></li>
+						<li><a href="#">My Gallery</a></li>
+					</ul>
+				</div></li>
+		</ul>
 	</nav>
 
 	<section class="emoticon-container">
-	<div class="container-header">
-		<h2>New Emoticon</h2>
-		<button type="button">→ Browse</button>
-	</div>
-	<div class="container-main">
-		<c:forEach var="dto" items="${list}">
+		<div class="container-header">
+			<h2>New Emoticon</h2>
+			<button type="button">→ Browse</button>
+		</div>
+		<div class="container-main">
+			<c:forEach var="dto" items="${list}">
+				<div class="emoticon-package">
+					<a href="retrieve.do?num=${dto.num}"> <img
+						src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
+					</a>
+					<p class="title">
+						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+					</p>
+					<p class="artist">Artist: ${dto.author}</p>
+					<p class="artist">Retrieve: ${dto.readcnt}</p>
+				</div>
+			</c:forEach>
 			<div class="emoticon-package">
-				<a href="retrieve.do?num=${dto.num}"> <img
-					src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
+				<a href="#"> <img src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
 				</a>
-				<p class="title">
-					Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
-				</p>
-				<p class="artist">Artist: ${dto.author}</p>
-				<p class="artist">Retrieve: ${dto.readcnt}</p>
+				<p class="title">Title: 애용!김애용!티콘</p>
+				<p class="artist">Artist: 김애용</p>
 			</div>
-		</c:forEach>
-		<div class="emoticon-package">
-			<a href=""> <img
-				src="emo/images/thumbnail/옴팡지게앙증해옴팡이_thumbnail.png">
-			</a>
-			<p class="title">Title: 옴팡지게 앙증해 옴팡이</p>
-			<p class="artist">Artist: 애소</p>
+			<div class="emoticon-package">
+				<a href="#"> <img
+					src="emo/images/thumbnail/옴팡지게앙증해옴팡이_thumbnail.png">
+				</a>
+				<p class="title">Title: 옴팡지게 앙증해 옴팡이</p>
+				<p class="artist">Artist: 애소</p>
+			</div>
+			<div class="emoticon-package">
+				<a href="#"> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
+			<div class="emoticon-package">
+				<a href="#"> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
 		</div>
-		<div class="emoticon-package">
-			<a href=""> <img src="emo/images/thumbnail/.png">
-			</a>
-			<p class="title">Title: abc</p>
-			<p class="artist">Artist: 1234</p>
-		</div>
-		<div class="emoticon-package">
-			<a href=""> <img src="emo/images/thumbnail/.png">
-			</a>
-			<p class="title">Title: abc</p>
-			<p class="artist">Artist: 1234</p>
-		</div>
-	</div>
 	</section>
 
 	<section class="emoticon-container">
-	<div class="container-header">
-		<h2>Popular Emoticon</h2>
-		<button type="button">→ Browse</button>
-	</div>
-	<div class="container-main">
-		<div class="emoticon-package">
-			<a href=""> <img src="emo/images/thumbnail/.png">
-			</a>
-			<p class="title">Title: abc</p>
-			<p class="artist">Artist: 1234</p>
+		<div class="container-header">
+			<h2>Popular Emoticon</h2>
+			<button type="button">→ Browse</button>
 		</div>
-		<div class="emoticon-package">
-			<a href=""> <img src="emo/images/thumbnail/.png">
-			</a>
-			<p class="title">Title: abc</p>
-			<p class="artist">Artist: 1234</p>
+		<div class="container-main">
+			<div class="emoticon-package">
+				<a href=""> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
+			<div class="emoticon-package">
+				<a href=""> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
+			<div class="emoticon-package">
+				<a href=""> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
+			<div class="emoticon-package">
+				<a href=""> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
 		</div>
-		<div class="emoticon-package">
-			<a href=""> <img src="emo/images/thumbnail/.png">
-			</a>
-			<p class="title">Title: abc</p>
-			<p class="artist">Artist: 1234</p>
+	</section>
+
+	<section class="emoticon-container">
+		<div class="container-header">
+			<h2>Recent Emoticon</h2>
+			<button type="button">→ Browse</button>
 		</div>
-		<div class="emoticon-package">
-			<a href=""> <img src="emo/images/thumbnail/.png">
-			</a>
-			<p class="title">Title: abc</p>
-			<p class="artist">Artist: 1234</p>
+		<div class="container-main">
+			<div class="emoticon-package">
+				<a href=""> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
+			<div class="emoticon-package">
+				<a href=""> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
+			<div class="emoticon-package">
+				<a href=""> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
+			<div class="emoticon-package">
+				<a href=""> <img src="emo/images/thumbnail/.png">
+				</a>
+				<p class="title">Title: abc</p>
+				<p class="artist">Artist: 1234</p>
+			</div>
 		</div>
-	</div>
 	</section>
 
 	<section id="tags-container">
-	<div class="container-header">
-		<h2>Categories</h2>
-		<button type="button">→ Browse</button>
-	</div>
-	<div id="categories">
-		<div class="tags">
-			<ul>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-			</ul>
+		<div class="container-header">
+			<h2>Categories</h2>
+			<button type="button">→ Browse</button>
 		</div>
-		<div class="tags">
-			<ul>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-			</ul>
+		<div id="categories">
+			<div class="tags">
+				<ul>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+				</ul>
+			</div>
+			<div class="tags">
+				<ul>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+				</ul>
+			</div>
+			<div class="tags">
+				<ul>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+				</ul>
+			</div>
+			<div class="tags">
+				<ul>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+				</ul>
+			</div>
 		</div>
-		<div class="tags">
-			<ul>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-			</ul>
+		<div class="container-header">
+			<h2>Styles</h2>
+			<button type="button">→ Browse</button>
 		</div>
-		<div class="tags">
-			<ul>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-			</ul>
+		<div id="styles">
+			<div class="tags">
+				<ul>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+				</ul>
+			</div>
+			<div class="tags">
+				<ul>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+				</ul>
+			</div>
+			<div class="tags">
+				<ul>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+				</ul>
+			</div>
+			<div class="tags">
+				<ul>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+					<li><a href="">abcd</a></li>
+				</ul>
+			</div>
 		</div>
-	</div>
-	<div class="container-header">
-		<h2>Styles</h2>
-		<button type="button">→ Browse</button>
-	</div>
-	<div id="styles">
-		<div class="tags">
-			<ul>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-			</ul>
-		</div>
-		<div class="tags">
-			<ul>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-			</ul>
-		</div>
-		<div class="tags">
-			<ul>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-			</ul>
-		</div>
-		<div class="tags">
-			<ul>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-				<li><a href="">abcd</a></li>
-			</ul>
-		</div>
-	</div>
 	</section>
 
-	<section id="footer"> </section>
+	<section id="footer">
+		<img src="emo/images/cbnu_white.png" width="221" height="67">
+		<p>2019, 오픈소스 전문 프로젝트, TEAM 11, 조 ??</p>
+		<p>윤송희 ~ 전준호, 정희주, 장형규</p>
+		<p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 / TEL : 043)261-2114</p>
+	</section>
 
 </body>
 

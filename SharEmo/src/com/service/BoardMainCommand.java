@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dao.BoardDAO;
 import com.entity.PageTO;
 
-public class BoardPageCommand implements BoardCommand{
+public class BoardMainCommand implements BoardCommand{
 	static boolean start=false;
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		int curPage =1;
@@ -22,6 +22,6 @@ public class BoardPageCommand implements BoardCommand{
 		
 		//page.jsp에서 페이징 처리 데이터 저장
 		request.setAttribute("page", list);
-		return "emo/listPage.jsp";
+		return "emo/main.jsp";
 	}
 }

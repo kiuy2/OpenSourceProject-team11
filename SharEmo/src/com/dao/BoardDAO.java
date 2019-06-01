@@ -172,18 +172,17 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 		try {
 			con = ds.getConnection();
 			String sql = "select ifnull(max(num), 0)+1 from board";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if (pstmt != null)
-				pstmt.close();
+			
 			int currval = 1;
 			if (rs.next())
 				currval = rs.getInt(1);
 
+			
 			String query = "INSERT INTO board( title, author,content,"
 					+ "repRoot,repStep, repIndent) values (?,?,?,?, 0, 0)";
 			pstmt = con.prepareStatement(query);

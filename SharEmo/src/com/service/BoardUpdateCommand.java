@@ -16,7 +16,7 @@ public class BoardUpdateCommand implements BoardCommand {
 		
 		BoardDAO dao = new BoardDAO();
 		dao.update(num, title, author, content);
-		return "main.do";
+		return "listPage.do";
 	}
 
 }

@@ -15,10 +15,10 @@
 	
 	for(int i=1; i<=totalPage; i++){
 		if( curPage ==i ){
-			out.print("<font size=6 color='red'>"+ i+ "</font>");
+			out.print("<font size=3 color='red'>"+ i+ "</font>");
 		}
 		else{
-			out.print("<a href='list.do?curPage="+ i+ "'>"+i+"</a>&nbsp;");
+			out.print("<a href='list.do?curPage="+ i+ "'> / "+i+"</a>&nbsp;");
 		}
 	}
 
