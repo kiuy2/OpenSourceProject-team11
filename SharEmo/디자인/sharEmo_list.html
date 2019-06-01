@@ -1,0 +1,225 @@
+<! DOCTYPE html>
+<html>
+
+<head>
+    
+    <link type="text/css" rel="stylesheet" href="assets/css/list_style.css">
+    <link href='https://fonts.googleapis.com/css?family=Didact Gothic' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <title>SharEmo - Free Emoticon Share Website</title>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+	    $(document).ready(function(){  
+
+            
+	        $(".nav-mid-item>a").hover(function() {
+                $(this).css("color", "grey");
+                $(this).parent().find(".nav-mid-item-drop").slideDown('normal').show(); 
+                $(this).parent().find(".nav-mid-item-drop li").hover(function() {
+                    $(this).css("background-color", "rgba(255, 255, 255, 0.3)");
+
+                    $(this).mouseleave(function() { 
+                        $(this).css("background-color", "");
+                    });                    
+                });
+
+                $(this).parent().mouseleave(function() { 
+                    $(this).find(">a").css("color", "white");
+                    $(this).find(".nav-mid-item-drop").slideUp('fast'); 
+                });
+                
+            });  
+	    });  
+    </script>
+
+</head>
+
+<body>
+
+    <section id="header">
+        <div id="navbar-top">
+            <a href="sharEmo_main.html">
+                <img src="images/sharEmo_logo_2.png">
+            </a>
+            <ul id="navbar-top-right">
+                <li class="nav-top-item">
+                    <a href="">Login</a>
+                </li>
+                <li class="nav-top-item">
+                    <a href="">Sign up</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
+    <nav id="navbar-mid">
+        <form action="" method="">
+            <input type="search" name="q" placeholder="Search for emoticons e.g. happy, sad, angry...">
+            <button type="submit">
+                <img src="images/musica-searcher.png" width="20px" height="20px">
+            </button>
+        </form>
+        <ul>
+            <li class="nav-mid-item">
+                <a href="#">Home</a>
+            </li>
+            <li class="nav-mid-item">
+                <a href="#">Emotion</a>
+                <div class="nav-mid-item-drop">
+                    <ul>
+                        <li><a href="#">New</a></li>
+                        <li><a href="#">Popular</a></li>
+                        <li><a href="#">Recent</a></li>
+                        <li><a href="#">Category</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-mid-item">
+                <a href="#">Artist</a>
+                <div class="nav-mid-item-drop">
+                    <ul>
+                        <li><a href="#">New</a></li>
+                        <li><a href="#">Popular</a></li>
+                        <li><a href="#">Recent</a></li>
+                        <li><a href="#">Most<br/>followed</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-mid-item">
+                <a href="#">MyGallery</a>
+                <div class="nav-mid-item-drop">
+                    <ul>
+                        <li><a href="#">Likes</a></li>
+                        <li><a href="#">Following</a></li>
+                        <li><a href="#">Upload</a></li>
+                        <li><a href="#">Gallery</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    
+    <section id="container">
+        <nav id="nav-mid-left">
+            <ul>
+                <li><a href="#">New Emoticon</a></li>
+                <li><a href="#">Popular Emoticon</a></li>
+                <li><a href="#">Recent Emoticon</a></li>
+                <li><a href="#">Category</a></li>
+            </ul>
+        </nav>
+        <section id="content">
+            <table>
+                <tr>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/도라에몽/1.png"></a>
+                        <p><a href="#">Doraemon</a><br/>
+                            <a href="#">artist_1</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/돌/1.png"></a>
+                        <p><a href="#">stone</a><br/>
+                            <a href="#">artist_2</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/동물/1.png"></a>
+                        <p><a href="#">animal</a><br/>
+                            <a href="#">artist_3</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/어피치/1.png"></a>
+                        <p><a href="#">apeach</a><br/>
+                            <a href="#">artist_4</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/헬로키티/1.png"></a>
+                        <p><a href="#">hellocitty</a><br/>
+                            <a href="#">artist_5</a></p>
+                        </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                        </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                        </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                    <td>
+                        <a href="#"><img src="images/emoticon_pack/.png"></a>
+                        <p><a href="#">title : ...</a><br/>
+                            <a href="#">artist : ...</a></p>
+                    </td>
+                </tr>
+            </table>
+            <div id="paging">
+                <a href="#"><img src="images/page_left.png"></a>
+                <p id="paging">1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 / 10</p>
+                <a href="#"><img src="images/page_right.png"></a>
+            </div>
+        </section>
+        <div id="ad">
+            <a href="https://www.idowell.co.kr/home/" target="_blank"><img src="images/ad/winnerstel.png"></a><br/>
+            <a href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F" target="_blank"><img src="images/ad/duo.jpg"></a>
+        </div>
+    </section>
+
+    <section id="footer">
+        <img src="images/cbnu_white.png" width="221" height="67">
+        <p>2019, 오픈소스 전문 프로젝트, TEAM 11, 조 ??</p>
+        <p>윤송희 ~ 전준호, 정희주, 장형규</p>
+        <p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 / TEL : 043)261-2114</p>
+    </section>
+
+</body>
+
+</html>
