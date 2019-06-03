@@ -25,7 +25,6 @@
 <script type="text/javascript">
 $(document).ready(function(){  
 
-    
     $(".nav-mid-item>a").hover(function() {
         $(this).css("color", "grey");
         $(this).parent().find(".nav-mid-item-drop").fadeIn('normal').show(); 
@@ -54,19 +53,22 @@ $(document).ready(function(){
 			<a href="main.do"> <img src="emo/images/sharEmo_logo_2.png">
 			</a>
 			<ul id="navbar-top-right">
-				<li class="nav-top-item"><c:choose>
-						<c:when test="${user != null}">
-							<a href='mypage.do'>${user.id}님</a></li>
-				<li class="nav-top-item"><a href='logout.do'> LogOut </a> </c:when> <c:otherwise>
-						<a href='loginUI.do'> Login </a>
-					</c:otherwise> </c:choose></li>
+				<c:choose>
+					<c:when test="${user != null}">
+						<li class="nav-top-item"><a href='mypage.do'>${user.id}님</a></li>
+						<li class="nav-top-item"><a href='logout.do'> LogOut </a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-top-item"><a href='loginUI.do'> Login </a></li>
+					</c:otherwise>
+				</c:choose>
 				<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
 			</ul>
 		</div>
 	</section>
 
 	<nav id="navbar-mid">
-		<form action="search.do" method="">
+		<form action="search.do" method="post">
 			<input type="search" name="searchValue"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
