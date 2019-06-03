@@ -22,57 +22,10 @@
 <title>SharEmo - Free Emoticon Share Website</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$(".nav-mid-item>a")
-								.hover(
-										function() {
-											$(this).css("color", "grey");
-											$(this).parent().find(
-													".nav-mid-item-drop")
-													.slideDown('normal').show();
-											$(this)
-													.parent()
-													.find(
-															".nav-mid-item-drop li")
-													.hover(
-															function() {
-																$(this)
-																		.css(
-																				"background-color",
-																				"rgba(255, 255, 255, 0.3)");
-																$(this)
-																		.mouseleave(
-																				function() {
-																					$(
-																							this)
-																							.css(
-																									"background-color",
-																									"");
-																				});
-															});
-											$(this)
-													.parent()
-													.mouseleave(
-															function() {
-																$(this)
-																		.find(
-																				">a")
-																		.css(
-																				"color",
-																				"white");
-																$(this)
-																		.find(
-																				".nav-mid-item-drop")
-																		.slideUp(
-																				'fast');
-															});
-										});
-					});
+<script type="text/javascript" src="emo/assets/js/dropbox.js">
 </script>
-
+<script type="text/javascript" src="emo/assets/js/preview.js">
+</script>
 </head>
 
 <body>
@@ -97,7 +50,7 @@
 	</section>
 
 	<nav id="navbar-mid">
-		<form action="write.do" enctype="multipart/form-data" method="post">
+		<form action="search.do" method="post">
 			<input type="search" name="q"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
@@ -141,7 +94,7 @@
 		<section id="content">
 			<div id="content-wrapper">
 				<h2>Share your new COOL emoticon!</h2>
-				<form id="frm" name=form1 action='write.do' method=post enctype="">
+				<form id="frm" name=form1 action='write.do' method=post enctype="multipart/form-data">
 					<div id="title">
 						<label for="title">Title : </label> <input type="text"
 							name="title" required>
@@ -154,10 +107,10 @@
 					<textarea name="description" rows="8" cols="100"></textarea>
 					<div id="file_label">
 						<label for="upload">Upload Images</label> <input type="file"
-							name="upload" value="폴더 선택">
+							name="upload" id="input_images" value="폴더 선택" multiple>
 					</div>
-					<div id="upload_images"></div>
-					<span><input type="submit" value="SUBMIT"></span>
+					<div class="upload_images"></div>
+					<span><button type="submit" >SUBMIT</button></span>
 				</form>
 			</div>
 		</section>
