@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.entity.BoardDTO;
+import com.entity.Emoticon;
 import com.entity.PageTO;
 import com.entity.User;
 
@@ -168,7 +169,7 @@ public class BoardDAO {
 
 	// 글 쓰기
 	public void write(String _title, String _author, String _content) {
-
+		int currval = 1;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -178,7 +179,6 @@ public class BoardDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			int currval = 1;
 			if (rs.next())
 				currval = rs.getInt(1);
 
@@ -209,6 +209,45 @@ public class BoardDAO {
 		}
 	}
 
+	public void writeImage(String _sysname, String _orgname) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int _num=0;
+		try {
+			con = ds.getConnection();
+			String sql = "select ifnull(max(num), 0)+1 from board";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next())
+				_num = rs.getInt(1);
+
+			System.out.println(_sysname);
+			String query = "INSERT INTO emoticon( boardnum, sysname, orgname)"
+					+ " values (?,?,?)";
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setInt(1, _num);
+			pstmt.setString(2, _sysname);
+			pstmt.setString(3, _orgname);
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	// 조회수 1증가
 	public void readCount(String _num) {
 
@@ -673,6 +712,43 @@ public class BoardDAO {
 			}
 		}
 		return false;
+	}
+
+	public ArrayList<Emoticon> getEmoticon() {
+		ArrayList<Emoticon> ticon = new ArrayList<Emoticon>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String query = "SELECT boardnum, sysname FROM emoticon order by boardnum desc;";
+			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = pstmt.executeQuery();
+
+			while( rs.next()) {
+				int num = rs.getInt("boardnum");
+				String sysname = rs.getString("sysname");
+				Emoticon data = new Emoticon();
+				data.setBoardnum(num);
+				data.setSrc(sysname);
+				ticon.add(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ticon;
 	}
 
 }

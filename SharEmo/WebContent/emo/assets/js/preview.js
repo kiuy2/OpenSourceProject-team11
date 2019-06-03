@@ -1,10 +1,10 @@
 var sel_files =[];
-alert("d");
+
 $(document).ready(function(){
-	$("#input_images").on("change", handleImgsFilesSelect);
+	$("#input_images").on("change", ImgsFilesSelect);
 });
 
-function handleImgsFilesSelect(e){
+function ImgsFilesSelect(e){
 	var files = e.target.files;
 	var filesArr = Array.prototype.slice.call(files);
 	

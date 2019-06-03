@@ -128,6 +128,10 @@ body {
     background-image: url("images/halftone-yellow.png");
     border-bottom: 1px darkgoldenrod solid;
 }
+.emoticon-Thumbnail {
+	width: 33%;
+	height: 33%;
+}
 .container-header {
     display: flex;
     align-items: center;

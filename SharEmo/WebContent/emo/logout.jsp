@@ -11,10 +11,8 @@
 </head>
 <body>
 	<script>
-		
-	<%session.removeAttribute("user");%>
 		self.window.alert('로그아웃됐습니다.');
-		"location.href='main.do';"
+		location.href='main.do';
 	</script>
 </body>
 </html>

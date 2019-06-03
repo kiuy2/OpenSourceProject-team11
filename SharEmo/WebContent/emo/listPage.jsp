@@ -104,8 +104,13 @@
 					<c:if test="${status.index % 4 eq 0}">
 						<tr>
 					</c:if>
-					<td><a href="retrieve.do?num=${dto.num}"> <img
-							src="emo/images/emoticon_pack/도라에몽/1.png">
+					<td><a href="retrieve.do?num=${dto.num}"> 
+							<c:forEach
+								var="emo" items="${ticon}" begin="0" end="6">
+								<c:if test="${dto.num eq emo.boardnum}">
+									<img class="emoticon-Thumbnail" src="emosave/${emo.src}">
+								</c:if>
+							</c:forEach>
 					</a>
 						<p>
 							<a href="retrieve.do?num=${dto.num}">${dto.title}</a><br /> <a

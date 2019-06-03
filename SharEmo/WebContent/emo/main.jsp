@@ -98,13 +98,18 @@
 	<section class="emoticon-container">
 		<div class="container-header">
 			<h2>New Emoticon</h2>
-			<button type="button" onclick="location.href='listPage.do'">→ Browse</button>
+			<button type="button" onclick="location.href='listPage.do'">→
+				Browse</button>
 		</div>
 		<div class="container-main">
 			<c:forEach var="dto" items="${list}" begin="0" end="3">
 				<div class="emoticon-package">
-					<a href="retrieve.do?num=${dto.num}"> <img
-						src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
+					<a href="retrieve.do?num=${dto.num}"> 
+						<c:forEach var="emo" items="${ticon}" begin="0" end="6">
+							<c:if test="${dto.num eq emo.boardnum}">
+								<img class="emoticon-Thumbnail" src="emosave/${emo.src}">
+							</c:if>
+						</c:forEach>
 					</a>
 					<p class="title">
 						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>

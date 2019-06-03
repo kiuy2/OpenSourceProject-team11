@@ -104,7 +104,7 @@
 				<h2>${retrieve.title}</h2>
 				<div id="detail-wrapper">
 					<div id="detail-image">
-						<img src="emo/images/emoticon_pack/도라에몽/1.png"><br />
+						<img class="emoticon-Thumbnail" src="emosave/${ticon[0].src}">
 						<button id="likes" type="button" onclick="">
 							<img src="emo/images/likes_white.png">
 						</button>
@@ -141,24 +141,19 @@
 				</div>
 				<div id="emoticon-package">
 					<table>
-						<tr>
-							<td><img src="emo/images/emoticon_pack/도라에몽/1.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/2.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/3.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/4.png"></td>
-						</tr>
-						<tr>
-							<td><img src="emo/images/emoticon_pack/도라에몽/5.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/6.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/7.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/8.png"></td>
-						</tr>
-						<tr>
-							<td><img src="emo/images/emoticon_pack/도라에몽/9.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/10.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/11.png"></td>
-							<td><img src="emo/images/emoticon_pack/도라에몽/12.png"></td>
-						</tr>
+						<c:forEach var="emo" items="${ticon}" varStatus="status">
+							<c:if test="${status.index % 4 eq 0}">
+								<tr>
+							</c:if>
+							<c:if test="${retrieve.num eq emo.boardnum}">
+								<td><img class="emoticon-Thumbnail"
+									src="emosave/${emo.src}"></td>
+							</c:if>
+						</td>
+						<c:if test="${status.count % 4 eq 0}">
+							</tr>
+						</c:if>
+						</c:forEach>
 					</table>
 					<button type="button" onclick="">DOWNLOAD</button>
 				</div>
