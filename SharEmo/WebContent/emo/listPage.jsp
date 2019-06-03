@@ -154,7 +154,7 @@ $(document).ready(function(){
 					<td><a href="#"><img
 							src="emo/images/emoticon_pack/헬로키티/1.png"></a>
 						<p>
-							<a href="#">hellocitty</a><br /> <a href="#">artist_5</a>
+							<a href="#">hellokitty</a><br /> <a href="#">artist_5</a>
 						</p></td>
 					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
 						<p>
