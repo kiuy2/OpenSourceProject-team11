@@ -67,8 +67,8 @@
 		<div id="header-content">
 			<img src="emo/images/sharEmo_logo_3.png">
 			<p>Find your emoticon whatever you want!!</p>
-			<form action="" method="">
-				<input type="search" name="q"
+			<form action="search.do" method="">
+				<input type="search" name="searchValue"
 					placeholder="Search for emoticons e.g. happy, sad, angry...">
 				<button type="submit">
 					<img src="emo/images/musica-searcher.png" width="20px" height="20px">
@@ -116,10 +116,10 @@
 	<section class="emoticon-container">
 		<div class="container-header">
 			<h2>New Emoticon</h2>
-			<button type="button">→ Browse</button>
+			<button type="button" onclick="location.href='listPage.do'">→ Browse</button>
 		</div>
 		<div class="container-main">
-			<c:forEach var="dto" items="${list}">
+			<c:forEach var="dto" items="${list}" begin="0" end="3">
 				<div class="emoticon-package">
 					<a href="retrieve.do?num=${dto.num}"> <img
 						src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
@@ -131,31 +131,6 @@
 					<p class="artist">Retrieve: ${dto.readcnt}</p>
 				</div>
 			</c:forEach>
-			<div class="emoticon-package">
-				<a href="#"> <img src="emo/images/thumbnail/애용!김애용!티콘_thumbnail.png">
-				</a>
-				<p class="title">Title: 애용!김애용!티콘</p>
-				<p class="artist">Artist: 김애용</p>
-			</div>
-			<div class="emoticon-package">
-				<a href="#"> <img
-					src="emo/images/thumbnail/옴팡지게앙증해옴팡이_thumbnail.png">
-				</a>
-				<p class="title">Title: 옴팡지게 앙증해 옴팡이</p>
-				<p class="artist">Artist: 애소</p>
-			</div>
-			<div class="emoticon-package">
-				<a href="#"> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
-			<div class="emoticon-package">
-				<a href="#"> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
 		</div>
 	</section>
 
@@ -226,68 +201,6 @@
 	</section>
 
 	<section id="tags-container">
-		<div class="container-header">
-			<h2>Categories</h2>
-			<button type="button">→ Browse</button>
-		</div>
-		<div id="categories">
-			<div class="tags">
-				<ul>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-				</ul>
-			</div>
-			<div class="tags">
-				<ul>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-				</ul>
-			</div>
-			<div class="tags">
-				<ul>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-				</ul>
-			</div>
-			<div class="tags">
-				<ul>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-				</ul>
-			</div>
-		</div>
 		<div class="container-header">
 			<h2>Styles</h2>
 			<button type="button">→ Browse</button>

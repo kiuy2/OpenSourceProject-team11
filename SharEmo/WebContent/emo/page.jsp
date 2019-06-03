@@ -18,7 +18,7 @@
 			out.print("<font size=3 color='red'>"+ i+ "</font>");
 		}
 		else{
-			out.print("<a href='list.do?curPage="+ i+ "'> / "+i+"</a>&nbsp;");
+			out.print("<a href='listPage.do?curPage="+ i+ "'> / "+i+"</a>&nbsp;");
 		}
 	}
 

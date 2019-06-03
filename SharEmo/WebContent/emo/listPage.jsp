@@ -23,7 +23,6 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-<script type="text/javascript">
 $(document).ready(function(){  
 
     
@@ -67,8 +66,8 @@ $(document).ready(function(){
 	</section>
 
 	<nav id="navbar-mid">
-		<form action="" method="">
-			<input type="search" name="q"
+		<form action="search.do" method="">
+			<input type="search" name="searchValue"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
 				<img src="emo/images/musica-searcher.png" width="20px" height="20px">
@@ -118,93 +117,24 @@ $(document).ready(function(){
 		</nav>
 		<section id="content">
 			<table>
-				<tr>
-					<c:forEach var="dto" items="${list}">
-						<td><a href="retrieve.do?num=${dto.num}"> <img
-								src="emo/images/emoticon_pack/도라에몽/1.png">
-						</a>
-							<p>
-								<a href="retrieve.do?num=${dto.num}">${dto.title}</a><br /> <a
-									href="#">작성자 : ${dto.author}</a><br /> <a href="#">조회 수:
-									${dto.readcnt}</a>
-							</p></td>
-					</c:forEach>
-					<td><a href="#"><img
-							src="emo/images/emoticon_pack/도라에몽/1.png"></a>
+
+				<c:forEach var="dto" items="${list}" varStatus="status">
+					<c:if test="${status.index % 4 eq 0}">
+						<tr>
+					</c:if>
+					<td><a href="retrieve.do?num=${dto.num}"> <img
+							src="emo/images/emoticon_pack/도라에몽/1.png">
+					</a>
 						<p>
-							<a href="#">Doraemon</a><br /> <a href="#">artist_1</a>
+							<a href="retrieve.do?num=${dto.num}">${dto.title}</a><br /> <a
+								href="#">작성자 : ${dto.author}</a><br /> <a href="#">조회 수:
+								${dto.readcnt}</a>
 						</p></td>
-					<td><a href="#"><img
-							src="emo/images/emoticon_pack/돌/1.png"></a>
-						<p>
-							<a href="#">stone</a><br /> <a href="#">artist_2</a>
-						</p></td>
-					<td><a href="#"><img
-							src="emo/images/emoticon_pack/동물/1.png"></a>
-						<p>
-							<a href="#">animal</a><br /> <a href="#">artist_3</a>
-						</p></td>
-					<td><a href="#"><img
-							src="emo/images/emoticon_pack/어피치/1.png"></a>
-						<p>
-							<a href="#">apeach</a><br /> <a href="#">artist_4</a>
-						</p></td>
-				</tr>
-				<tr>
-					<td><a href="#"><img
-							src="emo/images/emoticon_pack/헬로키티/1.png"></a>
-						<p>
-							<a href="#">hellocitty</a><br /> <a href="#">artist_5</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-				</tr>
-				<tr>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-				</tr>
-				<tr>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-					<td><a href="#"><img src="emo/images/emoticon_pack/.png"></a>
-						<p>
-							<a href="#">title : ...</a><br /> <a href="#">artist : ...</a>
-						</p></td>
-				</tr>
+					<c:if test="${status.count % 4 eq 0}">
+						</tr>
+					</c:if>
+				</c:forEach>
+
 			</table>
 			<div id="paging">
 				<a href="#"><img src="emo/images/page_left.png"></a>
@@ -216,7 +146,12 @@ $(document).ready(function(){
 				<a href="#"><img src="emo/images/page_right.png"></a>
 				<!-- 글쓰기 버튼 만들 공간 -->
 				<p>
+				<c:choose>
+						<c:when test="${user != null}">
 					<a href="writeui.do"> 글 쓰기 </a>
+				</c:when> <c:otherwise>
+					<a href="loginerror.do"> 글 쓰기 </a>
+					</c:otherwise> </c:choose>
 				</p>
 			</div>
 		</section>

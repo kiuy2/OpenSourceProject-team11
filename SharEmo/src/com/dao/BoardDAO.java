@@ -465,32 +465,50 @@ public class BoardDAO {
 	}
 
 	// 글 검색하기
-	public ArrayList<BoardDTO> search(String _searchName, String _searchValue) {
+	public PageTO search(String _searchName, String _searchValue, int curPage) {
+		PageTO to = new PageTO();
+		int totalCount = totalCount();
+
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 			con = ds.getConnection();
-			String query = "SELECT num, author, title,SELECT num,author,title,content,"
-					+ "DATE_FORMAT(writeday,'%Y/%M/%D') writeday, readcnt FROM board";
+			String query = "SELECT num,author,title,content,"
+					+ "DATE_FORMAT(writeday,'%Y/%M/%D') writeday, readcnt "
+					+ ",repRoot, repStep, repIndent FROM "
+					+ "board ";
 			if (_searchName.equals("title")) {
-				query += "WHERE title LIKE ?";
+				query += "WHERE title LIKE ? ";
 			} else {
-				query += "WHERE author LIKE ?";
+				query += "WHERE author LIKE ? ";
 			}
-
+			query+="order by repRoot desc, repStep asc";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, "%" + _searchValue + "%");
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
+			
+			int perPage = to.getPerPage();// 5
+
+			int skip = (curPage - 1) * perPage;
+
+			if (skip > 0) {
+				rs.absolute(skip);
+			}
+			
+
+			for (int i = 0; i < perPage && rs.next(); i++) {
 				int num = rs.getInt("num");
 				String author = rs.getString("author");
 				String title = rs.getString("title");
 				String content = rs.getString("content");
 				String writeday = rs.getString("writeday");
 				int readcnt = rs.getInt("readcnt");
+				int repRoot = rs.getInt("repRoot");
+				int repStep = rs.getInt("repStep");
+				int repIndent = rs.getInt("repIndent");
 
 				BoardDTO data = new BoardDTO();
 				data.setNum(num);
@@ -499,10 +517,14 @@ public class BoardDAO {
 				data.setContent(content);
 				data.setWriteday(writeday);
 				data.setReadcnt(readcnt);
-
+				data.setRepRoot(repRoot);
+				data.setRepStep(repStep);
+				data.setRepIndent(repIndent);
 				list.add(data);
 			}
-
+			to.setList(list);
+			to.setTotalCount(totalCount);
+			to.setCurPage(curPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -517,7 +539,7 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return to;
 	}
 
 	public int totalCount() {
