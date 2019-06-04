@@ -124,7 +124,7 @@
 						<legend>detail</legend>
 						<p>
 							<b>ARTIST :</b> ${retrieve.author}
-						</p>s
+						</p>
 						<p>
 							<b>LIKES : </b>15
 						</p>
