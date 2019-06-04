@@ -23,6 +23,7 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="emo/assets/js/dropbox.js">
+	
 </script>
 </head>
 
@@ -104,13 +105,18 @@
 					<c:if test="${status.index % 4 eq 0}">
 						<tr>
 					</c:if>
-					<td><a href="retrieve.do?num=${dto.num}"> 
-							<c:forEach
-								var="emo" items="${ticon}" begin="0" end="6">
-								<c:if test="${dto.num eq emo.boardnum}">
-									<img class="emoticon-Thumbnail" src="emosave/${emo.src}">
-								</c:if>
-							</c:forEach>
+					<td><a href="retrieve.do?num=${dto.num}">
+							<div class="emoticon-Thumbnail">
+								<c:set var="loop_flag" value="false" />
+								<c:forEach var="emo" items="${ticon}">
+									<c:if test="${not loop_flag }">
+										<c:if test="${dto.num eq emo.boardnum}">
+											<img id="Thumbnail" src="emosave/${emo.src}">
+											<c:set var="loop_flag" value="true" />
+										</c:if>
+									</c:if>
+								</c:forEach>
+							</div>
 					</a>
 						<p>
 							<a href="retrieve.do?num=${dto.num}">${dto.title}</a><br /> <a
@@ -133,12 +139,14 @@
 				<a href="#"><img src="emo/images/page_right.png"></a>
 				<!-- 글쓰기 버튼 만들 공간 -->
 				<p>
-				<c:choose>
+					<c:choose>
 						<c:when test="${user != null}">
-					<a href="writeui.do"> 글 쓰기 </a>
-				</c:when> <c:otherwise>
-					<a href="loginerror.do"> 글 쓰기 </a>
-					</c:otherwise> </c:choose>
+							<a href="writeui.do"> 글 쓰기 </a>
+						</c:when>
+						<c:otherwise>
+							<a href="loginerror.do"> 글 쓰기 </a>
+						</c:otherwise>
+					</c:choose>
 				</p>
 			</div>
 		</section>

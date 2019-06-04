@@ -223,7 +223,6 @@ public class BoardDAO {
 			if (rs.next())
 				_num = rs.getInt(1);
 
-			System.out.println(_sysname);
 			String query = "INSERT INTO emoticon( boardnum, sysname, orgname)"
 					+ " values (?,?,?)";
 			pstmt = con.prepareStatement(query);

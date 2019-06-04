@@ -104,7 +104,15 @@
 				<h2>${retrieve.title}</h2>
 				<div id="detail-wrapper">
 					<div id="detail-image">
-						<img class="emoticon-Thumbnail" src="emosave/${ticon[0].src}">
+						<c:set var="loop_flag" value="false" />
+						<c:forEach var="emo" items="${ticon}">
+							<c:if test="${not loop_flag }">
+								<c:if test="${retrieve.num eq emo.boardnum}">
+									<img class="emoticon-Thumbnail" src="emosave/${emo.src}"><br/>
+									<c:set var="loop_flag" value="true" />
+								</c:if>
+							</c:if>
+						</c:forEach>
 						<button id="likes" type="button" onclick="">
 							<img src="emo/images/likes_white.png">
 						</button>
@@ -116,7 +124,7 @@
 						<legend>detail</legend>
 						<p>
 							<b>ARTIST :</b> ${retrieve.author}
-						</p>
+						</p>s
 						<p>
 							<b>LIKES : </b>15
 						</p>
@@ -149,10 +157,10 @@
 								<td><img class="emoticon-Thumbnail"
 									src="emosave/${emo.src}"></td>
 							</c:if>
-						</td>
-						<c:if test="${status.count % 4 eq 0}">
-							</tr>
-						</c:if>
+							</td>
+							<c:if test="${status.count % 4 eq 0}">
+								</tr>
+							</c:if>
 						</c:forEach>
 					</table>
 					<button type="button" onclick="">DOWNLOAD</button>

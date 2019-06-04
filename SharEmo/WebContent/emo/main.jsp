@@ -3,13 +3,17 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%
+	int Thumbnailnum = 0;
+	request.setAttribute("thumbnum", Thumbnailnum);
+%>
 <! DOCTYPE html>
 <html>
 
 <head>
 
-<link type="text/css" rel="stylesheet" href="emo/assets/css/main_style.css">
+<link type="text/css" rel="stylesheet"
+	href="emo/assets/css/main_style.css">
 <link href='https://fonts.googleapis.com/css?family=Didact Gothic'
 	rel='stylesheet'>
 <link
@@ -22,6 +26,7 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="emo/assets/js/dropbox.js">
+	
 </script>
 
 </head>
@@ -33,14 +38,14 @@
 		</a>
 		<ul id="navbar-top-right">
 			<c:choose>
-					<c:when test="${user != null}">
-						<li class="nav-top-item"><a href='mypage.do'>${user.id}님</a></li>
-						<li class="nav-top-item"><a href='logout.do'> LogOut </a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="nav-top-item"><a href='loginUI.do'> Login </a></li>
-					</c:otherwise>
-				</c:choose>
+				<c:when test="${user != null}">
+					<li class="nav-top-item"><a href='mypage.do'>${user.id}님</a></li>
+					<li class="nav-top-item"><a href='logout.do'> LogOut </a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="nav-top-item"><a href='loginUI.do'> Login </a></li>
+				</c:otherwise>
+			</c:choose>
 			<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
 		</ul>
 	</nav>
@@ -53,7 +58,8 @@
 				<input type="search" name="searchValue"
 					placeholder="Search for emoticons e.g. happy, sad, angry...">
 				<button type="submit">
-					<img src="emo/images/musica-searcher.png" width="20px" height="20px">
+					<img src="emo/images/musica-searcher.png" width="20px"
+						height="20px">
 				</button>
 			</form>
 		</div>
@@ -104,12 +110,22 @@
 		<div class="container-main">
 			<c:forEach var="dto" items="${list}" begin="0" end="3">
 				<div class="emoticon-package">
-					<a href="retrieve.do?num=${dto.num}"> 
-						<c:forEach var="emo" items="${ticon}" begin="0" end="6">
-							<c:if test="${dto.num eq emo.boardnum}">
-								<img class="emoticon-Thumbnail" src="emosave/${emo.src}">
-							</c:if>
-						</c:forEach>
+					<a href="retrieve.do?num=${dto.num}">
+						<div class="emoticon-Thumbnail">
+							<c:forEach var="emo" items="${ticon}" varStatus="status">
+								<c:if test="${thumbnum <6 && dto.num eq emo.boardnum}">
+									<%
+										Thumbnailnum++;
+													request.setAttribute("thumbnum", Thumbnailnum);
+									%>
+									<img id="Thumbnail${thumbnum}" src="emosave/${emo.src}">
+								</c:if>
+							</c:forEach>
+							<%
+								Thumbnailnum = 0;
+									request.setAttribute("thumbnum", Thumbnailnum);
+							%>
+						</div>
 					</a>
 					<p class="title">
 						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>

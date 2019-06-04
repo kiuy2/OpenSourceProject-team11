@@ -129,8 +129,23 @@ body {
     border-bottom: 1px darkgoldenrod solid;
 }
 .emoticon-Thumbnail {
-	width: 33%;
-	height: 33%;
+	width :270px;
+	height:270px;
+    margin: 15px;
+    clear:both;
+}
+.emoticon-Thumbnail img {
+	width :33%;
+	height:33%;
+	display:inline;
+	padding :0px;
+	margin : 0px;
+	float:left;
+}
+.emoticon-Thumbnail #Thumbnail1 {
+	width :66%;
+	height:66%;
+	display:inline;
 }
 .container-header {
     display: flex;
@@ -166,11 +181,12 @@ body {
     border-bottom: 2px grey solid;
     margin: 10px;
 }
+/* 이미지 css
 .emoticon-package img {
     width: 270px;
     height: 270px;
     margin: 15px;
-}
+} */
 .emoticon-package p {
     font-family: 'Didact Gothic';
 }
