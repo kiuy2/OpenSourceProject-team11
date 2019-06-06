@@ -13,6 +13,6 @@ public class BoardDeleteCommand implements BoardCommand {
 		
 		BoardDAO dao = new BoardDAO();
 		dao.delete(num);
-		return "main.do";
+		return "listPage.do";
 	}
 }

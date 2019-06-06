@@ -4,6 +4,7 @@ public class Emoticon {
 
 	int boardnum;
 	String src;
+	String org;
 	public int getBoardnum() {
 		return boardnum;
 	}
@@ -15,5 +16,11 @@ public class Emoticon {
 	}
 	public void setSrc(String src) {
 		this.src = src;
+	}
+	public String getOrg() {
+		return org;
+	}
+	public void setOrg(String org) {
+		this.org = org;
 	}
 }

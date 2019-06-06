@@ -41,7 +41,7 @@ public class BoardDAO {
 
 		try {
 			con = ds.getConnection();
-			String query = "SELECT num,author,title,content," + "DATE_FORMAT(writeday,'%Y/%M/%D') writeday,"
+			String query = "SELECT num,author,title,content,likes, " + "DATE_FORMAT(writeday,'%Y/%M/%D') writeday,"
 					+ "readcnt,repRoot, repStep, repIndent FROM " + "board order by repRoot desc, repStep asc";
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();
@@ -50,6 +50,7 @@ public class BoardDAO {
 				String author = rs.getString("author");
 				String title = rs.getString("title");
 				String content = rs.getString("content");
+				int likes=rs.getInt("likes");
 				String writeday = rs.getString("writeday");
 				int readcnt = rs.getInt("readcnt");
 				int repRoot = rs.getInt("repRoot");
@@ -61,6 +62,7 @@ public class BoardDAO {
 				data.setAuthor(author);
 				data.setTitle(title);
 				data.setContent(content);
+				data.setLikes(likes);
 				data.setWriteday(writeday);
 				data.setReadcnt(readcnt);
 				data.setRepRoot(repRoot);
@@ -213,21 +215,21 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int _num=0;
+		int boardnum=0;
 		try {
 			con = ds.getConnection();
-			String sql = "select ifnull(max(num), 0)+1 from board";
+			String sql = "select ifnull(max(num), 0) from board";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next())
-				_num = rs.getInt(1);
+				boardnum = rs.getInt(1);
 
 			String query = "INSERT INTO emoticon( boardnum, sysname, orgname)"
 					+ " values (?,?,?)";
 			pstmt = con.prepareStatement(query);
 
-			pstmt.setInt(1, _num);
+			pstmt.setInt(1, boardnum);
 			pstmt.setString(2, _sysname);
 			pstmt.setString(3, _orgname);
 			pstmt.executeUpdate();
@@ -247,6 +249,45 @@ public class BoardDAO {
 			}
 		}
 	}
+	
+
+	// 조회수 1증가
+	public int setLikes(String _num) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		int num=0;
+		try {
+			con = ds.getConnection();
+			String query = "UPDATE board SET likes = likes + 1 WHERE num=" + _num;
+
+			pstmt = con.prepareStatement(query);
+
+			pstmt.executeUpdate();
+			query = "SELECT likes from board WHERE num=" + _num;
+			pstmt = con.prepareStatement(query);
+			rs=pstmt.executeQuery();
+			
+			if (rs.next())
+				num=rs.getInt("likes");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return num;
+	}
+
+	
 	// 조회수 1증가
 	public void readCount(String _num) {
 
@@ -297,6 +338,7 @@ public class BoardDAO {
 				String title = rs.getString("title");
 				String author = rs.getString("author");
 				String content = rs.getString("content");
+				int likes =rs.getInt("likes");
 				String writeday = rs.getString("writeday");
 				int readcnt = rs.getInt("readcnt");
 
@@ -304,6 +346,7 @@ public class BoardDAO {
 				data.setTitle(title);
 				data.setAuthor(author);
 				data.setContent(content);
+				data.setLikes(likes);
 				data.setWriteday(writeday);
 				data.setReadcnt(readcnt);
 			}
@@ -405,6 +448,7 @@ public class BoardDAO {
 				data.setTitle(rs.getString("title"));
 				data.setAuthor(rs.getString("author"));
 				data.setContent(rs.getString("content"));
+				data.setLikes(rs.getInt("likes"));
 				data.setWriteday(rs.getString("writeday"));
 				data.setReadcnt(rs.getInt("readcnt"));
 				data.setRepRoot(rs.getInt("repRoot"));
@@ -750,4 +794,44 @@ public class BoardDAO {
 		return ticon;
 	}
 
+	//해당 게시물의 이모티콘만 추출
+	public ArrayList<Emoticon> getEmoticon(String _num) {
+		ArrayList<Emoticon> ticon = new ArrayList<Emoticon>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String query = "SELECT * FROM emoticon where boardnum="+_num;
+			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = pstmt.executeQuery();
+
+			while( rs.next()) {
+				int num = rs.getInt("boardnum");
+				String sysname = rs.getString("sysname");
+				String orgname = rs.getString("orgname");
+				Emoticon data = new Emoticon();
+				data.setBoardnum(num);
+				data.setSrc(sysname);
+				data.setOrg(orgname);
+				ticon.add(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ticon;
+	}
+	
 }

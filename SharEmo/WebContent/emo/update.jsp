@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="com.dao.BoardDAO, com.entity.BoardDTO"%>
 <! DOCTYPE html>
 <html>
 
@@ -18,41 +17,14 @@
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
 <link type="text/css" rel="stylesheet"
-	href="emo/assets/css/recieve_style.css">
+	href="emo/assets/css/write_style.css">
 
 <title>SharEmo - Free Emoticon Share Website</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="emo/assets/js/dropbox.js">
 </script>
-
-<script>
-	function like() {
-		$.ajax({
-			url : "like.do",
-			type : "POST",
-			data : {
-				num : "${retrieve.num }"
-			},
-			success : function(likes) {
-				//alert("'좋아요'가 반영되었습니다!");
-				// data중 put한 것의 이름 like 
-				$("#likes_num").html(likes);
-				//id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다. 
-			},
-			error : function(request, status, error) {
-				alert("오류");
-			}
-		});
-	}
-	function download() {
-
-		url = "emo/filedown.jsp?num=" + ${retrieve.num};
-		open(
-				url,
-				"confirm",
-				"toolbar=no,location=no,status=no,menubar=no, scrollbars=no, resizable=no, width=300, height=200");
-	}
+<script type="text/javascript" src="emo/assets/js/preview.js">
 </script>
 </head>
 
@@ -78,7 +50,7 @@
 	</section>
 
 	<nav id="navbar-mid">
-		<form action="" method="">
+		<form action="search.do" method="post">
 			<input type="search" name="q"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
@@ -119,89 +91,34 @@
 	</nav>
 
 	<section id="container">
-		<nav id="nav-mid-left">
-			<ul>
-				<li><a href="listPage.do">New Emoticon</a></li>
-				<li><a href="#">Popular Emoticon</a></li>
-				<li><a href="#">Recent Emoticon</a></li>
-				<li><a href="#">Category</a></li>
-			</ul>
-		</nav>
 		<section id="content">
 			<div id="content-wrapper">
-				<p>view : ${retrieve.readcnt}</p>
-				<h2>${retrieve.title}</h2>
-				<div id="detail-wrapper">
-					<div id="detail-image">
-						<c:set var="loop_flag" value="false" />
-						<c:forEach var="emo" items="${ticon}">
-							<c:if test="${not loop_flag }">
-								<c:if test="${retrieve.num eq emo.boardnum}">
-									<img class="emoticon-Thumbnail" src="emosave/${emo.src}"><br/>
-									<c:set var="loop_flag" value="true" />
-								</c:if>
-							</c:if>
-						</c:forEach>
-						<button id="likes" type="button" onclick="return like();">
-							<img src="emo/images/likes_white.png">
-						</button>
-						<button id="follow" type="button" onclick="">
-							<img src="emo/images/follow_white.png">
-						</button>
+				<h2>Update your COOL emoticon!</h2>
+				<form id="frm" name=form1 action='update.do' method=post enctype="multipart/form-data">
+					<input type="text"
+							name="name" hidden value="${retrieve.num }">
+					<div id="title">
+						<label for="title">Title : </label> <input type="text"
+							name="title" value="${retrieve.title }" required>
 					</div>
-					<fieldset id="detail">
-						<legend>detail</legend>
-						<p>
-							<b>ARTIST :</b> ${retrieve.author}
-						</p>
-						<p>
-							<b>LIKES : </b> <span id="likes_num">${retrieve.likes}</span>
-						</p>
-						<p>
-							<b>FOLLOW : </b>9
-						</p>
-						<p>
-							<b>DESCRIPTION</b>
-						</p>
-						<textarea rows="6" cols="50">${retrieve.content}</textarea>
-					</fieldset>
-				</div>
-				<div id="tags">
-					<p>tags</p>
-					<ul>
-						<li><a href="#">#animation</a></li>
-						<li><a href="#">#cat</a></li>
-						<li><a href="#">#japan</a></li>
-						<li><a href="#">#cute</a></li>
-						<li><a href="#">#doraemon</a></li>
-					</ul>
-				</div>
-				<div id="emoticon-package">
-					<table>
-						<c:forEach var="emo" items="${ticon}" varStatus="status">
-							<c:if test="${status.index % 4 eq 0}">
-								<tr>
-							</c:if>
-							<c:if test="${retrieve.num eq emo.boardnum}">
-								<td><img class="emoticon-Thumbnail"
-									src="emosave/${emo.src}"></td>
-							</c:if>
-							</td>
-							<c:if test="${status.count % 4 eq 0}">
-								</tr>
-							</c:if>
-						</c:forEach>
-					</table>
-					<button type="button" onclick="download();">DOWNLOAD</button>
-					
-					<button type="button" onclick="location.href('updateUI.do?num=${retrieve.num}')">수정</button>
-					<button type="button" onclick="location.href('delete.do?num=${retrieve.num}')">삭제</button>
-				</div>
+					<p>Artist : ${user.nickname}</p>
+					<div id="desc_label">
+						<label for="description">Description</label>
+						<p>0/500bytes</p>
+					</div>
+					<textarea name="description" rows="8" cols="100" value="">${retrieve.content }</textarea>
+					<div id="file_label">
+						<label for="upload">Upload Images</label> <input type="file"
+							name="upload" id="input_images" value="폴더 선택" accept="image/*" multiple>
+					</div>
+					<div class="upload_images"></div>
+					<span><button type="submit" >SUBMIT</button></span>
+				</form>
 			</div>
 		</section>
 		<div id="ad">
 			<a href="https://www.idowell.co.kr/home/" target="_blank"><img
-				src="emo/images/ad/winnerstel.png"></a> <a
+				src="emo/images/ad/winnerstel.png"></a><br /> <a
 				href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F"
 				target="_blank"><img src="emo/images/ad/duo.jpg"></a>
 		</div>

@@ -50,6 +50,9 @@ public class BoardWriteCommand implements BoardCommand {
 		String title="";
 		String content=""; 
 		BoardDAO dao = new BoardDAO();
+
+		User user= (User) session.getAttribute("user");
+		String author =user.nickname;
 		
 		// Create a disk file factory processing object
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
@@ -60,6 +63,7 @@ public class BoardWriteCommand implements BoardCommand {
 		servletFileUpload.setFileSizeMax(maxFileSize);// 10M
 		
 		DefaultFileRenamePolicy dp = new DefaultFileRenamePolicy();
+		
 		try {
 			// Field and request resolution in the request request content
 			List<FileItem> fileItems = servletFileUpload.parseRequest(request);
@@ -70,8 +74,11 @@ public class BoardWriteCommand implements BoardCommand {
 				if (fileItem.isFormField()) {
 					if(fileItem.getFieldName().equals("title"))
 						title =fileItem.getString("UTF-8");
-					else if(fileItem.getFieldName().equals("description"))
+					else if(fileItem.getFieldName().equals("description")) {
 						content =fileItem.getString("UTF-8");
+						dao.write(title, author, content);
+					}
+						
 				} else {
 					if (fileItem.getSize() <= maxFileSize) {
 						// To obtain the field name
@@ -100,7 +107,10 @@ public class BoardWriteCommand implements BoardCommand {
 						else {
 							dao.writeImage("default.jpg", "default.jpg");
 						}
-					} 
+					}
+					else {
+						dao.writeImage("default.jpg", "default.jpg");
+					}
 				}
 			}
 
@@ -112,9 +122,6 @@ public class BoardWriteCommand implements BoardCommand {
 			e.printStackTrace();
 		}
 	
-		User user= (User) session.getAttribute("user");
-		String author =user.nickname;
-		dao.write(title, author, content);
 
 		return "listPage.do";
 	}

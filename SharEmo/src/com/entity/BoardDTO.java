@@ -5,6 +5,7 @@ public class BoardDTO {
 	String author;
 	String title;
 	String content;
+	int likes;
 	int readcnt;
 	String writeday;
 	int repRoot;
@@ -12,12 +13,13 @@ public class BoardDTO {
 	int repIndent;
 	
 	public BoardDTO() {	}
-	public BoardDTO(int num,String author, String title, String content,int readcnt,
+	public BoardDTO(int num,String author, String title, String content,int likes, int readcnt,
 			String writeday, int repRoot, int repStep, int repIndent) {
 		this.num=num;
 		this.author=author;
 		this.title=title;
 		this.content=content;
+		this.likes=likes;
 		this.readcnt=readcnt;
 		this.writeday=writeday;
 		this.repRoot=repRoot;
@@ -78,5 +80,11 @@ public class BoardDTO {
 	}
 	public void setRepIndent(int repIndent) {
 		this.repIndent=repIndent;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 }
