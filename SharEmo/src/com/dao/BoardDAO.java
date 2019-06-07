@@ -16,10 +16,10 @@ import com.entity.Emoticon;
 import com.entity.PageTO;
 import com.entity.User;
 
-
 public class BoardDAO {
 
 	DataSource ds;
+
 	// 생성자
 	public BoardDAO() {
 		try {
@@ -50,7 +50,7 @@ public class BoardDAO {
 				String author = rs.getString("author");
 				String title = rs.getString("title");
 				String content = rs.getString("content");
-				int likes=rs.getInt("likes");
+				int likes = rs.getInt("likes");
 				String writeday = rs.getString("writeday");
 				int readcnt = rs.getInt("readcnt");
 				int repRoot = rs.getInt("repRoot");
@@ -131,25 +131,25 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		User user=new User();
+		User user = new User();
 		try {
 			con = ds.getConnection();
 			String query = "select * from user where id = '" + _id + "' and password = '" + _password + "';";
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();
-			
 
 			while (rs.next()) {
-				user.islogin=true;
+				user.islogin = true;
 				user.setId(rs.getString("id"));
 				user.setName(rs.getString("name"));
 				user.setNickname(rs.getString("nickname"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
+				user.setFollowernum(rs.getInt("followernum"));
 			}
-			
+
 			if (!user.islogin && _id != null) {
-				user.islogin=false;
+				user.islogin = false;
 			}
 
 		} catch (Exception e) {
@@ -180,11 +180,10 @@ public class BoardDAO {
 			String sql = "select ifnull(max(num), 0)+1 from board";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next())
 				currval = rs.getInt(1);
 
-			
 			String query = "INSERT INTO board( userid, title, author,content,"
 					+ "repRoot,repStep, repIndent) values (?,?,?,?,?, 0, 0)";
 			pstmt = con.prepareStatement(query);
@@ -211,23 +210,22 @@ public class BoardDAO {
 			}
 		}
 	}
-
-	public void writeImage(String _sysname, String _orgname) {
+	
+	public int writeImage(String _sysname, String _orgname) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int boardnum=0;
+		int boardnum = 0;
 		try {
 			con = ds.getConnection();
 			String sql = "select ifnull(max(num), 0) from board";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next())
 				boardnum = rs.getInt(1);
 
-			String query = "INSERT INTO emoticon( boardnum, sysname, orgname)"
-					+ " values (?,?,?)";
+			String query = "INSERT INTO emoticon( boardnum, sysname, orgname)" + " values (?,?,?)";
 			pstmt = con.prepareStatement(query);
 
 			pstmt.setInt(1, boardnum);
@@ -249,52 +247,52 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
+		
+		return boardnum;
 	}
-	
 
 	// 조회수 1증가
 	public int setLikes(String _num, String _userid) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs=null;
-		int num=0;
+		ResultSet rs = null;
+		int num = 0;
 		try {
 			con = ds.getConnection();
 
-			String query = "select * from likes WHERE like_boardnum=" + _num +" and like_userid='"+ _userid+"'";
+			String query = "select * from likes WHERE like_boardnum=" + _num + " and like_userid='" + _userid + "'";
 			pstmt = con.prepareStatement(query);
-			rs=pstmt.executeQuery();
-			
-			if(!rs.next()) {
+			rs = pstmt.executeQuery();
+
+			if (!rs.next()) {
 				query = "insert INTO likes values(?,?);";
 				pstmt = con.prepareStatement(query);
 				pstmt.setInt(1, Integer.parseInt(_num));
 				pstmt.setString(2, _userid);
 				pstmt.executeUpdate();
-				
-				query = "UPDATE board SET likes = likes + 1 WHERE num=" + _num;	
+
+				query = "UPDATE board SET likes = likes + 1 WHERE num=" + _num;
 				pstmt = con.prepareStatement(query);
 				pstmt.executeUpdate();
 
-			}
-			else {
-				query = "delete from likes WHERE like_boardnum=" + _num +" and like_userid='"+ _userid+"'";
+			} else {
+				query = "delete from likes WHERE like_boardnum=" + _num + " and like_userid='" + _userid + "'";
 				pstmt = con.prepareStatement(query);
 				pstmt.executeUpdate();
-				
-				query = "UPDATE board SET likes = likes - 1 WHERE num=" + _num;		
+
+				query = "UPDATE board SET likes = likes - 1 WHERE num=" + _num;
 				pstmt = con.prepareStatement(query);
-				pstmt.executeUpdate();				
+				pstmt.executeUpdate();
 			}
-			
+
 			query = "SELECT likes from board WHERE num=" + _num;
 			pstmt = con.prepareStatement(query);
-			rs=pstmt.executeQuery();
-			
+			rs = pstmt.executeQuery();
+
 			if (rs.next())
-				num=rs.getInt("likes");
-			
+				num = rs.getInt("likes");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -310,7 +308,6 @@ public class BoardDAO {
 		return num;
 	}
 
-	
 	// 조회수 1증가
 	public void readCount(String _num) {
 
@@ -357,12 +354,12 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				String userid=rs.getString("userid");
+				String userid = rs.getString("userid");
 				int num = rs.getInt("num");
 				String title = rs.getString("title");
 				String author = rs.getString("author");
 				String content = rs.getString("content");
-				int likes =rs.getInt("likes");
+				int likes = rs.getInt("likes");
 				String writeday = rs.getString("writeday");
 				int readcnt = rs.getInt("readcnt");
 
@@ -580,23 +577,21 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			con = ds.getConnection();
-			String query = "SELECT num,author,title,content,"
-					+ "DATE_FORMAT(writeday,'%Y/%M/%D') writeday, readcnt "
-					+ ",repRoot, repStep, repIndent FROM "
-					+ "board ";
+			String query = "SELECT num,author,title,content," + "DATE_FORMAT(writeday,'%Y/%M/%D') writeday, readcnt "
+					+ ",repRoot, repStep, repIndent FROM " + "board ";
 			if (_searchName.equals("title")) {
 				query += "WHERE title LIKE ? ";
 			} else {
 				query += "WHERE author LIKE ? ";
 			}
-			query+="order by repRoot desc, repStep asc";
+			query += "order by repRoot desc, repStep asc";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, "%" + _searchValue + "%");
 			rs = pstmt.executeQuery();
-			
+
 			int perPage = to.getPerPage();// 5
 
 			int skip = (curPage - 1) * perPage;
@@ -604,7 +599,6 @@ public class BoardDAO {
 			if (skip > 0) {
 				rs.absolute(skip);
 			}
-			
 
 			for (int i = 0; i < perPage && rs.next(); i++) {
 				int num = rs.getInt("num");
@@ -794,7 +788,7 @@ public class BoardDAO {
 			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = pstmt.executeQuery();
 
-			while( rs.next()) {
+			while (rs.next()) {
 				int num = rs.getInt("boardnum");
 				String sysname = rs.getString("sysname");
 				Emoticon data = new Emoticon();
@@ -819,7 +813,7 @@ public class BoardDAO {
 		return ticon;
 	}
 
-	//해당 게시물의 이모티콘만 추출
+	// 해당 게시물의 이모티콘만 추출
 	public ArrayList<Emoticon> getEmoticon(String _num) {
 		ArrayList<Emoticon> ticon = new ArrayList<Emoticon>();
 		Connection con = null;
@@ -828,11 +822,11 @@ public class BoardDAO {
 
 		try {
 			con = ds.getConnection();
-			String query = "SELECT * FROM emoticon where boardnum="+_num;
+			String query = "SELECT * FROM emoticon where boardnum=" + _num;
 			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = pstmt.executeQuery();
 
-			while( rs.next()) {
+			while (rs.next()) {
 				int num = rs.getInt("boardnum");
 				String sysname = rs.getString("sysname");
 				String orgname = rs.getString("orgname");
@@ -859,46 +853,74 @@ public class BoardDAO {
 		return ticon;
 	}
 
+	public int getFollow(String _follow) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num = 0;
+		try {
+			con = ds.getConnection();
+			String query = "SELECT followernum from user WHERE id='" + _follow + "'";
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+
+			if (rs.next())
+				num = rs.getInt("followernum");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return num;
+	}
+	
 	public int setFollow(String _follow, String _follower) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs=null;
-		int num=0;
+		ResultSet rs = null;
+		int num = 0;
 		try {
 			con = ds.getConnection();
 
-			String query = "select * from follow WHERE follow='" + _follow +"' and follower='"+ _follower+"'";
+			String query = "select * from follow WHERE follow='" + _follow + "' and follower='" + _follower + "'";
 			pstmt = con.prepareStatement(query);
-			rs=pstmt.executeQuery();
-			
-			if(!rs.next()) {
+			rs = pstmt.executeQuery();
+
+			if (!rs.next()) {
 				query = "insert INTO follow values(?,?);";
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, _follow);
 				pstmt.setString(2, _follower);
 				pstmt.executeUpdate();
-				
-				query = "UPDATE user SET followernum = followernum + 1 WHERE id='" + _follow+"'";
+
+				query = "UPDATE user SET followernum = followernum + 1 WHERE id='" + _follow + "'";
+				pstmt = con.prepareStatement(query);
+				pstmt.executeUpdate();
+			} else {
+				query = "delete from follow WHERE follow='" + _follow + "' and follower='" + _follower + "'";
+				pstmt = con.prepareStatement(query);
+				pstmt.executeUpdate();
+
+				query = "UPDATE user SET followernum = followernum - 1 WHERE id='" + _follow + "'";
 				pstmt = con.prepareStatement(query);
 				pstmt.executeUpdate();
 			}
-			else {
-				query = "delete from follow WHERE follow='" + _follow +"' and follower='"+ _follower+"'";
-				pstmt = con.prepareStatement(query);
-				pstmt.executeUpdate();
-				
-				query = "UPDATE user SET followernum = followernum - 1 WHERE id='" + _follow+"'";
-				pstmt = con.prepareStatement(query);
-				pstmt.executeUpdate();			
-			}
-			
-			query = "SELECT followernum from user WHERE id='" + _follow+"'";
+
+			query = "SELECT followernum from user WHERE id='" + _follow + "'";
 			pstmt = con.prepareStatement(query);
-			rs=pstmt.executeQuery();
-			
+			rs = pstmt.executeQuery();
+
 			if (rs.next())
-				num=rs.getInt("followernum");
-			
+				num = rs.getInt("followernum");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -914,5 +936,64 @@ public class BoardDAO {
 		return num;
 	}
 
+	public boolean isFollow(String _follow, String _follower) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean isFollow=false;
+		try {
+			con = ds.getConnection();
+			String query = "select * from follow WHERE follow='" + _follow + "' and follower='" + _follower + "'";
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+
+			if (rs.next())
+				isFollow = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return isFollow;
+	}
+
+	public boolean isLike(String _num, String _userid) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean isLike=false;
+		try {
+			con = ds.getConnection();
+			String query = "select * from likes WHERE like_boardnum=" + _num + " and like_userid='" + _userid + "'";
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+
+			if (rs.next())
+				isLike = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	
+		return isLike;
+	}
+
 }
