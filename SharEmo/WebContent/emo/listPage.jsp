@@ -111,7 +111,7 @@
 								<c:forEach var="emo" items="${ticon}">
 									<c:if test="${not loop_flag }">
 										<c:if test="${dto.num eq emo.boardnum}">
-											<img id="Thumbnail" src="emosave/${emo.src}">
+											<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
 											<c:set var="loop_flag" value="true" />
 										</c:if>
 									</c:if>
