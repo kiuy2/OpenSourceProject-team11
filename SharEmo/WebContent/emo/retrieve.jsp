@@ -28,22 +28,25 @@
 
 <script>
 	function like() {
-		$.ajax({
-			url : "like.do",
-			type : "POST",
-			data : {
-				num : "${retrieve.num }"
-			},
-			success : function(likes) {
-				//alert("'좋아요'가 반영되었습니다!");
-				// data중 put한 것의 이름 like 
-				$("#likes_num").html(likes);
-				//id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다. 
-			},
-			error : function(request, status, error) {
-				alert("오류");
-			}
-		});
+		if( ${user != null} ){
+			$.ajax({
+				url : "like.do",
+				type : "POST",
+				data : {
+					num : "${retrieve.num }"
+				},
+				success : function(likes) {
+					//alert("'좋아요'가 반영되었습니다!");
+					// data중 put한 것의 이름 like 
+					$("#likes_num").html(likes);
+					//id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다. 
+				},
+				error : function(request, status, error) {
+					alert("오류");
+				}
+			});
+		}
+		
 	}
 	function download() {
 
@@ -193,9 +196,10 @@
 						</c:forEach>
 					</table>
 					<button type="button" onclick="download();">DOWNLOAD</button>
-					
-					<button type="button" onclick="location.href('updateUI.do?num=${retrieve.num}')">수정</button>
-					<button type="button" onclick="location.href('delete.do?num=${retrieve.num}')">삭제</button>
+					/<c:if test="${user.id==retrieve.userid }">
+					<button type="button" onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
+					<button type="button" onclick="location.href='delete.do?num=${retrieve.num}'">삭제</button>
+					</c:if>
 				</div>
 			</div>
 		</section>

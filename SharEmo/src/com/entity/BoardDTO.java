@@ -1,6 +1,7 @@
 package com.entity;
 
 public class BoardDTO {
+	String userid;
 	int num;
 	String author;
 	String title;
@@ -13,8 +14,9 @@ public class BoardDTO {
 	int repIndent;
 	
 	public BoardDTO() {	}
-	public BoardDTO(int num,String author, String title, String content,int likes, int readcnt,
+	public BoardDTO(String userid, int num,String author, String title, String content,int likes, int readcnt,
 			String writeday, int repRoot, int repStep, int repIndent) {
+		this.userid=userid;
 		this.num=num;
 		this.author=author;
 		this.title=title;
@@ -87,4 +89,11 @@ public class BoardDTO {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
 }

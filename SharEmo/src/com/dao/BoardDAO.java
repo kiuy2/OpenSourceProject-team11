@@ -170,7 +170,7 @@ public class BoardDAO {
 	}
 
 	// 글 쓰기
-	public void write(String _title, String _author, String _content) {
+	public void write(String _userid, String _title, String _author, String _content) {
 		int currval = 1;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -185,14 +185,15 @@ public class BoardDAO {
 				currval = rs.getInt(1);
 
 			
-			String query = "INSERT INTO board( title, author,content,"
-					+ "repRoot,repStep, repIndent) values (?,?,?,?, 0, 0)";
+			String query = "INSERT INTO board( userid, title, author,content,"
+					+ "repRoot,repStep, repIndent) values (?,?,?,?,?, 0, 0)";
 			pstmt = con.prepareStatement(query);
 
-			pstmt.setString(1, _title);
-			pstmt.setString(2, _author);
-			pstmt.setString(3, _content);
-			pstmt.setInt(4, currval);
+			pstmt.setString(1, _userid);
+			pstmt.setString(2, _title);
+			pstmt.setString(3, _author);
+			pstmt.setString(4, _content);
+			pstmt.setInt(5, currval);
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -334,6 +335,7 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
+				String userid=rs.getString("userid");
 				int num = rs.getInt("num");
 				String title = rs.getString("title");
 				String author = rs.getString("author");
@@ -342,6 +344,7 @@ public class BoardDAO {
 				String writeday = rs.getString("writeday");
 				int readcnt = rs.getInt("readcnt");
 
+				data.setUserid(userid);
 				data.setNum(num);
 				data.setTitle(title);
 				data.setAuthor(author);

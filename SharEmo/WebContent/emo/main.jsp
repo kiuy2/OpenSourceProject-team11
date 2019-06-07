@@ -94,8 +94,13 @@
 					<ul>
 						<li><a href="#">Liked Emoticon</a></li>
 						<li><a href="#">Following Artist</a></li>
-						<li><a href="#">Upload Emoticon</a></li>
-						<li><a href="#">My Gallery</a></li>
+						<li><a href="writeui.do">Upload Emoticon</a></li>
+						<c:if test="${user!=null}">
+						<li><a href="mypage.do">My Gallery</a></li>
+						</c:if>
+						<c:if test="${user==null}">
+						<li><a href="loginUI.do">My Gallery</a></li>
+						</c:if>
 					</ul>
 				</div></li>
 		</ul>
@@ -143,30 +148,32 @@
 			<button type="button">→ Browse</button>
 		</div>
 		<div class="container-main">
-			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
-			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
-			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
-			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
+			<c:forEach var="dto" items="${list}" begin="0" end="3">
+				<div class="emoticon-package">
+					<a href="retrieve.do?num=${dto.num}">
+						<div class="emoticon-Thumbnail">
+							<c:forEach var="emo" items="${ticon}" varStatus="status">
+								<c:if test="${thumbnum <6 && dto.num eq emo.boardnum}">
+									<%
+										Thumbnailnum++;
+													request.setAttribute("thumbnum", Thumbnailnum);
+									%>
+									<img id="Thumbnail${thumbnum}" src="emosave/${emo.src}">
+								</c:if>
+							</c:forEach>
+							<%
+								Thumbnailnum = 0;
+									request.setAttribute("thumbnum", Thumbnailnum);
+							%>
+						</div>
+					</a>
+					<p class="title">
+						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+					</p>
+					<p class="artist">Artist: ${dto.author}</p>
+					<p class="artist">Retrieve: ${dto.readcnt}</p>
+				</div>
+			</c:forEach>
 		</div>
 	</section>
 
@@ -177,28 +184,32 @@
 		</div>
 		<div class="container-main">
 			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
-			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
-			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
-			</div>
-			<div class="emoticon-package">
-				<a href=""> <img src="emo/images/thumbnail/.png">
-				</a>
-				<p class="title">Title: abc</p>
-				<p class="artist">Artist: 1234</p>
+				<c:forEach var="dto" items="${list}" begin="0" end="3">
+				<div class="emoticon-package">
+					<a href="retrieve.do?num=${dto.num}">
+						<div class="emoticon-Thumbnail">
+							<c:forEach var="emo" items="${ticon}" varStatus="status">
+								<c:if test="${thumbnum <6 && dto.num eq emo.boardnum}">
+									<%
+										Thumbnailnum++;
+													request.setAttribute("thumbnum", Thumbnailnum);
+									%>
+									<img id="Thumbnail${thumbnum}" src="emosave/${emo.src}">
+								</c:if>
+							</c:forEach>
+							<%
+								Thumbnailnum = 0;
+									request.setAttribute("thumbnum", Thumbnailnum);
+							%>
+						</div>
+					</a>
+					<p class="title">
+						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+					</p>
+					<p class="artist">Artist: ${dto.author}</p>
+					<p class="artist">Retrieve: ${dto.readcnt}</p>
+				</div>
+			</c:forEach>
 			</div>
 		</div>
 	</section>
@@ -209,27 +220,6 @@
 			<button type="button">→ Browse</button>
 		</div>
 		<div id="styles">
-			<div class="tags">
-				<ul>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-				</ul>
-			</div>
-			<div class="tags">
-				<ul>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-				</ul>
-			</div>
-			<div class="tags">
-				<ul>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-					<li><a href="">abcd</a></li>
-				</ul>
-			</div>
 			<div class="tags">
 				<ul>
 					<li><a href="">abcd</a></li>

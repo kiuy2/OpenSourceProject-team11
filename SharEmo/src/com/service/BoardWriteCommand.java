@@ -52,7 +52,8 @@ public class BoardWriteCommand implements BoardCommand {
 		BoardDAO dao = new BoardDAO();
 
 		User user= (User) session.getAttribute("user");
-		String author =user.nickname;
+		String id = user.getId();
+		String author =user.getNickname();
 		
 		// Create a disk file factory processing object
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
@@ -76,7 +77,7 @@ public class BoardWriteCommand implements BoardCommand {
 						title =fileItem.getString("UTF-8");
 					else if(fileItem.getFieldName().equals("description")) {
 						content =fileItem.getString("UTF-8");
-						dao.write(title, author, content);
+						dao.write(id, title, author, content);
 					}
 						
 				} else {

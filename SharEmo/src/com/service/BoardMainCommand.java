@@ -24,8 +24,6 @@ public class BoardMainCommand implements BoardCommand{
 		request.setAttribute("list", list.getList());
 		//이모티콘 이미지 저장
 		request.setAttribute("ticon", ticon);
-		//page.jsp에서 페이징 처리 데이터 저장
-		request.setAttribute("page", list);
 		return "emo/main.jsp";
 	}
 }

@@ -20,11 +20,6 @@ public class BoardLikeCommand implements BoardCommand {
 		String num = request.getParameter("num");
 		BoardDAO dao = new BoardDAO();
 		int likes=dao.setLikes(num);
-		BoardDTO data = dao.retrieve(num);
-		ArrayList<Emoticon> ticon =dao.getEmoticon();
-		//이모티콘 이미지 저장
-		request.setAttribute("ticon", ticon);
-		request.setAttribute("retrieve", data);
 		
 		PrintWriter out = response.getWriter();
 		out.println(likes);

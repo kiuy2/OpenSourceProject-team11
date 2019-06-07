@@ -6,6 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 public class BoardMyPageCommand implements BoardCommand {
 	
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		return "emo/mypage.jsp";
+		return "emo/mypageUI.jsp";
 	}
 }
