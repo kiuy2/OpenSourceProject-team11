@@ -27,6 +27,23 @@
 </script>
 
 <script>
+
+$(document).ready(function changeColor(){  
+	if(${isFollow}){
+		$("#follow").css("background-color", "rgb(255, 81, 106)");
+	}
+	else{
+		$("#follow").css("background-color", "gray")
+	}
+	
+	if(${isLike}){
+		$("#likes").css("background-color", "rgb(0, 131, 255)");
+	}
+	else{
+		$("#likes").css("background-color", "gray");
+	}
+}); 
+
 	function like() {
 		if( ${ user != null }){
 			$.ajax({
@@ -36,10 +53,19 @@
 					num : "${retrieve.num }",
 					userid : "${user.id}"
 				},
-				success : function(likes) {
+				success : function(data) {
 					//alert("'좋아요'가 반영되었습니다!");
 					// data중 put한 것의 이름 like 
-					$("#likes_num").html(likes);
+					var likes=data.split('\n');
+					
+					if(likes[1].indexof("true") > -1 ){
+						$("#likes").css("background-color", "rgb(0, 131, 255)");
+					}
+					else{
+						$("#likes").css("background-color", "gray");
+					}
+					
+					$("#likes_num").html(likes[0]);
 					//id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다. 
 				},
 				error : function(request, status, error) {
@@ -50,7 +76,6 @@
 		else{
 			alert("로그인이 필요합니다.");
 		}
-		
 	}
 	function follow() {
 		if( ${user != null } ){
@@ -61,10 +86,17 @@
 					follow : "${retrieve.userid }",
 					follower : "${user.id}"
 				},
-				success : function(followernum) {
+				success : function(data) {
 					//alert("'좋아요'가 반영되었습니다!");
 					// data중 put한 것의 이름 like 
-					$("#follower_num").html(followernum);
+					var follow=data.split('\n');
+					if(follow[1].indexOf("true") > -1){
+						$("#follow").css("background-color", "rgb(255, 81, 106)");
+					}
+					else{
+						$("#follow").css("background-color", "gray")
+					}
+					$("#follower_num").html(follow[0]);
 					//id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다. 
 				},
 				error : function(request, status, error) {
@@ -77,9 +109,7 @@
 		}
 	}
 
-	 $(document).ready(function(){  
-	       
-	    }); 
+	
 	
 	
 	function download() {
@@ -174,7 +204,8 @@
 						<c:forEach var="emo" items="${ticon}">
 							<c:if test="${not loop_flag }">
 								<c:if test="${retrieve.num eq emo.boardnum}">
-									<img class="emoticon-Thumbnail" src="emosave/${emo.src}"><br/>
+									<img class="emoticon-Thumbnail" src="emosave/${emo.src}">
+									<br />
 									<c:set var="loop_flag" value="true" />
 								</c:if>
 							</c:if>
@@ -230,9 +261,12 @@
 						</c:forEach>
 					</table>
 					<button type="button" onclick="download();">DOWNLOAD</button>
-					/<c:if test="${user.id==retrieve.userid }">
-					<button type="button" onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
-					<button type="button" onclick="location.href='delete.do?num=${retrieve.num}'">삭제</button>
+					/
+					<c:if test="${user.id==retrieve.userid }">
+						<button type="button"
+							onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
+						<button type="button"
+							onclick="location.href='delete.do?num=${retrieve.num}'">삭제</button>
 					</c:if>
 				</div>
 			</div>
