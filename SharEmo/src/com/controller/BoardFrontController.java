@@ -114,10 +114,6 @@ public class BoardFrontController extends HttpServlet {
 		// 지정한 경로로 제어를 이동(리다이렉트)시키기 위한 코드입니다.
         RequestDispatcher dispatcher = request.getRequestDispatcher(view);
         dispatcher.forward(request, response);
-		/*// 글쓰기 폼
-		if (com.equals("/writeui.do")) {
-			nextPage = "emo/write.jsp";
-		}*/
 	}
 
 }

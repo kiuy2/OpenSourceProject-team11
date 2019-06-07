@@ -14,7 +14,7 @@
 <%
 	User user=(User)session.getAttribute("user");
 	if(user.islogin){
-		out.println("self.window.alert('"+user.id+"님 환영합니다');");
+		out.println("self.window.alert('"+user.getId()+"님 환영합니다');");
 		out.println("location.href='main.do';"); 
 	}
 	else{

@@ -97,7 +97,7 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 
-			String query = "INSERT INTO user values (?,?,?,?,?,?)";
+			String query = "INSERT INTO user values (?,?,?,?,?,?, 0)";
 			pstmt = con.prepareStatement(query);
 
 			pstmt.setString(1, _id);
@@ -141,11 +141,11 @@ public class BoardDAO {
 
 			while (rs.next()) {
 				user.islogin=true;
-				user.id = rs.getString("id");
-				user.name = rs.getString("name");
-				user.nickname = rs.getString("nickname");
-				user.phone = rs.getString("phone");
-				user.email = rs.getString("email");
+				user.setId(rs.getString("id"));
+				user.setName(rs.getString("name"));
+				user.setNickname(rs.getString("nickname"));
+				user.setPhone(rs.getString("phone"));
+				user.setEmail(rs.getString("email"));
 			}
 			
 			if (!user.islogin && _id != null) {
@@ -253,7 +253,7 @@ public class BoardDAO {
 	
 
 	// 조회수 1증가
-	public int setLikes(String _num) {
+	public int setLikes(String _num, String _userid) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -261,11 +261,33 @@ public class BoardDAO {
 		int num=0;
 		try {
 			con = ds.getConnection();
-			String query = "UPDATE board SET likes = likes + 1 WHERE num=" + _num;
 
+			String query = "select * from likes WHERE like_boardnum=" + _num +" and like_userid='"+ _userid+"'";
 			pstmt = con.prepareStatement(query);
+			rs=pstmt.executeQuery();
+			
+			if(!rs.next()) {
+				query = "insert INTO likes values(?,?);";
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, Integer.parseInt(_num));
+				pstmt.setString(2, _userid);
+				pstmt.executeUpdate();
+				
+				query = "UPDATE board SET likes = likes + 1 WHERE num=" + _num;	
+				pstmt = con.prepareStatement(query);
+				pstmt.executeUpdate();
 
-			pstmt.executeUpdate();
+			}
+			else {
+				query = "delete from likes WHERE like_boardnum=" + _num +" and like_userid='"+ _userid+"'";
+				pstmt = con.prepareStatement(query);
+				pstmt.executeUpdate();
+				
+				query = "UPDATE board SET likes = likes - 1 WHERE num=" + _num;		
+				pstmt = con.prepareStatement(query);
+				pstmt.executeUpdate();				
+			}
+			
 			query = "SELECT likes from board WHERE num=" + _num;
 			pstmt = con.prepareStatement(query);
 			rs=pstmt.executeQuery();
@@ -768,7 +790,7 @@ public class BoardDAO {
 
 		try {
 			con = ds.getConnection();
-			String query = "SELECT boardnum, sysname FROM emoticon order by boardnum desc;";
+			String query = "SELECT boardnum, sysname FROM emoticon;";
 			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = pstmt.executeQuery();
 
@@ -836,5 +858,61 @@ public class BoardDAO {
 		}
 		return ticon;
 	}
+
+	public int setFollow(String _follow, String _follower) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		int num=0;
+		try {
+			con = ds.getConnection();
+
+			String query = "select * from follow WHERE follow='" + _follow +"' and follower='"+ _follower+"'";
+			pstmt = con.prepareStatement(query);
+			rs=pstmt.executeQuery();
+			
+			if(!rs.next()) {
+				query = "insert INTO follow values(?,?);";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, _follow);
+				pstmt.setString(2, _follower);
+				pstmt.executeUpdate();
+				
+				query = "UPDATE user SET followernum = followernum + 1 WHERE id='" + _follow+"'";
+				pstmt = con.prepareStatement(query);
+				pstmt.executeUpdate();
+			}
+			else {
+				query = "delete from follow WHERE follow='" + _follow +"' and follower='"+ _follower+"'";
+				pstmt = con.prepareStatement(query);
+				pstmt.executeUpdate();
+				
+				query = "UPDATE user SET followernum = followernum - 1 WHERE id='" + _follow+"'";
+				pstmt = con.prepareStatement(query);
+				pstmt.executeUpdate();			
+			}
+			
+			query = "SELECT followernum from user WHERE id='" + _follow+"'";
+			pstmt = con.prepareStatement(query);
+			rs=pstmt.executeQuery();
+			
+			if (rs.next())
+				num=rs.getInt("followernum");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return num;
+	}
+
 	
 }

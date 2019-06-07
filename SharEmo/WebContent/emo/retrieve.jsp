@@ -28,17 +28,40 @@
 
 <script>
 	function like() {
-		if( ${user != null } ){
+		if( ${ user != null }){
 			$.ajax({
 				url : "like.do",
 				type : "POST",
 				data : {
-					num : "${retrieve.num }"
+					num : "${retrieve.num }",
+					userid : "${user.id}"
 				},
 				success : function(likes) {
 					//alert("'좋아요'가 반영되었습니다!");
 					// data중 put한 것의 이름 like 
 					$("#likes_num").html(likes);
+					//id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다. 
+				},
+				error : function(request, status, error) {
+					alert("오류");
+				}
+			});
+		}
+		
+	}
+	function follow() {
+		if( ${user != null } ){
+			$.ajax({
+				url : "follow.do",
+				type : "POST",
+				data : {
+					follow : "${retrieve.userid }",
+					follower : "${user.id}"
+				},
+				success : function(followernum) {
+					//alert("'좋아요'가 반영되었습니다!");
+					// data중 put한 것의 이름 like 
+					$("#follower_num").html(followernum);
 					//id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다. 
 				},
 				error : function(request, status, error) {
@@ -148,7 +171,7 @@
 						<button id="likes" type="button" onclick="return like();">
 							<img src="emo/images/likes_white.png">
 						</button>
-						<button id="follow" type="button" onclick="">
+						<button id="follow" type="button" onclick="return follow();">
 							<img src="emo/images/follow_white.png">
 						</button>
 					</div>
@@ -161,7 +184,7 @@
 							<b>LIKES : </b> <span id="likes_num">${retrieve.likes}</span>
 						</p>
 						<p>
-							<b>FOLLOW : </b>9
+							<b>FOLLOW : </b><span id="follower_num"></span>
 						</p>
 						<p>
 							<b>DESCRIPTION</b>

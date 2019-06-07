@@ -2,9 +2,9 @@ package com.entity;
 
 public class Emoticon {
 
-	int boardnum;
-	String src;
-	String org;
+	private int boardnum;
+	private String src;
+	private String org;
 	public int getBoardnum() {
 		return boardnum;
 	}

@@ -17,7 +17,6 @@ public class BoardRetrieveCommand implements BoardCommand {
 		String num = request.getParameter("num");
 		BoardDAO dao = new BoardDAO();
 		BoardDTO data = dao.retrieve(num);
-		
 		ArrayList<Emoticon> ticon =dao.getEmoticon();
 		//이모티콘 이미지 저장
 		request.setAttribute("ticon", ticon);
