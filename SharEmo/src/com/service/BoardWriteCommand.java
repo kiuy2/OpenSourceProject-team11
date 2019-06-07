@@ -43,7 +43,6 @@ public class BoardWriteCommand implements BoardCommand {
 		
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		String path = request.getRealPath("emosave");
 		int maxFileSize = 1024 * 1024 * 10;
 		String enc = "utf-8";
 
@@ -94,10 +93,13 @@ public class BoardWriteCommand implements BoardCommand {
 									fileName = fileName.substring(index + 1);
 								}
 
-								File file = new File(path, newFileName(fileName));
+								String newfilename = newFileName(fileName);
+								int boardnum = dao.writeImage( newfilename, fileName);
+								
+								String path = request.getRealPath("emosave/" + boardnum);
+								File file = new File(path, newfilename);
 
 								fileItem.write(file);
-								dao.writeImage( file.getName(), fileName);
 								
 								fileItem.delete();
 							} 
