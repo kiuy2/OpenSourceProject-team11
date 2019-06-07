@@ -25,19 +25,19 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="emo/assets/js/dropbox.js"></script>
 
-<script> function img_resize() { //이모티콘 크기 강제 조절
-	var maxsize = 150; 
-	var content = document.getElementById("content"); 
+<script> 
+function img_resize() { 
+	var maxsize = 200; 
+	var content = document.getElementById("emoticon-package"); 
 	var img = content.getElementsByTagName("img"); 
 	for(i=0; i<img.length; i++) { 
-		if ( eval!('img[' + i + '].width > maxsize') ) { 
-		eval!('img[' + i + '].width = maxsize') ;
+	if ( eval('img[' + i + '].width > maxsize') ) { 
+		eval('img[' + i + '].width = maxsize');
  			}
- 		}
- 	} 
+ 		} 
+	} 
 	window.onload = img_resize; 
 </script>
-
 <script>
 
 $(document).ready(function changeColor(){  
@@ -70,7 +70,7 @@ $(document).ready(function changeColor(){
 					// data중 put한 것의 이름 like 
 					var likes=data.split('\n');
 					
-					if(likes[1].indexof("true") > -1 ){
+					if(likes[1].indexOf("true") > -1 ){
 						$("#likes").css("background-color", "rgb(0, 131, 255)");
 					}
 					else{
@@ -216,12 +216,7 @@ $(document).ready(function changeColor(){
 						<c:forEach var="emo" items="${ticon}">
 							<c:if test="${not loop_flag }">
 								<c:if test="${retrieve.num eq emo.boardnum}">
-<<<<<<< HEAD
-									<img class="emoticon-Thumbnail" src="emosave/${emo.src}">
-									<br />
-=======
 									<img class="emoticon-Thumbnail" src="emosave/${emo.boardnum}/${emo.src}"><br/>
->>>>>>> branch 'master' of https://github.com/YunSongHui/OpenSourceProject-team11.git
 									<c:set var="loop_flag" value="true" />
 								</c:if>
 							</c:if>
@@ -267,13 +262,8 @@ $(document).ready(function changeColor(){
 								<tr>
 							</c:if>
 							<c:if test="${retrieve.num eq emo.boardnum}">
-<<<<<<< HEAD
-								<td>
-								<img src="emosave/${emo.src}"></td>
-=======
 								<td><img class="emoticon-Thumbnail"
 									src="emosave/${emo.boardnum}/${emo.src}"></td>
->>>>>>> branch 'master' of https://github.com/YunSongHui/OpenSourceProject-team11.git
 							</c:if>
 							</td>
 							<c:if test="${status.count % 4 eq 0}">
@@ -288,7 +278,7 @@ $(document).ready(function changeColor(){
 					<c:if test="${user.id==retrieve.userid }">
 					<button type="button" onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
 					<button type="button" onclick="location.href='delete.do?num=${retrieve.num}'">삭제</button>
-
+					</c:if>
 					<c:if test="${user.id==retrieve.userid }">
 						<button type="button"
 							onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
@@ -317,16 +307,3 @@ $(document).ready(function changeColor(){
 
 </html>
 
-<script> 
-function img_resize() { 
-	var maxsize = 200; 
-	var content = document.getElementById("emoticon-package"); 
-	var img = content.getElementsByTagName("img"); 
-	for(i=0; i<img.length; i++) { 
-	if ( eval('img[' + i + '].width > maxsize') ) { 
-		eval('img[' + i + '].width = maxsize');
- 			}
- 		} 
-	} 
-	window.onload = img_resize; 
-</script>

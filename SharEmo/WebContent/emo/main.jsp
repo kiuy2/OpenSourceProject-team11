@@ -123,7 +123,7 @@
 										Thumbnailnum++;
 													request.setAttribute("thumbnum", Thumbnailnum);
 									%>
-									<img id="Thumbnail${thumbnum}" src="emosave/${emo.src}">
+									<img id="Thumbnail${thumbnum}" src="emosave/${emo.boardnum}/${emo.src}">
 								</c:if>
 							</c:forEach>
 							<%
@@ -158,7 +158,7 @@
 										Thumbnailnum++;
 													request.setAttribute("thumbnum", Thumbnailnum);
 									%>
-									<img id="Thumbnail${thumbnum}" src="emosave/${emo.src}">
+									<img id="Thumbnail${thumbnum}" src="emosave/${emo.boardnum}/${emo.src}">
 								</c:if>
 							</c:forEach>
 							<%
@@ -193,7 +193,7 @@
 										Thumbnailnum++;
 													request.setAttribute("thumbnum", Thumbnailnum);
 									%>
-									<img id="Thumbnail${thumbnum}" src="emosave/${emo.src}">
+									<img id="Thumbnail${thumbnum}" src="emosave/${emo.boardnum}/${emo.src}">
 								</c:if>
 							</c:forEach>
 							<%
