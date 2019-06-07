@@ -28,7 +28,7 @@
 
 <script>
 	function like() {
-		if( ${user != null} ){
+		if( ${user != null } ){
 			$.ajax({
 				url : "like.do",
 				type : "POST",

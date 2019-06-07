@@ -96,10 +96,10 @@
 						<li><a href="#">Following Artist</a></li>
 						<li><a href="writeui.do">Upload Emoticon</a></li>
 						<c:if test="${user!=null}">
-						<li><a href="mypage.do">My Gallery</a></li>
+							<li><a href="mypage.do">My Gallery</a></li>
 						</c:if>
 						<c:if test="${user==null}">
-						<li><a href="loginUI.do">My Gallery</a></li>
+							<li><a href="loginUI.do">My Gallery</a></li>
 						</c:if>
 					</ul>
 				</div></li>
@@ -183,8 +183,7 @@
 			<button type="button">→ Browse</button>
 		</div>
 		<div class="container-main">
-			<div class="emoticon-package">
-				<c:forEach var="dto" items="${list}" begin="0" end="3">
+			<c:forEach var="dto" items="${list}" begin="0" end="3">
 				<div class="emoticon-package">
 					<a href="retrieve.do?num=${dto.num}">
 						<div class="emoticon-Thumbnail">
@@ -210,7 +209,6 @@
 					<p class="artist">Retrieve: ${dto.readcnt}</p>
 				</div>
 			</c:forEach>
-			</div>
 		</div>
 	</section>
 
