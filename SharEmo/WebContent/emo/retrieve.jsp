@@ -23,7 +23,19 @@
 <title>SharEmo - Free Emoticon Share Website</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="emo/assets/js/dropbox.js">
+<script type="text/javascript" src="emo/assets/js/dropbox.js"></script>
+
+<script> function img_resize() { //이모티콘 크기 강제 조절
+	var maxsize = 150; 
+	var content = document.getElementById("content"); 
+	var img = content.getElementsByTagName("img"); 
+	for(i=0; i<img.length; i++) { 
+		if ( eval!('img[' + i + '].width > maxsize') ) { 
+		eval!('img[' + i + '].width = maxsize') ;
+ 			}
+ 		}
+ 	} 
+	window.onload = img_resize; 
 </script>
 
 <script>
@@ -209,8 +221,8 @@
 								<tr>
 							</c:if>
 							<c:if test="${retrieve.num eq emo.boardnum}">
-								<td><img class="emoticon-Thumbnail"
-									src="emosave/${emo.src}"></td>
+								<td>
+								<img src="emosave/${emo.src}"></td>
 							</c:if>
 							</td>
 							<c:if test="${status.count % 4 eq 0}">
@@ -218,6 +230,8 @@
 							</c:if>
 						</c:forEach>
 					</table>
+					<script>imgSize("img");</script>
+					
 					<button type="button" onclick="download();">DOWNLOAD</button>
 					<c:if test="${user.id==retrieve.userid }">
 					<button type="button" onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
@@ -244,3 +258,17 @@
 </body>
 
 </html>
+
+<script> 
+function img_resize() { 
+	var maxsize = 200; 
+	var content = document.getElementById("emoticon-package"); 
+	var img = content.getElementsByTagName("img"); 
+	for(i=0; i<img.length; i++) { 
+	if ( eval('img[' + i + '].width > maxsize') ) { 
+		eval('img[' + i + '].width = maxsize');
+ 			}
+ 		} 
+	} 
+	window.onload = img_resize; 
+</script>
