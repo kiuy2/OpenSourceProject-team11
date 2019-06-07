@@ -47,6 +47,9 @@
 				}
 			});
 		}
+		else{
+			alert("로그인이 필요합니다.");
+		}
 		
 	}
 	function follow() {
@@ -69,8 +72,16 @@
 				}
 			});
 		}
-		
+		else{
+			alert("로그인이 필요합니다.");
+		}
 	}
+
+	 $(document).ready(function(){  
+	       
+	    }); 
+	
+	
 	function download() {
 
 		url = "emo/filedown.jsp?num=" + ${retrieve.num};
@@ -184,7 +195,7 @@
 							<b>LIKES : </b> <span id="likes_num">${retrieve.likes}</span>
 						</p>
 						<p>
-							<b>FOLLOW : </b><span id="follower_num"></span>
+							<b>FOLLOW : </b><span id="follower_num">${followernum}</span>
 						</p>
 						<p>
 							<b>DESCRIPTION</b>
