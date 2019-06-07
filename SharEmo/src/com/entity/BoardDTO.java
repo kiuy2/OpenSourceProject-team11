@@ -1,17 +1,17 @@
 package com.entity;
 
 public class BoardDTO {
-	String userid;
-	int num;
-	String author;
-	String title;
-	String content;
-	int likes;
-	int readcnt;
-	String writeday;
-	int repRoot;
-	int repStep;
-	int repIndent;
+	private String userid;
+	private int num;
+	private String author;
+	private String title;
+	private String content;
+	private int likes;
+	private int readcnt;
+	private String writeday;
+	private int repRoot;
+	private int repStep;
+	private int repIndent;
 	
 	public BoardDTO() {	}
 	public BoardDTO(String userid, int num,String author, String title, String content,int likes, int readcnt,

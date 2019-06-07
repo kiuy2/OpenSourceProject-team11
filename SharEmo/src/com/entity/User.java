@@ -2,11 +2,12 @@ package com.entity;
 
 public class User {
 	public boolean islogin;
-	public String id;
-	public String name;
-	public String nickname;
-	public String phone;
-	public String email;
+	private String id;
+	private String name;
+	private String nickname;
+	private String phone;
+	private String email;
+	private int followernum;
 	public User(){
 		islogin=false;
 		id="";
@@ -50,5 +51,11 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getFollowernum() {
+		return followernum;
+	}
+	public void setFollowernum(int followernum) {
+		this.followernum = followernum;
 	}
 }

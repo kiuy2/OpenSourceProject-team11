@@ -51,7 +51,7 @@ public class BoardUpdateCommand implements BoardCommand {
 		BoardDAO dao = new BoardDAO();
 
 		User user= (User) session.getAttribute("user");
-		String author =user.nickname;
+		String author =user.getNickname();
 		
 		// Create a disk file factory processing object
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();

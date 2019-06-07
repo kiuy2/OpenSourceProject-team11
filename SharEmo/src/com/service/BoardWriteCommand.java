@@ -101,16 +101,7 @@ public class BoardWriteCommand implements BoardCommand {
 								
 								fileItem.delete();
 							} 
-							else {
-								dao.writeImage("default.jpg", "default.jpg");
-							}
 						} 
-						else {
-							dao.writeImage("default.jpg", "default.jpg");
-						}
-					}
-					else {
-						dao.writeImage("default.jpg", "default.jpg");
 					}
 				}
 			}
@@ -122,8 +113,8 @@ public class BoardWriteCommand implements BoardCommand {
 			// TODO 자동 생성된 catch 블록
 			e.printStackTrace();
 		}
-	
+		response.sendRedirect("listPage.do");
 
-		return "listPage.do";
+		return null;
 	}
 }

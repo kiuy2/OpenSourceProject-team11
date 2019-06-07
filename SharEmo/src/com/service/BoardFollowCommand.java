@@ -13,17 +13,17 @@ import com.dao.BoardDAO;
 import com.entity.BoardDTO;
 import com.entity.Emoticon;
 
-public class BoardLikeCommand implements BoardCommand {
+public class BoardFollowCommand implements BoardCommand {
 	
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
-		String num = request.getParameter("num");
-		String userid = request.getParameter("userid");
+		String follow = request.getParameter("follow");
+		String follower = request.getParameter("follower");
 		BoardDAO dao = new BoardDAO();
-		int likes=dao.setLikes(num,userid);
+		int followernum=dao.setFollow(follow,follower);
 		
 		PrintWriter out = response.getWriter();
-		out.println(likes);
+		out.println(followernum);
 		out.close();
 		
 		return null;
