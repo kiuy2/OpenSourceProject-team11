@@ -210,8 +210,8 @@ public class BoardDAO {
 			}
 		}
 	}
-
-	public void writeImage(String _sysname, String _orgname) {
+	
+	public int writeImage(String _sysname, String _orgname) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -247,6 +247,8 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
+		
+		return boardnum;
 	}
 
 	// 조회수 1증가

@@ -174,7 +174,7 @@
 						<c:forEach var="emo" items="${ticon}">
 							<c:if test="${not loop_flag }">
 								<c:if test="${retrieve.num eq emo.boardnum}">
-									<img class="emoticon-Thumbnail" src="emosave/${emo.src}"><br/>
+									<img class="emoticon-Thumbnail" src="emosave/${emo.boardnum}/${emo.src}"><br/>
 									<c:set var="loop_flag" value="true" />
 								</c:if>
 							</c:if>
@@ -221,7 +221,7 @@
 							</c:if>
 							<c:if test="${retrieve.num eq emo.boardnum}">
 								<td><img class="emoticon-Thumbnail"
-									src="emosave/${emo.src}"></td>
+									src="emosave/${emo.boardnum}/${emo.src}"></td>
 							</c:if>
 							</td>
 							<c:if test="${status.count % 4 eq 0}">
