@@ -190,8 +190,7 @@ body {
 }
 #content-footer {
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column;   
 }
 #paging {
     display: flex;

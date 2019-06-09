@@ -58,12 +58,12 @@ $(document).ready(function changeColor(){
 }); 
 
 	function like() {
-		if( ${ user != null }){
+		if( ${user != null}){
 			$.ajax({
 				url : "like.do",
 				type : "POST",
 				data : {
-					num : "${retrieve.num }",
+					num : "${retrieve.num}",
 					userid : "${user.id}"
 				},
 				success : function(data) {
@@ -91,7 +91,7 @@ $(document).ready(function changeColor(){
 		}
 	}
 	function follow() {
-		if( ${user != null } ){
+		if( ${user != null} ){
 			$.ajax({
 				url : "follow.do",
 				type : "POST",
@@ -122,16 +122,15 @@ $(document).ready(function changeColor(){
 		}
 	}
 
-	
-	
-	
 	function download() {
 
-		url = "emo/filedown.jsp?num=" + ${retrieve.num};
-		open(
-				url,
-				"confirm",
-				"toolbar=no,location=no,status=no,menubar=no, scrollbars=no, resizable=no, width=300, height=200");
+		$.ajax({
+			url : "download.do?num=" + ${retrieve.num} ,
+			type : "GET",
+			error : function(request, status, error) {
+				alert("오류");
+			}
+		});
 	}
 </script>
 
@@ -273,7 +272,6 @@ $(document).ready(function changeColor(){
 							</c:if>
 						</c:forEach>
 					</table>
-					<script>imgSize("img");</script>
 					
 					<button type="button" onclick="download();">DOWNLOAD</button>
 
