@@ -2,17 +2,12 @@ package com.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
-import com.entity.BoardDTO;
-import com.entity.Emoticon;
 import com.entity.User;
 
 public class BoardFollowCommand implements BoardCommand {

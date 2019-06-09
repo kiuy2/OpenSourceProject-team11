@@ -125,8 +125,14 @@ $(document).ready(function changeColor(){
 	function download() {
 
 		$.ajax({
-			url : "download.do?num=" + ${retrieve.num} ,
-			type : "GET",
+			url : "download.do",
+			type : "POST",
+			data : {
+				num : "${retrieve.num }"
+			},
+			success : function(data) {
+				alert("성공");
+			},
 			error : function(request, status, error) {
 				alert("오류");
 			}
