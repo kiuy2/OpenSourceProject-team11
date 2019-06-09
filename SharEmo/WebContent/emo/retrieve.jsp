@@ -121,23 +121,6 @@ $(document).ready(function changeColor(){
 			alert("로그인이 필요합니다.");
 		}
 	}
-
-	function download() {
-
-		$.ajax({
-			url : "download.do",
-			type : "POST",
-			data : {
-				num : "${retrieve.num }"
-			},
-			success : function(data) {
-				alert("성공");
-			},
-			error : function(request, status, error) {
-				alert("오류");
-			}
-		});
-	}
 </script>
 
 </head>
@@ -152,10 +135,10 @@ $(document).ready(function changeColor(){
 				<c:choose>
 					<c:when test="${user != null}">
 						<li class="nav-top-item"><a href='mypage.do'>${user.id}님</a></li>
-						<li class="nav-top-item"><a href='logout.do'> LogOut </a></li>
+						<li class="nav-top-item"><a href='logout.do'>Logout</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-top-item"><a href='loginUI.do'> Login </a></li>
+						<li class="nav-top-item"><a href='loginUI.do'>Login</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li class="nav-top-item"><a href="signUpUI.do">Sign up</a></li>
@@ -279,17 +262,11 @@ $(document).ready(function changeColor(){
 						</c:forEach>
 					</table>
 					
-					<button type="button" onclick="download();">DOWNLOAD</button>
+					<button type="button" onclick="location.href='download.do?num=${retrieve.num}'">DOWNLOAD</button>
 
 					<c:if test="${user.id==retrieve.userid }">
-					<button type="button" onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
-					<button type="button" onclick="location.href='delete.do?num=${retrieve.num}'">삭제</button>
-					</c:if>
-					<c:if test="${user.id==retrieve.userid }">
-						<button type="button"
-							onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
-						<button type="button"
-							onclick="location.href='delete.do?num=${retrieve.num}'">삭제</button>
+						<button type="button" onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
+						<button type="button" onclick="location.href='delete.do?num=${retrieve.num}'">삭제</button>
 					</c:if>
 				</div>
 			</div>

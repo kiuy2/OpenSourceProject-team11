@@ -2,14 +2,12 @@ package com.service;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,7 +32,7 @@ public class BoardDownloadCommand implements BoardCommand {
 		ZipOutputStream zipout = null;
 		FileInputStream fileinput = null;
 		try {
-			zipout = new ZipOutputStream(new FileOutputStream(savePath+"/"+zipName));
+			zipout = new ZipOutputStream(new FileOutputStream(savePath + "/" + zipName));
 
 			for (String file : files) {
 				fileinput = new FileInputStream(savePath + "/" + file);
@@ -58,43 +56,32 @@ public class BoardDownloadCommand implements BoardCommand {
 				e.printStackTrace();
 			}
 		}
-		
-		File zipFile = new File(savePath, zipName);
-		System.out.println(savePath+"\\"+zipFile.getName());
-				response.setContentType("application/zip");
-		response.setHeader("Content-Disposition", "attachment; filename=" + zipFile.getName());
 
-		OutputStream os = null;
-		InputStream in = null;
+		File zipFile = new File(savePath, zipName);
+		response.setContentType("application/zip");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + zipFile.getName() + "\";");
+		
+		ServletOutputStream os = null;
+		FileInputStream fin = null;
 
 		try {
+			fin = new FileInputStream(savePath + "/" + zipName);
 			os = response.getOutputStream();
-			in = new FileInputStream(zipFile);
-
+			
 			int length = 0;
-			while ((length = in.read(buf)) > 0) {
+			while ((length = fin.read(buf)) > 0) {
 				os.write(buf, 0, length);
-				os.flush();
 			}
+			
+			if(os!=null) os.close();
+			if(fin!=null) fin.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (os != null) {
-				try {
-					os.close();
-				} catch (Exception e) {
-				}
-				os = null;
-			}
-			if (in != null) {
-				try {
-					in.close();
-				} catch (Exception e) {
-				}
-				in = null;
-			}
 		}
-
+		
+		zipFile.delete();
+		
 		return null;
 	}
 }
