@@ -22,7 +22,7 @@
 <title>SharEmo - Free Emoticon Share Website</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="emo/assets/js/dropbox.js">
+<script type="text/javascript" src="emo/assets/js/dropbox2.js">
 	
 </script>
 </head>
@@ -57,11 +57,11 @@
 			</button>
 		</form>
 		<ul>
-			<li class="nav-mid-item"><a href="main.do">Home</a></li>
-			<li class="nav-mid-item"><a href="#">Emotion</a>
+			<li class="nav-mid-item"><a href="#">Home</a></li>
+			<li class="nav-mid-item"><a href="#listPage.do">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="#">New</a></li>
+						<li><a href="listPage.do">New</a></li>
 						<li><a href="#">Popular</a></li>
 						<li><a href="#">Recent</a></li>
 						<li><a href="#">Category</a></li>
@@ -117,12 +117,11 @@
 									</c:if>
 								</c:forEach>
 							</div>
-					</a>
-						<p>
-							<a href="retrieve.do?num=${dto.num}">${dto.title}</a><br /> <a
-								href="#">작성자 : ${dto.author}</a><br /> <a href="#">조회 수:
-								${dto.readcnt}</a>
-						</p></td>
+						</a>
+						<p><a href="retrieve.do?num=${dto.num}">${dto.title}</a></p>
+						<p><a href="#">${dto.author}</a></p>
+						<div id="view"><img src="emo/images/view.png"><p>${dto.readcnt}</p></div>
+					</td>
 					<c:if test="${status.count % 4 eq 0}">
 						</tr>
 					</c:if>
@@ -151,10 +150,12 @@
 			</div>
 		</section>
 		<div id="ad">
-			<a href="https://www.idowell.co.kr/home/" target="_blank"><img
-				src="emo/images/ad/winnerstel.png"></a><br /> <a
-				href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F"
-				target="_blank"><img src="emo/images/ad/duo.jpg"></a>
+			<a href="https://www.idowell.co.kr/home/" target="_blank">
+				<img src="emo/images/ad/winnerstel.png">
+			</a><br/>
+			<a href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F" target="_blank">
+				<img src="emo/images/ad/duo.jpg">
+			</a>
 		</div>
 	</section>
 

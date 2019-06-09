@@ -113,7 +113,6 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 12pt;
     text-decoration: none;
-    margin: auto;
 }
 .nav-mid-item-drop a:link, .nav-mid-item-drop a:hover, .nav-mid-item-drop a:visited{
     color: black;
@@ -122,6 +121,9 @@ body {
     display: flex;
     height: 50px;
     border-radius: 5px;
+}
+.nav-mid-item-drop span {
+	margin: auto;
 }
 .emoticon-container {
     padding: 2em 2em 3em 2em;

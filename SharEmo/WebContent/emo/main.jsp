@@ -88,18 +88,21 @@
 						<li><a href="#">Most followed</a></li>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="#">MyGallery</a>
+			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
 				<div class="nav-mid-item-drop">
 					<img src="emo/images/말꼬리.png" width="180px" height="40px">
 					<ul>
-						<li><a href="#">Liked Emoticon</a></li>
-						<li><a href="#">Following Artist</a></li>
-						<li><a href="writeui.do">Upload Emoticon</a></li>
 						<c:if test="${user!=null}">
-							<li><a href="mypage.do">My Gallery</a></li>
+							<a href="#"><li><span>Liked Emoticon</span></li></a>
+							<a href="#"><li><span>Following Artist</span></li></a>
+							<a href="writeui.do"><li><span>Upload Emoticon</span></li></a>
+							<a href="mypage.do"><li><span>My Gallery</span></li></a>
 						</c:if>
 						<c:if test="${user==null}">
-							<li><a href="loginUI.do">My Gallery</a></li>
+							<a href="loginUI.do"><li><span>Liked Emoticon</span></li></a>
+							<a href="loginUI.do"><li><span>Following Artist</span></li></a>
+							<a href="loginUI.do"><li><span>Upload Emoticon</span></li></a>
+							<a href="loginUI.do"><li><span>My Gallery</span></li></a>
 						</c:if>
 					</ul>
 				</div></li>
