@@ -188,10 +188,14 @@ body {
 #content a:link, #content a:hover, #content a:visited{
 	color: black;
 }
+#content-footer {
+    display: flex;
+    flex-direction: column;
+    
+}
 #paging {
     display: flex;
-    align-content: center;
-    margin: 2em auto 2em auto;
+    margin: 2em auto 0 auto;
 }
 #paging p {
     margin: auto 20px auto 20px;
@@ -199,6 +203,12 @@ body {
 #paging img {
     width: 30px;
     height: 30px;
+}
+#upload {
+	text-align: right;
+	position: relative;
+	top: -32px;
+	left: -20px;
 }
 #ad {
     display: flex;
