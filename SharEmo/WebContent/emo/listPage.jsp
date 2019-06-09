@@ -57,8 +57,8 @@
 			</button>
 		</form>
 		<ul>
-			<li class="nav-mid-item"><a href="#">Home</a></li>
-			<li class="nav-mid-item"><a href="#listPage.do">Emotion</a>
+			<li class="nav-mid-item"><a href="main.do">Home</a></li>
+			<li class="nav-mid-item"><a href="listPage.do">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<ul>
 						<li><a href="listPage.do">New</a></li>
@@ -128,24 +128,24 @@
 				</c:forEach>
 
 			</table>
-			<div id="paging">
-				<a href="#"><img src="emo/images/page_left.png"></a>
+			<div id="content-footer">
+				<div id="paging">
+					<a href="#"><img src="emo/images/page_left.png"></a>
 
-				<p id="paging">
-					<!-- page -->
-					<jsp:include page="page.jsp" flush="true" />
-				</p>
-				<a href="#"><img src="emo/images/page_right.png"></a>
-				<!-- 글쓰기 버튼 만들 공간 -->
-				<p>
-					<c:choose>
-						<c:when test="${user != null}">
-							<a href="writeui.do"> 글 쓰기 </a>
-						</c:when>
-						<c:otherwise>
-							<a href="loginerror.do"> 글 쓰기 </a>
-						</c:otherwise>
-					</c:choose>
+					<p>
+						<!-- page -->
+						<jsp:include page="page.jsp" flush="true" />
+					</p>
+					<a href="#"><img src="emo/images/page_right.png"></a>
+				</div>
+
+				<p id="upload">
+					<c:if test="${user != null}">
+						<a href="writeui.do">Upload</a>
+					</c:if>
+					<c:if test="${user == null}">
+						<a href="loginerror.do">Upload</a>
+					</c:if>
 				</p>
 			</div>
 		</section>
