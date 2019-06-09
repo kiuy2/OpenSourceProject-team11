@@ -74,7 +74,7 @@ $(document).ready(function(){
 			</button>
 		</form>
 		<ul>
-			<li class="nav-mid-item"><a href="#">Home</a></li>
+			<li class="nav-mid-item"><a href="main.do">Home</a></li>
 			<li class="nav-mid-item"><a href="#">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<ul>

@@ -1,0 +1,286 @@
+body {
+    margin: 0;
+    min-width: 1480px;
+}
+#header {
+    background-image: url("images/paisley.png");
+    text-align: center;
+}
+#navbar-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+#navbar-top>a {
+    margin: 10 auto 10 10;
+}
+#navbar-top-right {
+    white-space: nowrap;
+	color: Black;
+}
+.nav-top-item {
+    display: inline-block;
+    background-color: rgba( 0, 0, 0, 0.09);
+    border-radius: 5px;
+    padding: 7 11 7 11;
+    margin-right: 20px;
+}
+.nav-top-item a{
+	text-decoration: none;
+}
+.nav-top-item a:link, .nav-top-item a:hover, .nav-top-item a:visited{
+    color: black;
+}
+#header-content {
+    max-width: 56em;
+    margin: auto;
+    padding: 0 6em 5em 6em;
+}
+#header-content p {
+    color: Black;
+    margin: 1em 0 1em 0;
+}
+#navbar-mid {
+    display: flex;
+    align-items: center;
+    background-image: url("images/prism.png");
+    height: 80px;
+    padding: 0 30px 0 30px;
+}
+#navbar-mid form {
+    display: inline-flex;
+    height: 40px;
+    width: 500px;
+    margin: 0 auto 0 0;
+    background-color: lavender;
+    border: 2px black solid;
+    border-radius: 20px;
+}
+#navbar-mid input {
+    width: 90%;
+    height: 100%;
+    padding-left: 2em;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+}
+#navbar-mid button {
+    width: 10%;
+    background-color: transparent;
+    border: none;
+}
+#navbar-mid img {
+    margin: 0;
+}
+#navbar-mid ul {
+    white-space: nowrap;
+}
+.nav-mid-item {
+    display: inline-flex;
+    width: 100px;
+    height: 80px;
+    position: relative;
+}
+.nav-mid-item a{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16pt;
+    margin: auto;
+	text-decoration: none;
+}
+.nav-mid-item a:link, .nav-mid-item a:hover, .nav-mid-item a:visited{
+	color: white;
+}
+.nav-mid-item-drop{
+    position: absolute;
+    width: 100px;
+    top: 80px;
+    display: none;
+}
+.nav-mid-item-drop ul{
+    background-image: url("images/prism.png");
+    padding: 0;
+    list-style: none;
+    border-left: 3px goldenrod solid;
+    border-right: 3px goldenrod solid;
+}
+.nav-mid-item-drop a{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 12pt;
+    text-decoration: none;
+    margin-top: auto;
+}
+.nav-mid-item-drop a:link, .nav-mid-item-drop a:hover, .nav-mid-item-drop a:visited{
+    color: white;
+}
+.nav-mid-item-drop li {
+    display: flex;
+    text-align: center;
+    height: 50px;
+}
+#container {
+    display: flex;
+    width: 100%;
+    background-image: url("images/stripes-light.png");
+}
+#nav-mid-left {
+    margin-right: auto;
+    padding: 2em 30px 0 70px;
+    background-image: url("images/tweed.png");
+}
+#nav-mid-left ul {
+    list-style: none;
+    width: 180px;
+    padding: 0;
+}
+#nav-mid-left li {
+    display: flex;
+    height: 60px;
+    text-align: right;
+}
+#nav-mid-left a{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16pt;
+    margin: auto 0 auto auto;
+	text-decoration: none;
+}
+#nav-mid-left a:link, #nav-mid-left a:hover, #nav-mid-left a:visited{
+	color: white;
+}
+#content {
+    padding: 2em 3em 2em 3em;
+}
+#content-wrapper {
+    background-color: white;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 3px 5px 10px rgba( 0, 0, 0, 0.5);
+}
+#content-wrapper>p {
+    text-align: right;
+    font-family: 'Didact Gothic';
+    margin: 0;
+}
+#content-wrapper h2 {
+    font-family: 'Dekko';
+    text-align: center;
+    font-size: 42pt;
+    margin: 0 0 30px 0;
+}
+#detail-wrapper {
+    display: flex;
+    padding: 0 1em 40px 1em;
+    border-bottom: 2px grey solid;
+}
+#detail-image {
+    margin-right: 2em;
+}
+#detail-image>img {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 1.5em;
+}
+#detail-image button {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border-radius: 15px;
+    border: none;
+    border-right: 2px grey solid;
+    border-bottom: 2px grey solid;
+}
+#detail-image button>img {
+    width: 40px;
+    height: 40px;
+}
+#likes {
+    background-color: rgb(0, 131, 255);
+}
+#follow {
+    background-color: rgb(255, 81, 106);
+}
+#detail {
+    border-radius: 8px;
+    margin: auto 0 auto 0;
+    font-family: 'Didact Gothic';
+    padding-bottom: 30px;
+}
+#detail legend {
+    text-align: center;
+}
+#detail textarea{
+    margin-left: 20px;
+    border-radius: 5px;
+    background-color: lightgoldenrodyellow;
+    padding: 0.5em;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: auto;
+}
+#tags {
+    padding: 40px 0 40px 0;
+    border-bottom: 2px grey solid;
+}
+#tags p {
+    font-weight: bold;
+    font-family: 'Dekko';
+    font-size: 24pt;
+    margin: 0;
+}
+#tags li {
+    display: inline;
+    padding: 0.1em 0.4em 0.1em 0.4em;
+    margin-right: 1em;
+    border-radius: 5px;
+    background-color: rgb(45, 158, 120);
+}
+#tags a {
+    font-weight: bold;
+    text-decoration: none;
+}
+#tags a:link, #tags a:hover, #tags a:visited{
+    color: white;
+}
+#emoticon-package {
+    padding: 1.5em 0 1.5em 0;
+    text-align: center;
+}
+#emoticon-package table {
+    margin: auto;
+    border-spacing: 15px;
+}
+#emoticon-package button {
+    margin-top: 0.8em;
+    width: 200px;
+    height: 60px;
+    border: none;
+    border-bottom: 3px #1e3048 solid;
+    border-radius: 40px;
+    color: white;
+    background-color: steelblue;
+	font-size: 24px;
+    font-family: 'Dekko';
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+#ad {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    margin-left: auto;
+    padding: 2em 0 2em 0;
+    background-color: rgba( 0, 0, 0, 0.1);
+}
+#ad a {
+    margin: auto;
+}
+#footer {
+    background-color: #151113;
+    padding: 2em;
+    text-align: right;
+}
+#footer p {
+    font-family: 'Noto Sans KR';
+    color: white;
+}
