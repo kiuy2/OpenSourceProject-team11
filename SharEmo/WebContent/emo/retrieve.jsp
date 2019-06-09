@@ -18,12 +18,12 @@
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
 <link type="text/css" rel="stylesheet"
-	href="emo/assets/css/recieve_style.css">
+	href="emo/assets/css/retrieve_style.css">
 
 <title>SharEmo - Free Emoticon Share Website</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="emo/assets/js/dropbox.js">
+<script type="text/javascript" src="emo/assets/js/dropbox2.js">
 </script>
 
 <script>
@@ -91,6 +91,7 @@
 				"toolbar=no,location=no,status=no,menubar=no, scrollbars=no, resizable=no, width=300, height=200");
 	}
 </script>
+
 </head>
 
 <body>
@@ -238,10 +239,12 @@
 			</div>
 		</section>
 		<div id="ad">
-			<a href="https://www.idowell.co.kr/home/" target="_blank"><img
-				src="emo/images/ad/winnerstel.png"></a> <a
-				href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F"
-				target="_blank"><img src="emo/images/ad/duo.jpg"></a>
+			<a href="https://www.idowell.co.kr/home/" target="_blank">
+				<img src="emo/images/ad/winnerstel.png">
+			</a>
+			<a href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F" target="_blank">
+				<img src="emo/images/ad/duo.jpg">
+			</a>
 		</div>
 	</section>
 

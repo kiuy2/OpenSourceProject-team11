@@ -155,18 +155,34 @@ body {
     flex-direction: column;
     padding: 2em 3em 2em 3em;
 }
-#content img {
-    width: 150px;
-    height: 150px;
-}
 #content table {
     border-spacing: 40px;
 }
 #content td {
     text-align: center;
 }
-#content a{
-    font-family: 'Didact Gothic';
+#Thumbnail{
+    width: 150px;
+    height: 150px;
+}
+#content p {
+	margin: 5px 0 5px 0;
+	font-family: 'Didact Gothic';
+}
+#view {
+	display: flex;
+	align-content: center;
+	margin: 5px 0 5px 0;
+}
+#view img {
+	width: 25px;
+	height: 25px;
+	margin-left: auto;
+}
+#view p {
+	margin: auto auto auto 10px;
+}
+#content a {
 	text-decoration: none;
 }
 #content a:link, #content a:hover, #content a:visited{
