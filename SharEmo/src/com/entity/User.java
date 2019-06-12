@@ -6,6 +6,7 @@ public class User {
 	private String name;
 	private String nickname;
 	private String mascot;
+	private String regdate;
 	private String phone;
 	private String email;
 	private int followernum;
@@ -15,6 +16,7 @@ public class User {
 		name="";
 		nickname="";
 		mascot="";
+		regdate="";
 		phone="";
 		email="";
 	}
@@ -47,6 +49,12 @@ public class User {
 	}
 	public void setMascot(String mascot) {
 		this.mascot = mascot;
+	}
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
 	public String getPhone() {
 		return phone;

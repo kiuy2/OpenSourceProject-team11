@@ -97,7 +97,8 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 
-			String query = "INSERT INTO user values (?,?,?,?,?,?,?, 0)";
+			String query = "INSERT INTO user(id, password, name, nickname, mascot, "
+					+ "phone, email) values (?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(query);
 
 			pstmt.setString(1, _id);
@@ -145,6 +146,7 @@ public class BoardDAO {
 				user.setName(rs.getString("name"));
 				user.setNickname(rs.getString("nickname"));
 				user.setMascot(rs.getString("mascot"));
+				user.setRegdate(rs.getString("regdate"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setFollowernum(rs.getInt("followernum"));
