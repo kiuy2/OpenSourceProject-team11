@@ -13,11 +13,13 @@ public class BoardSignUpCommand implements BoardCommand {
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
+		String mascot = request.getParameter("mascot");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
+		mascot = "emo/images/mascot/" + mascot + ".png";
 		
 		BoardDAO dao = new BoardDAO();
-		dao.signUp(id, password, name, nickname, phone, email);
+		dao.signUp(id, password, name, nickname, mascot, phone, email);
 		return "emo/join.jsp";
 	}
 

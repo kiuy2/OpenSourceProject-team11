@@ -5,7 +5,11 @@
 
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -15,31 +19,45 @@
 <title>회원가입</title>
 
 <style>
-th {
-	text-align: center;
-	font-family: Georgia, 'Times New Roman', Times, serif;
-	font-size: 20px;
-	margin-top: 20px;
-	padding-top: 30px;
-}
-
 body {
 	background-image: url('emo/images/trash/cheap_diagonal_fabric.png');
 }
-</style>
-<style type="text/css">
-table {
-	margin-left: auto;
-	margin-right: auto;
+#header {
+	padding: 10px;
+}
+#mainform {
+	padding: 30px 200px;
+}
+#mainform form {
+	min-width: 700px;
+}
+.table {
+	margin: auto;
 	border: 3px solid skyblue;
+	background-color: whitesmoke;
 }
-
-td {
-	border: 1px solid skyblue
+.table-bordered>tbody>tr>th {
+	width: 40%;
+	text-align: center;	
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-size: 20px;
+	vertical-align: middle;
 }
-
-#title {
-	background-color: skyblue
+.table-bordered>tbody>tr>td {
+	text-align: center;
+	padding: 1.5em 4em; 
+}
+#mascotImg {
+	width: 60px;
+	height: 60px;
+	margin-right: 20px;
+}
+#footer {
+    background-color: #151113;
+    padding: 2em;
+    text-align: right;
+    font-family: 'Noto Sans KR';
+    color: white;
 }
 </style>
 
@@ -105,93 +123,117 @@ td {
 	}
 	function inputIdChk() {
 		document.userInfo.idcheck.value = "idUncheck";
-		document.userInfo.confirm_id.value = "중복확인";
+		document.userInfo.confirm_id.value = "Confirm";
 	}
+	
+	$(document).ready(function(){
+        $("#mascot").change(function() {
+            var source = "emo/images/mascot/" + this.value + ".png";
+        	$("#mascotImg").attr("src", source);
+        });  
+    });
+	
 </script>
-<style>
-th {
-	text-align: center;
-	font-family: Georgia, 'Times New Roman', Times, serif;
-	font-size: 20px;
-	margin-top: 20px;
-	padding-top: 30px;
-}
-
-body {
-	background-image: url('emo/images/trash/cheap_diagonal_fabric.png');
-}
-</style>
 
 </head>
 <body>
-	<br />
-	<div>
+
+	<section id="header">
 		<a href="main.do"> <img src="emo/images/sharEmo_logo_2.png">
 		</a>
-	</div>
-	<br>
-	<br>
+	</section>
+	
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
-	<form method="post" action="signUp.do" name="userInfo"
-		onsubmit="return writecheck()">
-		<table class="table table-striped table-bordered table-hover"
-			style="text-align: center; height: 800px; width: 600px; margin: auto; background-color: whitesmoke">
+	<section id="mainform">
+		<form method="post" action="signUp.do" name="userInfo"
+			onsubmit="return writecheck()">
+			<table class="table table-striped table-bordered table-hover">
 
-			<tr>
-				<th style="text-align: center; padding-top: 30px" colspan="2">
-					<h2 align="center">signUp</h2>
-				</th>
-			</tr>
-			<tr>
-				<th style="text-align: center; padding-top: 30px">ID</th>
-				<th style="text-align: center; padding-top: 30px"><input
-					type="text" name="id" id="userId" maxlength="50"
-					onkeydown="inputIdChk()"> <input type="button" value="중복확인"
-					name="confirm_id" onclick="confirmId(this.form)"> <input
-					type="hidden" name="idcheck" value="idUncheck"></th>
-			</tr>
-			<tr>
-				<th style="text-align: center; padding-top: 30px">PASSWORD</th>
-				<th style="text-align: center; padding-top: 30px"><input
-					type="password" name="password"></th>
-			</tr>
-			<tr>
-				<th style="text-align: center; padding-top: 30px">PASSWORD
-					Confirm</th>
-				<th style="text-align: center; padding-top: 30px"><input
-					type="password" name="passwordcheck"></th>
-			</tr>
-			<tr>
-				<th style="text-align: center; padding-top: 30px">NAME</th>
-				<th style="text-align: center; padding-top: 30px"><input
-					type="text" name="name"></th>
-			</tr>
-			<tr>
-				<th style="text-align: center; padding-top: 30px">NICKNAME</th>
-				<th style="text-align: center; padding-top: 30px"><input
-					type="text" name="nickname"></th>
-			</tr>
-			<tr>
-				<th style="text-align: center; padding-top: 30px">PHONE</th>
-				<th style="text-align: center; padding-top: 30px"><input
-					type="tel" name="phone"></th>
-			</tr>
-			<tr>
-				<th style="text-align: center; padding-top: 30px">EMAIL</th>
-				<th style="text-align: center; padding-top: 30px"><input
-					type="email" name="email"></th>
-			</tr>
-			<tr>
-				<th style="text-align: center; padding-top: 30px;" colspan="2">
-					<input
-					style="background-image: url(emo/images/trash/halftone-yellow.png); border: 0px; color: black"
-					type=submit class="btn btn-success" value="등록"> <input
-					style="background-image: url(emo/images/trash/halftone-yellow.png); border: 0px; color: black"
-					type=button class="btn btn-secondary" value="취소"
-					OnClick="window.location='main.do'">
-				</th>
-			</tr>
-		</table>
-	</form>
+				<tr>
+					<th colspan="2">
+						<h2>signUp</h2>
+					</th>
+				</tr>
+				<tr>
+					<th>ID</th>
+					<td>
+						<div class="input-group">
+							<input type="text" name="id" id="userId" class="form-control"
+								placeholder="Enter Id" maxlength="50" onkeydown="inputIdChk()">
+							<div class="input-group-btn">
+								<input class="btn btn-default" type="button" value="Confirm"
+									name="confirm_id" onclick="confirmId(this.form)">
+								<input type="hidden" name="idcheck" value="idUncheck">
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>PASSWORD</th>
+					<td><input class="form-control" type="password"
+						name="password" placeholder="Enter password"></td>
+				</tr>
+				<tr>
+					<th>PASSWORD Confirm</th>
+					<td><input class="form-control" type="password"
+						name="passwordcheck" placeholder="Enter password confirm"></td>
+				</tr>
+				<tr>
+					<th>NAME</th>
+					<td><input class="form-control" type="text" name="name"
+						placeholder="Enter your name"></td>
+				</tr>
+				<tr>
+					<th>NICKNAME</th>
+					<td><input class="form-control" type="text" name="nickname"
+						placeholder="Enter your nickname"></td>
+				</tr>
+				<tr>
+					<th>MASCOT</th>
+					<td>
+						<img id="mascotImg" src="emo/images/mascot/no mascot.png">
+						<select class="form-inline" id="mascot" name="mascot">
+							<option>no mascot</option>
+							<option>Abigail</option>
+							<option>Bentley</option>
+							<option>Camila</option>
+							<option>Daisy</option>
+							<option>Eric</option>
+							<option>Eva</option>
+							<option>Jayce</option>
+							<option>Kate</option>
+							<option>Luis</option>
+							<option>Monica</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>PHONE</th>
+					<td><input class="form-control" type="tel" name="phone"
+						placeholder="Enter your phone number"></td>
+				</tr>
+				<tr>
+					<th>EMAIL</th>
+					<td><input class="form-control" type="email" name="email"
+						placeholder="Enter your email"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type=submit class="btn btn-success" value="등록">
+						<input type=button class="btn btn-secondary" value="취소"
+						OnClick="window.location='main.do'">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</section>
+	
+	<section id="footer">
+		<img src="emo/images/cbnu_white.png" width="221" height="67">
+		<p>2019, 오픈소스 전문 프로젝트, TEAM 11, 조 ??</p>
+		<p>윤송희 ~ 전준호, 정희주, 장형규</p>
+		<p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 / TEL : 043)261-2114</p>
+	</section>
+	
 </body>
 </html>
