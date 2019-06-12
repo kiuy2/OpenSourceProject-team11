@@ -677,7 +677,7 @@ public class BoardDAO {
 	}
 
 	// 페이지 구현
-	public PageTO page(int curPage) {
+	public PageTO page(int curPage, String field_name, boolean method) {
 		PageTO to = new PageTO();
 		int totalCount = totalCount();
 
@@ -689,7 +689,13 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 			String query = "SELECT num,author,title,content," + "DATE_FORMAT(writeday,'%Y/%M/%D') writeday,"
-					+ "readcnt,repRoot, repStep, repIndent FROM " + "board order by repRoot desc, repStep asc";
+					+ "readcnt,repRoot, repStep, repIndent FROM board order by ";
+			if (field_name != null) {
+				query += field_name;
+				if (method) query += " asc, ";
+				else query += " desc, ";
+			}
+			query += "UNIX_TIMESTAMP(writeday) desc";
 			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = pstmt.executeQuery();
 

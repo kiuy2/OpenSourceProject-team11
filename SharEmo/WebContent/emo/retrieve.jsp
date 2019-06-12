@@ -155,14 +155,13 @@ $(document).ready(function changeColor(){
 			</button>
 		</form>
 		<ul>
-			<li class="nav-mid-item"><a href="#">Home</a></li>
-			<li class="nav-mid-item"><a href="#">Emotion</a>
+			<li class="nav-mid-item"><a href="main.do">Home</a></li>
+			<li class="nav-mid-item"><a href="listPage.do?method=1">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="#">New</a></li>
-						<li><a href="#">Popular</a></li>
-						<li><a href="#">Recent</a></li>
-						<li><a href="#">Category</a></li>
+						<li><a href="listPage.do?method=1">New</a></li>
+						<li><a href="listPage.do?method=2">Popular</a></li>
+						<li><a href="listPage.do?method=3">Hot</a></li>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="#">Artist</a>
@@ -170,7 +169,6 @@ $(document).ready(function changeColor(){
 					<ul>
 						<li><a href="#">New</a></li>
 						<li><a href="#">Popular</a></li>
-						<li><a href="#">Recent</a></li>
 						<li><a href="#">Most<br />followed
 						</a></li>
 					</ul>
@@ -190,10 +188,9 @@ $(document).ready(function changeColor(){
 	<section id="container">
 		<nav id="nav-mid-left">
 			<ul>
-				<li><a href="listPage.do">New Emoticon</a></li>
-				<li><a href="#">Popular Emoticon</a></li>
-				<li><a href="#">Recent Emoticon</a></li>
-				<li><a href="#">Category</a></li>
+				<li><a href="listPage.do?method=1">New Emoticon</a></li>
+				<li><a href="listPage.do?method=2">Popular Emoticon</a></li>
+				<li><a href="listPage.do?method=3">Hot Emoticon</a></li>
 			</ul>
 		</nav>
 		<section id="content">
@@ -235,6 +232,7 @@ $(document).ready(function changeColor(){
 						<textarea rows="6" cols="50">${retrieve.content}</textarea>
 					</fieldset>
 				</div>
+				<!-- 
 				<div id="tags">
 					<p>tags</p>
 					<ul>
@@ -245,6 +243,7 @@ $(document).ready(function changeColor(){
 						<li><a href="#">#doraemon</a></li>
 					</ul>
 				</div>
+				 -->
 				<div id="emoticon-package">
 					<table>
 						<c:forEach var="emo" items="${ticon}" varStatus="status">
