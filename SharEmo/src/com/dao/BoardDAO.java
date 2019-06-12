@@ -150,6 +150,7 @@ public class BoardDAO {
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setFollowernum(rs.getInt("followernum"));
+				user.setPostnum(rs.getInt("postnum"));
 			}
 
 			if (!user.islogin && _id != null) {
@@ -197,6 +198,10 @@ public class BoardDAO {
 			pstmt.setString(3, _author);
 			pstmt.setString(4, _content);
 			pstmt.setInt(5, currval);
+			pstmt.executeUpdate();
+			
+			query = "UPDATE user SET postnum = postnum + 1 WHERE id='" + _userid + "'";
+			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
