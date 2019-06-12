@@ -88,7 +88,7 @@ public class BoardDAO {
 	}
 
 	// 회원가입
-	public void signUp(String _id, String _password, String _name, String _nickname, String _phone, String _email) {
+	public void signUp(String _id, String _password, String _name, String _nickname, String _mascot, String _phone, String _email) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -97,15 +97,16 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 
-			String query = "INSERT INTO user values (?,?,?,?,?,?, 0)";
+			String query = "INSERT INTO user values (?,?,?,?,?,?,?, 0)";
 			pstmt = con.prepareStatement(query);
 
 			pstmt.setString(1, _id);
 			pstmt.setString(2, _password);
 			pstmt.setString(3, _name);
 			pstmt.setString(4, _nickname);
-			pstmt.setString(5, _phone);
-			pstmt.setString(6, _email);
+			pstmt.setString(5, _mascot);
+			pstmt.setString(6, _phone);
+			pstmt.setString(7, _email);
 
 			pstmt.executeUpdate();
 
