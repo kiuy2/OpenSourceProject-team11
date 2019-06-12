@@ -215,6 +215,7 @@
 		</div>
 	</section>
 
+	<!-- 
 	<section id="tags-container">
 		<div class="container-header">
 			<h2>Styles</h2>
@@ -229,7 +230,8 @@
 				</ul>
 			</div>
 		</div>
-	</section>
+	</section> 
+	-->
 
 	<section id="footer">
 		<img src="emo/images/cbnu_white.png" width="221" height="67">
