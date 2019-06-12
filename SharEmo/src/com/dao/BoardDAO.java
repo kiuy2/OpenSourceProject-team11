@@ -144,6 +144,7 @@ public class BoardDAO {
 				user.setId(rs.getString("id"));
 				user.setName(rs.getString("name"));
 				user.setNickname(rs.getString("nickname"));
+				user.setMascot(rs.getString("mascot"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setFollowernum(rs.getInt("followernum"));

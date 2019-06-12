@@ -5,6 +5,7 @@ public class User {
 	private String id;
 	private String name;
 	private String nickname;
+	private String mascot;
 	private String phone;
 	private String email;
 	private int followernum;
@@ -13,6 +14,7 @@ public class User {
 		id="";
 		name="";
 		nickname="";
+		mascot="";
 		phone="";
 		email="";
 	}
@@ -39,6 +41,12 @@ public class User {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public String getMascot() {
+		return mascot;
+	}
+	public void setMascot(String mascot) {
+		this.mascot = mascot;
 	}
 	public String getPhone() {
 		return phone;
