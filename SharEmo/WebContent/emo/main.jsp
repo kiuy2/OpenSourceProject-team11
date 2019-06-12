@@ -68,24 +68,22 @@
 	<nav id="navbar-mid">
 		<ul>
 			<li class="nav-mid-item"><a href="#">Home</a></li>
-			<li class="nav-mid-item"><a href="#">Emotion</a>
+			<li class="nav-mid-item"><a href="listPage.do?method=1">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<img src="emo/images/말꼬리.png" width="180px" height="40px">
 					<ul>
-						<li><a href="listPage.do">New Emoticon</a></li>
-						<li><a href="listPage.do">Popular Emoticon</a></li>
-						<li><a href="listPage.do">Recent Emoticon</a></li>
-						<li><a href="listPage.do">Category</a></li>
+						<a href="listPage.do?method=1"><li><span>New Emoticon</span></li></a>
+						<a href="listPage.do?method=2"><li><span>Popular Emoticon</span></li></a>
+						<a href="listPage.do?method=3"><li><span>Hot Emoticon</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="#">Artist</a>
 				<div class="nav-mid-item-drop">
 					<img src="emo/images/말꼬리.png" width="180px" height="40px">
 					<ul>
-						<li><a href="#">New Artist</a></li>
-						<li><a href="#">Popular Artist</a></li>
-						<li><a href="#">Recent Emoticon</a></li>
-						<li><a href="#">Most followed</a></li>
+						<a href="#"><li><span>New Artist</span></li></a>
+						<a href="#"><li><span>Popular Artist</span></li></a>
+						<a href="#"><li><span>Most followed</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
@@ -112,11 +110,10 @@
 	<section class="emoticon-container">
 		<div class="container-header">
 			<h2>New Emoticon</h2>
-			<button type="button" onclick="location.href='listPage.do'">→
-				Browse</button>
+			<button type="button" onclick="location.href='listPage.do?method=1'">→Browse</button>
 		</div>
 		<div class="container-main">
-			<c:forEach var="dto" items="${list}" begin="0" end="3">
+			<c:forEach var="dto" items="${listNew}" begin="0" end="3">
 				<div class="emoticon-package">
 					<a href="retrieve.do?num=${dto.num}">
 						<div class="emoticon-Thumbnail">
@@ -124,14 +121,14 @@
 								<c:if test="${thumbnum <6 && dto.num eq emo.boardnum}">
 									<%
 										Thumbnailnum++;
-													request.setAttribute("thumbnum", Thumbnailnum);
+										request.setAttribute("thumbnum", Thumbnailnum);
 									%>
 									<img id="Thumbnail${thumbnum}" src="emosave/${emo.boardnum}/${emo.src}">
 								</c:if>
 							</c:forEach>
 							<%
 								Thumbnailnum = 0;
-									request.setAttribute("thumbnum", Thumbnailnum);
+								request.setAttribute("thumbnum", Thumbnailnum);
 							%>
 						</div>
 					</a>
@@ -139,7 +136,8 @@
 						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
 					</p>
 					<p class="artist">Artist: ${dto.author}</p>
-					<p class="artist">Retrieve: ${dto.readcnt}</p>
+					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
+						<img src="emo/images/view.png">${dto.readcnt}</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -148,10 +146,10 @@
 	<section class="emoticon-container">
 		<div class="container-header">
 			<h2>Popular Emoticon</h2>
-			<button type="button">→ Browse</button>
+			<button type="button" onclick="location.href='listPage.do?method=2'">→ Browse</button>
 		</div>
 		<div class="container-main">
-			<c:forEach var="dto" items="${list}" begin="0" end="3">
+			<c:forEach var="dto" items="${listPop}" begin="0" end="3">
 				<div class="emoticon-package">
 					<a href="retrieve.do?num=${dto.num}">
 						<div class="emoticon-Thumbnail">
@@ -174,7 +172,8 @@
 						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
 					</p>
 					<p class="artist">Artist: ${dto.author}</p>
-					<p class="artist">Retrieve: ${dto.readcnt}</p>
+					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
+						<img src="emo/images/view.png">${dto.readcnt}</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -182,11 +181,11 @@
 
 	<section class="emoticon-container">
 		<div class="container-header">
-			<h2>Recent Emoticon</h2>
-			<button type="button">→ Browse</button>
+			<h2>Hot Emoticon</h2>
+			<button type="button" onclick="location.href='listPage.do?method=3'">→ Browse</button>
 		</div>
 		<div class="container-main">
-			<c:forEach var="dto" items="${list}" begin="0" end="3">
+			<c:forEach var="dto" items="${listHot}" begin="0" end="3">
 				<div class="emoticon-package">
 					<a href="retrieve.do?num=${dto.num}">
 						<div class="emoticon-Thumbnail">
@@ -209,7 +208,8 @@
 						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
 					</p>
 					<p class="artist">Artist: ${dto.author}</p>
-					<p class="artist">Retrieve: ${dto.readcnt}</p>
+					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
+						<img src="emo/images/view.png">${dto.readcnt}</div>
 				</div>
 			</c:forEach>
 		</div>

@@ -12,13 +12,25 @@ import com.entity.PageTO;
 public class BoardPageCommand implements BoardCommand{
 	static boolean start=false;
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		int curPage =1;
+		int curPage = 1;
 		if(request.getParameter("curPage") !=null) {
 			curPage=Integer.parseInt(request.getParameter("curPage"));
 		}
+		int method = Integer.parseInt(request.getParameter("method"));
 		
 		BoardDAO dao = new BoardDAO();
-		PageTO list = dao.page(curPage);
+		PageTO list = null;
+		switch(method){
+			case 1:
+				list = dao.page(curPage, "writeday", true);
+				break;
+			case 2:
+				list = dao.page(curPage, "likes", false);
+				break;
+			case 3:
+				list = dao.page(curPage, "readCnt", false);
+				break;
+		}
 		ArrayList<Emoticon> ticon =dao.getEmoticon();
 		//listPage.jsp에서 목록 리스트 데이터 저장
 		request.setAttribute("list", list.getList());

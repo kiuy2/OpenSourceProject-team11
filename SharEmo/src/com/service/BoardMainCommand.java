@@ -18,10 +18,15 @@ public class BoardMainCommand implements BoardCommand{
 		}
 		
 		BoardDAO dao = new BoardDAO();
-		PageTO list = dao.page(curPage);
+		PageTO listNew = dao.page(curPage, null, true);
+		PageTO listPop = dao.page(curPage, "likes", false);
+		PageTO listHot = dao.page(curPage, "readCnt", false);
+		
 		ArrayList<Emoticon> ticon =dao.getEmoticon();
 		//listPage.jsp에서 목록 리스트 데이터 저장
-		request.setAttribute("list", list.getList());
+		request.setAttribute("listNew", listNew.getList());
+		request.setAttribute("listPop", listPop.getList());
+		request.setAttribute("listHot", listHot.getList());
 		//이모티콘 이미지 저장
 		request.setAttribute("ticon", ticon);
 		return "emo/main.jsp";

@@ -25,12 +25,14 @@ public class BoardRetrieveCommand implements BoardCommand {
 		
 		String follow=data.getUserid();
 		int followernum=dao.getFollow(follow);
-		if(user!=null) {
-			boolean isFollow=dao.isFollow(follow,user.getId());
-			boolean isLike=dao.isLike(num,user.getId());
-			request.setAttribute("isFollow", isFollow);
-			request.setAttribute("isLike", isLike);
+		boolean isFollow = false;
+		boolean isLike = false;
+		if(user != null) {
+			isFollow = dao.isFollow(follow,user.getId());
+			isLike = dao.isLike(num,user.getId());
 		}
+		request.setAttribute("isFollow", isFollow);
+		request.setAttribute("isLike", isLike);
 		
 		//이모티콘 이미지 저장
 		request.setAttribute("followernum", followernum);

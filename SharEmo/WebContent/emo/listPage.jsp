@@ -58,13 +58,12 @@
 		</form>
 		<ul>
 			<li class="nav-mid-item"><a href="main.do">Home</a></li>
-			<li class="nav-mid-item"><a href="listPage.do">Emotion</a>
+			<li class="nav-mid-item"><a href="listPage.do?method=1">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="listPage.do">New</a></li>
-						<li><a href="#">Popular</a></li>
-						<li><a href="#">Recent</a></li>
-						<li><a href="#">Category</a></li>
+						<li><a href="listPage.do?method=1">New</a></li>
+						<li><a href="listPage.do?method=2">Popular</a></li>
+						<li><a href="listPage.do?method=3">Hot</a></li>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="#">Artist</a>
@@ -72,7 +71,6 @@
 					<ul>
 						<li><a href="#">New</a></li>
 						<li><a href="#">Popular</a></li>
-						<li><a href="#">Recent</a></li>
 						<li><a href="#">Most<br />followed
 						</a></li>
 					</ul>
@@ -92,10 +90,9 @@
 	<section id="container">
 		<nav id="nav-mid-left">
 			<ul>
-				<li><a href="listPage.do">New Emoticon</a></li>
-				<li><a href="#">Popular Emoticon</a></li>
-				<li><a href="#">Recent Emoticon</a></li>
-				<li><a href="#">Category</a></li>
+				<li><a href="listPage.do?method=1">New Emoticon</a></li>
+				<li><a href="listPage.do?method=2">Popular Emoticon</a></li>
+				<li><a href="listPage.do?method=3">Hot Emoticon</a></li>
 			</ul>
 		</nav>
 		<section id="content">
@@ -106,17 +103,15 @@
 						<tr>
 					</c:if>
 					<td><a href="retrieve.do?num=${dto.num}">
-							<div class="emoticon-Thumbnail">
-								<c:set var="loop_flag" value="false" />
-								<c:forEach var="emo" items="${ticon}">
-									<c:if test="${not loop_flag }">
-										<c:if test="${dto.num eq emo.boardnum}">
-											<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
-											<c:set var="loop_flag" value="true" />
-										</c:if>
+							<c:set var="loop_flag" value="false" />
+							<c:forEach var="emo" items="${ticon}">
+								<c:if test="${not loop_flag }">
+									<c:if test="${dto.num eq emo.boardnum}">
+										<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
+										<c:set var="loop_flag" value="true" />
 									</c:if>
-								</c:forEach>
-							</div>
+								</c:if>
+							</c:forEach>
 						</a>
 						<p><a href="retrieve.do?num=${dto.num}">${dto.title}</a></p>
 						<p><a href="#">${dto.author}</a></p>

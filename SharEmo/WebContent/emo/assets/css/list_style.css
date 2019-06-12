@@ -154,6 +154,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 2em 3em 2em 3em;
+	min-width: 600px;
 }
 #content table {
     border-spacing: 40px;
