@@ -134,7 +134,10 @@ $(document).ready(function changeColor(){
 			<ul id="navbar-top-right">
 				<c:choose>
 					<c:when test="${user != null}">
-						<li class="nav-top-item"><a href='mypage.do'>${user.id}님</a></li>
+						<li class="nav-top-item">
+							<img src="${user.mascot}">
+							<a href='mypage.do'>${user.id}님</a>
+						</li>
 						<li class="nav-top-item"><a href='logout.do'>Logout</a></li>
 					</c:when>
 					<c:otherwise>
