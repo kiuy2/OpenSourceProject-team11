@@ -16,10 +16,14 @@
 	function login(){
 		document.form.submit();
 	}
+	$(document).ready(function(){
+	    $("form").keydown(function (key) {
+	        if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+	        	login();
+	        }
+	    });
+	});
 	
-	function cancel(){
-		document.form.reset();
-	}	
 </script>
 <style>
 th {

@@ -276,7 +276,7 @@ body {
     letter-spacing: 0.1em;
 }
 #other_btns {
-	display: flex;
+	text-align: right;
 	margin-top: 10px;
 }
 #other_btns button {
@@ -293,10 +293,14 @@ body {
 	width: 40px;
 	height: 40px;
 }
+/*
 #edit_btn {
 	margin-left: auto;
-	margin-right: 10px;
 }
+#delete_btn {
+	margin: 0 10px;
+}
+*/
 #ad {
     display: flex;
     flex-direction: column;

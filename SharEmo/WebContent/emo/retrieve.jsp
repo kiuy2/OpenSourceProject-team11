@@ -273,18 +273,22 @@ $(document).ready(function changeColor(){
 					
 					<button id="download_btn" type="button" onclick="location.href='download.do?num=${retrieve.num}'">DOWNLOAD</button>
 
-					<c:if test="${user.id==retrieve.userid }">
-						<div id="other_btns">
+					<div id="other_btns">
+						<c:if test="${user.id==retrieve.userid }">
 							<button type="button" id="edit_btn"
 								onclick="location.href='updateUI.do?num=${retrieve.num}'">
 								<img src="emo/images/edit.png">
 							</button>
-							<button type="button"
+							<button type="button" id="delete_btn"
 								onclick="location.href='delete.do?num=${retrieve.num}'">
 								<img src="emo/images/delete.png">
 							</button>
-						</div>
-					</c:if>
+						</c:if>
+						<button type="button"
+							onclick="location.href='listPage.do?method=1'">
+							<img src="emo/images/exit.png">
+						</button>
+					</div>
 				</div>
 			</div>
 		</section>
