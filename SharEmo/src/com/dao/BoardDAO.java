@@ -86,7 +86,7 @@ public class BoardDAO {
 		return list;
 	}
 
-	// 글 쓰기
+	// 회원가입
 	public void write(String _userid, String _title, String _author, String _content) {
 		int currval = 1;
 		Connection con = null;
@@ -110,6 +110,10 @@ public class BoardDAO {
 			pstmt.setString(3, _author);
 			pstmt.setString(4, _content);
 			pstmt.setInt(5, currval);
+			pstmt.executeUpdate();
+			
+			query = "UPDATE user SET postnum = postnum + 1 WHERE id='" + _userid + "'";
+			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {

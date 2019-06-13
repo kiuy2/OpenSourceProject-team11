@@ -10,13 +10,13 @@ public class User {
 	private String phone;
 	private String email;
 	private int followernum;
+	private int postnum;
 	public User(){
 		islogin=false;
 		id="";
 		name="";
 		nickname="";
 		mascot="";
-		regdate="";
 		phone="";
 		email="";
 	}
@@ -73,5 +73,11 @@ public class User {
 	}
 	public void setFollowernum(int followernum) {
 		this.followernum = followernum;
+	}
+	public int getPostnum() {
+		return postnum;
+	}
+	public void setPostnum(int postnum) {
+		this.postnum = postnum;
 	}
 }

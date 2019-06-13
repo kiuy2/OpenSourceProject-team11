@@ -86,7 +86,7 @@
 					<ul>
 						<a href="#"><li><span>New Artist</span></li></a>
 						<a href="#"><li><span>Popular Artist</span></li></a>
-						<a href="#"><li><span>Most followed</span></li></a>
+						<a href="#"><li><span>Most Published Artist</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>

@@ -75,7 +75,7 @@
 					<ul>
 						<a href="#"><li><span>New</span></li></a>
 						<a href="#"><li><span>Popular</span></li></a>
-						<a href="#"><li><span>Most<br />followed</span></li></a>
+						<a href="#"><li><span>Most<br/>Published</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
