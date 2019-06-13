@@ -164,12 +164,11 @@
             </li>
         </ul>
     </nav>
-    <br />
-    <br />
+    
     <section id="container_mypage">
         <section id="content_mypage">
             <div>
-                <h1 style="text-align: center">(JANGTIST)님의 MY PAGE</h1>
+                <h1 style="text-align: center">(JANGTIST)'s MY PAGE</h1>
                 <img src="에펠탑뺴꼼3.jpg" width="500" , height="500" />
 
                 <p>Nickname</p>
@@ -181,7 +180,7 @@
                 <table>
                     <tr>
                         <td style="width: 80%">
-                            <p style="text-align: left; padding-left:20px">업로드한 게시글</p>
+                            <p style="text-align: left; padding-left:20px">upload</p>
                         </td>
                         <td>
                             <div class="wrap"><button>Browse</button></div>
@@ -193,7 +192,7 @@
                 <table>
                         <tr>
                             <td style="width: 80%">
-                                <p style="text-align: left; padding-left:20px">업로드한 게시글</p>
+                                <p style="text-align: left; padding-left:20px">like</p>
                             </td>
                             <td>
                                 <div class="wrap"><button>Browse</button></div>
@@ -207,7 +206,7 @@
                 <table>
                         <tr>
                             <td style="width: 80%">
-                                <p style="text-align: left; padding-left:20px">업로드한 게시글</p>
+                                <p style="text-align: left; padding-left:20px">follow</p>
                             </td>
                             <td>
                                 <div class="wrap"><button>Browse</button></div>
@@ -218,9 +217,7 @@
             </div>
         </section>
     </section>
-<br />
-<br />
-<br />
+
     <section id="footer">
         <img src="emo/images/cbnu_white.png" width="221" height="67">
         <p>2019, 오픈소스 전문 프로젝트, TEAM 11, 조 ??</p>
