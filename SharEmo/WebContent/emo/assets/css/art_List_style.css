@@ -130,83 +130,93 @@ body {
     width: 100%;
     background-image: url("images/stripes-light.png");
 }
-#content {
-    min-width: 600px;
-    padding: 2em 3em 2em 3em;
-    font-family: "Didact Gothic";
+.emoticon-Thumbnail {
+	width: 33%;
+	height: 33%;
 }
-#content-wrapper {
-    background-color: white;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 3px 5px 10px rgba( 0, 0, 0, 0.5);
+#nav-mid-left {
+    margin-right: auto;
+    padding: 2em 30px 0 70px;
+    background-image: url("images/tweed.png");
 }
-#content-wrapper h2 {
-    font-size: 24pt;
-    margin: 0 0 50px 0;
+#nav-mid-left ul {
+    list-style: none;
+    width: 180px;
+    padding: 0;
 }
-#content-wrapper form {
+#nav-mid-left li {
+    display: flex;
+    height: 60px;
+    text-align: right;
+}
+#nav-mid-left a{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 16pt;
-    margin: 0;
+    margin: auto 0 auto auto;
+	text-decoration: none;
 }
-#title {
+#nav-mid-left a:link, #nav-mid-left a:hover, #nav-mid-left a:visited{
+	color: white;
+}
+#content {
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    padding: 2em 3em 2em 3em;
+	min-width: 600px;
 }
-#title label {
-    margin: auto 0 auto 0;
+#content table {
+    border-spacing: 40px;
 }
-#title input {
-    margin-left: 10px;
-    flex-grow: 1;
-    font-size: 12pt;
-    padding: 0.3em;
+#content td {
+    text-align: center;
 }
-#content-wrapper textarea {
-    margin-top: 10px;
-    font-size: 12pt;
-    width: 100%;
-    resize: none;
+#Thumbnail{
+    width: 150px;
+    height: 150px;
 }
-#desc_label {
+#content p {
+	margin: 5px 0 5px 0;
+	font-family: 'Didact Gothic';
+}
+#view {
+	display: flex;
+	align-content: center;
+	margin: 5px 0 5px 0;
+}
+#view img {
+	width: 25px;
+	height: 25px;
+	margin-left: auto;
+}
+#view p {
+	margin: auto auto auto 10px;
+}
+#content a {
+	text-decoration: none;
+}
+#content a:link, #content a:hover, #content a:visited{
+	color: black;
+}
+#content-footer {
     display: flex;
-
+    flex-direction: column;   
 }
-#desc_label p{
-    margin: auto 0 0 auto;
-    font-size: 10pt;
-}
-#file_label {
+#paging {
     display: flex;
-    margin-top: 30px;
+    margin: 2em auto 0 auto;
 }
-#file_label input{
-    margin-left: auto;
+#paging p {
+    margin: auto 20px auto 20px;
 }
-.upload_images {
-    border: 1px rgb(169, 169, 169) solid;
-    width: 100%;
-    height: 120px;
-    margin-top: 10px;
+#paging img {
+    width: 30px;
+    height: 30px;
 }
-.upload_images img{
-	width : 100px;
-	height: 100px;
-}
-#content-wrapper span {
-    display: flex;
-    margin-top: 2em;
-}
-#content-wrapper button {
-    margin-left: auto;
-    width: 160px;
-    height: 50px;
-    border: none;
-    border-bottom: 3px #1e3048 solid;
-    border-radius: 40px;
-    color: white;
-    background-color: steelblue;
-	font-size: 20px;
+#upload {
+	text-align: right;
+	position: relative;
+	top: -32px;
+	left: -20px;
 }
 #ad {
     display: flex;
@@ -228,4 +238,3 @@ body {
     font-family: 'Noto Sans KR';
     color: white;
 }
-

@@ -15,20 +15,13 @@
     <link href='https://fonts.googleapis.com/css?family=Dekko' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Didact Gothic' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-   <link type="text/css" rel="stylesheet"
-	href="emo/assets/css/mypage.css">
+    <link type="text/css" rel="stylesheet" href="emo/assets/css/mypage.css">
 
     <title>SharEmo - Free Emoticon Share Website</title>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript" src="emo/assets/js/dropbox2.js">
-    </script>
-    <script type="text/javascript" src="emo/assets/js/preview.js">
-    </script>
-    
-<script type="text/javascript" src="emo/assets/js/dropbox.js">
-	
-</script>
+    <script type="text/javascript" src="emo/assets/js/dropbox2.js"></script>
+
     <script>
         $('.fun-btn').on('click', function (event) {
             $(this).toggleClass('start-fun');
@@ -44,13 +37,6 @@
         });
     </script>
     <style>
-        .wrap {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .button {
             width: 140px;
             height: 45px;
@@ -179,84 +165,56 @@
         </ul>
     </nav>
    
-    <section id="container_mypage">
-        <section id="content_mypage">
-            <div>
+    <section id="container">
+    	<section id="content">
+        	<div id="content-wrapper">
                 <h1 style="text-align: center">(JANGTIST)'s MY PAGE</h1>
-                <img src="에펠탑뺴꼼3.jpg" width="500" , height="500" />
+                <img src="에펠탑뺴꼼3.jpg" width="100" height="100" />
 
                 <p>Nickname</p>
                 <p>Name</p>
                 <p>Phone</p>
                 <p>Email</p>
 
-                <hr />
-                <table>
-                    <tr>
-                        <td style="width: 1100px">
-                            <p style="text-align: left; padding-left:20px">upload</p>
-                        </td>
-                        <td>
-                            <div class="wrap"><button class="button">Browse</button></div>
-                        </td>
-                    </tr>                
-                </table>
-                <table>
-                <div class="container-main"></div>
-			
-				<div class="emoticon-package">
-					<a href="retrieve.do?num=${dto.num}"></a>
-						<div class="emoticon-Thumbnail" >
-							<c:forEach var="emo" items="${ticon}" varStatus="status">
-								<c:if test="${thumbnum <6 && dto.num eq emo.boardnum}">
-									<%
-										Thumbnailnum++;
-										request.setAttribute("thumbnum", Thumbnailnum);
-									%>
-									<img id="Thumbnail${thumbnum}" src="emosave/${emo.boardnum}/${emo.src}">
-								</c:if>
-							</c:forEach>
-							<%
-								Thumbnailnum = 0;
-								request.setAttribute("thumbnum", Thumbnailnum);
-							%>
-						</div>
-					</a>
-					<p class="title">
-						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
-					</p>
-					<p class="artist">Artist: ${dto.author}</p>
-					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
-						<img src="emo/images/view.png">${dto.readcnt}</div>
+				<hr />
+
+				<div class="emoticon-container">
+					<div class="container-header">
+						<p>uploaded post</p>
+						<button class="button">Browse</button>
+					</div>
+					<div class="emoticon-package">
+						<c:forEach var="dto" items="${listUpload}" begin="0" end="3">
+							<a href="retrieve.do?num=${dto.num}"> <c:set var="loop_flag"
+									value="false" /> <c:forEach var="emo" items="${ticon}">
+									<c:if test="${not loop_flag}">
+										<c:if test="${dto.num eq emo.boardnum}">
+											<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
+											<c:set var="loop_flag" value="true" />
+										</c:if>
+									</c:if>
+								</c:forEach>
+							</a>
+							<p>
+								<a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+							</p>
+							<div id="view">
+								<img src="emo/images/likes.png">
+								<p>${dto.likes}</p>
+								<img src="emo/images/view.png">
+								<p>${dto.readcnt}</p>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
-                </table>
+                
                 <hr />
-                <table>
-                        <tr>
-                            <td style="width: 1100px">
-                            <p style="text-align: left; padding-left:20px">upload</p>
-                        </td>
-                        <td>
-                            <div class="wrap"><button class="button">Browse</button></div>
-                        </td>
-                        </tr>
-                      
-                    </table>
 
 
-                <hr />
-                <table>
-                        <tr>
-                             <td style="width: 1100px">
-                            <p style="text-align: left; padding-left:20px">upload</p>
-                        </td>
-                        <td>
-                            <div class="wrap"><button class="button">Browse</button></div>
-                        </td>
-                        </tr>
-                        
-                    </table>
-            </div>
+				<hr />
+                
+                
+        	</div>
         </section>
     </section>
 
