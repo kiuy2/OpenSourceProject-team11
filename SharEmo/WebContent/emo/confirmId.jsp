@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dao.BoardDAO"%>
+<%@ page import="com.dao.UserDAO"%>
 
 <%
 	String id = request.getParameter("id");
-	BoardDAO dao = new BoardDAO();
+	UserDAO dao = new UserDAO();
 	boolean ch = dao.IdCheck(id);
 	request.setAttribute("idcheck", ch);
 	if (ch) {
