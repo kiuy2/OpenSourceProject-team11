@@ -55,7 +55,7 @@
 
 	<section id="header">
 		<div id="header-content">
-			<img src="emo/images/sharEmo_logo_3.png">
+			<a href="main.do"> <img src="emo/images/sharEmo_logo_3.png"> </a>
 			<p>Find your emoticon whatever you want!!</p>
 			<form action="search.do" method="post">
 				<input type="search" name="searchValue"
