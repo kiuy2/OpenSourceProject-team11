@@ -149,10 +149,10 @@
 
 				<p id="upload">
 					<c:if test="${user != null}">
-						<a href="writeui.do">Upload</a>
+						<a class="nav-top-item" href="writeui.do">Upload</a>
 					</c:if>
 					<c:if test="${user == null}">
-						<a href="loginerror.do">Upload</a>
+						<a class="nav-top-item" href="loginerror.do">Upload</a>
 					</c:if>
 				</p>
 			</div>

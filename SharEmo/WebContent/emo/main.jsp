@@ -55,7 +55,7 @@
 
 	<section id="header">
 		<div id="header-content">
-			<img src="emo/images/sharEmo_logo_3.png">
+			<a href="main.do"> <img src="emo/images/sharEmo_logo_3.png"> </a>
 			<p>Find your emoticon whatever you want!!</p>
 			<form action="search.do" method="post">
 				<input type="search" name="searchValue"
@@ -235,6 +235,11 @@
 		</div>
 	</section> 
 	-->
+	
+	 <div id="remote_control">
+        <a id="up_button" href="#navbar-top">UP</a>
+    </div>
+	
 
 	<section id="footer">
 		<img src="emo/images/cbnu_white.png" width="221" height="67">

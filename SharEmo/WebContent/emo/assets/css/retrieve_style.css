@@ -193,8 +193,8 @@ body {
     padding: 0;
     border-radius: 15px;
     border: none;
-    border-right: 2px grey solid;
-    border-bottom: 2px grey solid;
+    border-right: 2px darkgrey solid;
+    border-bottom: 2px darkgrey solid;
 }
 #detail-image button>img {
     width: 40px;
@@ -257,7 +257,11 @@ body {
     margin: auto;
     border-spacing: 30px;
 }
-#emoticon-package button {
+#emoticon-package img {
+	width: 180px;
+    height: 180px;
+}
+#download_btn {
     margin-top: 0.8em;
     width: 200px;
     height: 60px;
@@ -271,10 +275,32 @@ body {
     font-weight: bold;
     letter-spacing: 0.1em;
 }
-#emoticon-package img {
-	width: 180px;
-    height: 180px;
+#other_btns {
+	text-align: right;
+	margin-top: 10px;
 }
+#other_btns button {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border-radius: 15px;
+    border: none;
+    border-right: 2px grey solid;
+    border-bottom: 2px grey solid;
+    background-color: white;
+}
+#other_btns img {
+	width: 40px;
+	height: 40px;
+}
+/*
+#edit_btn {
+	margin-left: auto;
+}
+#delete_btn {
+	margin: 0 10px;
+}
+*/
 #ad {
     display: flex;
     flex-direction: column;
