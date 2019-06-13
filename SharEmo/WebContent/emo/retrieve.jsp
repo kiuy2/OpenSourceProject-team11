@@ -39,6 +39,7 @@ function img_resize() {
 	} 
 	window.onload = img_resize; 
 </script>
+
 <script>
 
 $(document).ready(function changeColor(){  
