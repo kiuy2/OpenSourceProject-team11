@@ -136,7 +136,7 @@
 						</div>
 					</a>
 					<p class="title">
-						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+						Title: <a style=" text-decoration: none;" href="retrieve.do?num=${dto.num}">${dto.title}</a>
 					</p>
 					<p class="artist">Artist: ${dto.author}</p>
 					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
@@ -172,7 +172,7 @@
 						</div>
 					</a>
 					<p class="title">
-						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+						Title: <a style=" text-decoration: none;" href="retrieve.do?num=${dto.num}">${dto.title}</a>
 					</p>
 					<p class="artist">Artist: ${dto.author}</p>
 					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
@@ -208,7 +208,7 @@
 						</div>
 					</a>
 					<p class="title">
-						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+						Title: <a style=" text-decoration: none;" href="retrieve.do?num=${dto.num}">${dto.title}</a>
 					</p>
 					<p class="artist">Artist: ${dto.author}</p>
 					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　

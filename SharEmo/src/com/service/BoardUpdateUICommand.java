@@ -16,7 +16,7 @@ public class BoardUpdateUICommand implements BoardCommand {
 		BoardDAO dao = new BoardDAO();
 		BoardDTO data = dao.retrieve(num);
 		
-		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
+		ArrayList<EmoticonTO> ticon =dao.getEmoticon(num);
 		//이모티콘 이미지 저장
 		request.setAttribute("ticon", ticon);
 		request.setAttribute("retrieve", data);
