@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+=======
+<%@ page import="com.dao.BoardDAO"%>
+>>>>>>> branch 'master' of https://github.com/YunSongHui/OpenSourceProject-team11.git
 <%@ page import="com.dao.UserDAO"%>
 
 <%
