@@ -148,8 +148,8 @@ $(document).ready(function changeColor(){
 	</section>
 
 	<nav id="navbar-mid">
-		<form action="search.do" method="">
-			<input type="search" name="q"
+		<form action="search.do" method="post">
+			<input type="search" name="searchValue"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
 				<img src="emo/images/musica-searcher.png" width="20px" height="20px">

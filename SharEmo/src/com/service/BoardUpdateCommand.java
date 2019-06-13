@@ -102,17 +102,8 @@ public class BoardUpdateCommand implements BoardCommand {
 								
 								fileItem.delete();
 							} 
-							else {
-								dao.writeImage("default.jpg", "default.jpg");
-							}
 						} 
-						else {
-							dao.writeImage("default.jpg", "default.jpg");
-						}
 					} 
-					else {
-						dao.writeImage("default.jpg", "default.jpg");
-					}
 				}
 			}
 
