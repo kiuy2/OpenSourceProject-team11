@@ -115,7 +115,7 @@ public class BoardWriteCommand implements BoardCommand {
 			// TODO 자동 생성된 catch 블록
 			e.printStackTrace();
 		}
-		response.sendRedirect("listPage.do");
+		response.sendRedirect("listPage.do?method=1");
 
 		return null;
 	}
