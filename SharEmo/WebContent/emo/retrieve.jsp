@@ -271,11 +271,19 @@ $(document).ready(function changeColor(){
 						</c:forEach>
 					</table>
 					
-					<button type="button" onclick="location.href='download.do?num=${retrieve.num}'">DOWNLOAD</button>
+					<button id="download_btn" type="button" onclick="location.href='download.do?num=${retrieve.num}'">DOWNLOAD</button>
 
 					<c:if test="${user.id==retrieve.userid }">
-						<button type="button" onclick="location.href='updateUI.do?num=${retrieve.num}'">수정</button>
-						<button type="button" onclick="location.href='delete.do?num=${retrieve.num}'">삭제</button>
+						<div id="other_btns">
+							<button type="button" id="edit_btn"
+								onclick="location.href='updateUI.do?num=${retrieve.num}'">
+								<img src="emo/images/edit.png">
+							</button>
+							<button type="button"
+								onclick="location.href='delete.do?num=${retrieve.num}'">
+								<img src="emo/images/delete.png">
+							</button>
+						</div>
 					</c:if>
 				</div>
 			</div>
