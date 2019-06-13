@@ -32,6 +32,7 @@ public class BoardPageCommand implements BoardCommand{
 				break;
 		}
 		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
+		request.setAttribute("method", method);
 		//listPage.jsp에서 목록 리스트 데이터 저장
 		request.setAttribute("list", list.getBoardList());
 		//이모티콘 이미지 저장

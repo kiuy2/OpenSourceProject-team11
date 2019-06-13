@@ -178,6 +178,9 @@ body {
 	margin: 5px 0 5px 0;
 	font-family: 'Didact Gothic';
 }
+a{
+	z-index : 3;
+}
 #view {
 	display: flex;
 	align-content: center;
@@ -214,9 +217,6 @@ body {
 }
 #upload {
 	text-align: right;
-	position: relative;
-	top: -32px;
-	left: -20px;
 }
 #ad {
     display: flex;

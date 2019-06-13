@@ -6,7 +6,7 @@ public class PageTO {
 	ArrayList<BoardDTO> boardList;
 	ArrayList<UserTO> userList;
 	int curPage;
-	int perPage=16;
+	int perPage=8;
 	int totalCount;
 	
 	public int getCurPage() {

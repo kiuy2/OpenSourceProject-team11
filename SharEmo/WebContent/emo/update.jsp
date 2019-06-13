@@ -23,8 +23,10 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="emo/assets/js/dropbox.js">
+	
 </script>
 <script type="text/javascript" src="emo/assets/js/preview.js">
+	
 </script>
 </head>
 
@@ -51,7 +53,7 @@
 
 	<nav id="navbar-mid">
 		<form action="search.do" method="post">
-			<input type="search" name="q"
+			<input type="search" name="searchValue"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
 				<img src="emo/images/musica-searcher.png" width="20px" height="20px">
@@ -94,9 +96,9 @@
 		<section id="content">
 			<div id="content-wrapper">
 				<h2>Update your COOL emoticon!</h2>
-				<form id="frm" name=form1 action='update.do' method=post enctype="multipart/form-data">
-					<input type="text"
-							name="name" hidden value="${retrieve.num }">
+				<form id="frm" name=form1 action='update.do' method=post
+					enctype="multipart/form-data">
+					<input type="text" name="name" hidden value="${retrieve.num }">
 					<div id="title">
 						<label for="title">Title : </label> <input type="text"
 							name="title" value="${retrieve.title }" required>
@@ -109,10 +111,17 @@
 					<textarea name="description" rows="8" cols="100" value="">${retrieve.content }</textarea>
 					<div id="file_label">
 						<label for="upload">Upload Images</label> <input type="file"
-							name="upload" id="input_images" value="폴더 선택" accept="image/*" multiple>
+							name="upload" id="input_images" value="폴더 선택" accept="image/*"
+							multiple>
+							<input type="button" value="파일 리셋" onclick="resetFiles()">이미지 클릭 시 개별 삭제
 					</div>
-					<div class="upload_images"></div>
-					<span><button type="submit" >SUBMIT</button></span>
+					<div class="upload_images">
+						<c:forEach var="emo" items="${ticon}" varStatus="status">
+							<img src="emosave/${emo.boardnum}/${emo.src}" class='selFile'
+								title='Click to remove' />
+						</c:forEach>
+					</div>
+					<span><button type="submit">SUBMIT</button></span>
 				</form>
 			</div>
 		</section>
@@ -126,8 +135,8 @@
 
 	<section id="footer">
 		<img src="emo/images/cbnu_white.png" width="221" height="67">
-		<p>2019  오픈소스 전문 프로젝트 TEAM 11</p>
-		<p>윤송희  전준호  정희주  장형규</p>
+		<p>2019 오픈소스 전문 프로젝트 TEAM 11</p>
+		<p>윤송희 전준호 정희주 장형규</p>
 		<p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 S4-1 소프트웨어학과 / TEL : 043)261-2114</p>
 	</section>
 

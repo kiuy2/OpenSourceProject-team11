@@ -135,10 +135,8 @@ $(document).ready(function changeColor(){
 			<ul id="navbar-top-right">
 				<c:choose>
 					<c:when test="${user != null}">
-						<li class="nav-top-item">
-							<img src="${user.mascot}">
-							<a href='mypage.do'>${user.id}님</a>
-						</li>
+						<li class="nav-top-item"><img src="${user.mascot}"> <a
+							href='mypage.do'>${user.id}님</a></li>
 						<li class="nav-top-item"><a href='logout.do'>Logout</a></li>
 					</c:when>
 					<c:otherwise>
@@ -151,8 +149,8 @@ $(document).ready(function changeColor(){
 	</section>
 
 	<nav id="navbar-mid">
-		<form action="" method="">
-			<input type="search" name="q"
+		<form action="search.do" method="post">
+			<input type="search" name="searchValue"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
 				<img src="emo/images/musica-searcher.png" width="20px" height="20px">
@@ -173,7 +171,8 @@ $(document).ready(function changeColor(){
 					<ul>
 						<a href="#"><li><span>New</span></li></a>
 						<a href="#"><li><span>Popular</span></li></a>
-						<a href="#"><li><span>Most<br/>Published</span></li></a>
+						<a href="#"><li><span>Most<br />Published
+							</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="#">MyGallery</a>
@@ -210,15 +209,8 @@ $(document).ready(function changeColor(){
 				<h2>${retrieve.title}</h2>
 				<div id="detail-wrapper">
 					<div id="detail-image">
-						<c:set var="loop_flag" value="false" />
-						<c:forEach var="emo" items="${ticon}">
-							<c:if test="${not loop_flag }">
-								<c:if test="${retrieve.num eq emo.boardnum}">
-									<img class="emoticon-Thumbnail" src="emosave/${emo.boardnum}/${emo.src}"><br/>
-									<c:set var="loop_flag" value="true" />
-								</c:if>
-							</c:if>
-						</c:forEach>
+						<img class="emoticon-Thumbnail"
+							src="emosave/${ticon[0].boardnum}/${ticon[0].src}"><br />
 						<button id="likes" type="button" onclick="return like();">
 							<img src="emo/images/likes_white.png">
 						</button>
@@ -261,21 +253,20 @@ $(document).ready(function changeColor(){
 							<c:if test="${status.index % 4 eq 0}">
 								<tr>
 							</c:if>
-							<c:if test="${retrieve.num eq emo.boardnum}">
-								<td><img class="emoticon-Thumbnail"
-									src="emosave/${emo.boardnum}/${emo.src}"></td>
-							</c:if>
+							<td><img class="emoticon-Thumbnail"
+								src="emosave/${emo.boardnum}/${emo.src}"></td>
 							</td>
 							<c:if test="${status.count % 4 eq 0}">
 								</tr>
 							</c:if>
 						</c:forEach>
 					</table>
-					
-					<button id="download_btn" type="button" onclick="location.href='download.do?num=${retrieve.num}'">DOWNLOAD</button>
+
+					<button id="download_btn" type="button"
+						onclick="location.href='download.do?num=${retrieve.num}'">DOWNLOAD</button>
 
 					<div id="other_btns">
-						<c:if test="${user.id==retrieve.userid }">
+						<c:if test="${user.id==retrieve.userid || user.id=='admin' }">
 							<button type="button" id="edit_btn"
 								onclick="location.href='updateUI.do?num=${retrieve.num}'">
 								<img src="emo/images/edit.png">
@@ -294,19 +285,19 @@ $(document).ready(function changeColor(){
 			</div>
 		</section>
 		<div id="ad">
-			<a href="https://www.idowell.co.kr/home/" target="_blank">
-				<img src="emo/images/ad/winnerstel.png">
-			</a>
-			<a href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F" target="_blank">
-				<img src="emo/images/ad/duo.jpg">
+			<a href="https://www.idowell.co.kr/home/" target="_blank"> <img
+				src="emo/images/ad/winnerstel.png">
+			</a> <a
+				href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F"
+				target="_blank"> <img src="emo/images/ad/duo.jpg">
 			</a>
 		</div>
 	</section>
 
 	<section id="footer">
 		<img src="emo/images/cbnu_white.png" width="221" height="67">
-		<p>2019  오픈소스 전문 프로젝트 TEAM 11</p>
-		<p>윤송희  전준호  정희주  장형규</p>
+		<p>2019 오픈소스 전문 프로젝트 TEAM 11</p>
+		<p>윤송희 전준호 정희주 장형규</p>
 		<p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 S4-1 소프트웨어학과 / TEL : 043)261-2114</p>
 	</section>
 

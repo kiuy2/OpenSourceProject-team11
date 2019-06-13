@@ -14,6 +14,7 @@ public class BoardSearchCommand implements BoardCommand {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		//String searchName=request.getParameter("searchName");
 		String searchValue=request.getParameter("searchValue");
+		int method = 1;
 		int curPage = 1;
 		if(request.getParameter("curPage") !=null) {
 			curPage=Integer.parseInt(request.getParameter("curPage"));
@@ -27,6 +28,7 @@ public class BoardSearchCommand implements BoardCommand {
 		//listPage.jsp에서 목록 리스트 데이터 저장
 		request.setAttribute("list", list.getBoardList());
 		
+		request.setAttribute("method", method);
 		//page.jsp에서 페이징 처리 데이터 저장
 		request.setAttribute("page", list);
 		return "emo/listPage.jsp";
