@@ -1,6 +1,6 @@
 package com.entity;
 
-public class Emoticon {
+public class EmoticonTO {
 
 	private int boardnum;
 	private String src;

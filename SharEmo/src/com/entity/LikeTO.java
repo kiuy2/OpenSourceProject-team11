@@ -1,6 +1,6 @@
 package com.entity;
 
-public class Likes {
+public class LikeTO {
 	private int boardnum;
 	private String userid;
 	public int getBoardnum() {

@@ -14,7 +14,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.dao.BoardDAO;
-import com.entity.User;
+import com.entity.UserTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -50,7 +50,7 @@ public class BoardWriteCommand implements BoardCommand {
 		String content=""; 
 		BoardDAO dao = new BoardDAO();
 
-		User user= (User) session.getAttribute("user");
+		UserTO user= (UserTO) session.getAttribute("user");
 		String id = user.getId();
 		String author =user.getNickname();
 		

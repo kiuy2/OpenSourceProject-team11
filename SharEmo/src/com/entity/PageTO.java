@@ -3,16 +3,12 @@ package com.entity;
 import java.util.ArrayList;
 
 public class PageTO {
-	ArrayList<BoardDTO> list;
+	ArrayList<BoardDTO> boardList;
+	ArrayList<UserTO> userList;
 	int curPage;
 	int perPage=16;
 	int totalCount;
-	public ArrayList<BoardDTO> getList() {
-		return list;
-	}
-	public void setList(ArrayList<BoardDTO> list) {
-		this.list = list;
-	}
+	
 	public int getCurPage() {
 		return curPage;
 	}
@@ -30,6 +26,18 @@ public class PageTO {
 	}
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+	}
+	public ArrayList<BoardDTO> getBoardList() {
+		return boardList;
+	}
+	public void setBoardList(ArrayList<BoardDTO> boardList) {
+		this.boardList = boardList;
+	}
+	public ArrayList<UserTO> getUserList() {
+		return userList;
+	}
+	public void setUserList(ArrayList<UserTO> userList) {
+		this.userList = userList;
 	}
 	
 }

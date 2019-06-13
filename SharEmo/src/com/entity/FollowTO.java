@@ -1,6 +1,6 @@
 package com.entity;
 
-public class Follows {
+public class FollowTO {
 	private String follow;
 	private String follower;
 	public String getFollow() {

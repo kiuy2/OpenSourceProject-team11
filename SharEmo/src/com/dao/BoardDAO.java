@@ -12,7 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.entity.BoardDTO;
-import com.entity.Emoticon;
+import com.entity.EmoticonTO;
 import com.entity.PageTO;
 
 public class BoardDAO {
@@ -31,7 +31,7 @@ public class BoardDAO {
 	}
 
 	// 게시물 리스트 보여주기
-	public ArrayList<BoardDTO> list() {
+	public ArrayList<BoardDTO> getList() {
 
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
 		Connection con = null;
@@ -131,7 +131,7 @@ public class BoardDAO {
 			}
 		}
 	}
-	
+
 	public int writeImage(String _sysname, String _orgname) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -168,7 +168,7 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return boardnum;
 	}
 
@@ -487,7 +487,7 @@ public class BoardDAO {
 				data.setRepIndent(repIndent);
 				list.add(data);
 			}
-			to.setList(list);
+			to.setBoardList(list);
 			to.setTotalCount(totalCount);
 			to.setCurPage(curPage);
 		} catch (Exception e) {
@@ -556,8 +556,10 @@ public class BoardDAO {
 					+ "readcnt,repRoot, repStep, repIndent FROM board order by ";
 			if (field_name != null) {
 				query += field_name;
-				if (method) query += " asc, ";
-				else query += " desc, ";
+				if (method)
+					query += " asc, ";
+				else
+					query += " desc, ";
 			}
 			query += "UNIX_TIMESTAMP(writeday) desc";
 			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -571,29 +573,19 @@ public class BoardDAO {
 				rs.absolute(skip);
 			}
 			for (int i = 0; i < perPage && rs.next(); i++) {
-				int num = rs.getInt("num");
-				String author = rs.getString("author");
-				String title = rs.getString("title");
-				String content = rs.getString("content");
-				String writeday = rs.getString("writeday");
-				int readcnt = rs.getInt("readcnt");
-				int repRoot = rs.getInt("repRoot");
-				int repStep = rs.getInt("repStep");
-				int repIndent = rs.getInt("repIndent");
-
 				BoardDTO data = new BoardDTO();
-				data.setNum(num);
-				data.setAuthor(author);
-				data.setTitle(title);
-				data.setContent(content);
-				data.setWriteday(writeday);
-				data.setReadcnt(readcnt);
-				data.setRepRoot(repRoot);
-				data.setRepStep(repStep);
-				data.setRepIndent(repIndent);
+				data.setNum(rs.getInt("num"));
+				data.setAuthor(rs.getString("author"));
+				data.setTitle(rs.getString("title"));
+				data.setContent(rs.getString("content"));
+				data.setWriteday(rs.getString("writeday"));
+				data.setReadcnt(rs.getInt("readcnt"));
+				data.setRepRoot(rs.getInt("repRoot"));
+				data.setRepStep(rs.getInt("repStep"));
+				data.setRepIndent(rs.getInt("repIndent"));
 				list.add(data);
 			}
-			to.setList(list);
+			to.setBoardList(list);
 			to.setTotalCount(totalCount);
 			to.setCurPage(curPage);
 
@@ -614,22 +606,22 @@ public class BoardDAO {
 		return to;
 	}
 
-	public ArrayList<Emoticon> getEmoticon() {
-		ArrayList<Emoticon> ticon = new ArrayList<Emoticon>();
+	public ArrayList<EmoticonTO> getEmoticon() {
+		ArrayList<EmoticonTO> ticon = new ArrayList<EmoticonTO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-	
+
 		try {
 			con = ds.getConnection();
 			String query = "SELECT boardnum, sysname FROM emoticon;";
 			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = pstmt.executeQuery();
-	
+
 			while (rs.next()) {
 				int num = rs.getInt("boardnum");
 				String sysname = rs.getString("sysname");
-				Emoticon data = new Emoticon();
+				EmoticonTO data = new EmoticonTO();
 				data.setBoardnum(num);
 				data.setSrc(sysname);
 				ticon.add(data);
@@ -652,23 +644,23 @@ public class BoardDAO {
 	}
 
 	// 해당 게시물의 이모티콘만 추출
-	public ArrayList<Emoticon> getEmoticon(String _num) {
-		ArrayList<Emoticon> ticon = new ArrayList<Emoticon>();
+	public ArrayList<EmoticonTO> getEmoticon(String _num) {
+		ArrayList<EmoticonTO> ticon = new ArrayList<EmoticonTO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-	
+
 		try {
 			con = ds.getConnection();
 			String query = "SELECT * FROM emoticon where boardnum=" + _num;
 			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = pstmt.executeQuery();
-	
+
 			while (rs.next()) {
 				int num = rs.getInt("boardnum");
 				String sysname = rs.getString("sysname");
 				String orgname = rs.getString("orgname");
-				Emoticon data = new Emoticon();
+				EmoticonTO data = new EmoticonTO();
 				data.setBoardnum(num);
 				data.setSrc(sysname);
 				data.setOrg(orgname);
