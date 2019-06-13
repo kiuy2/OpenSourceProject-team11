@@ -3,7 +3,7 @@ package com.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dao.BoardDAO;
+import com.dao.UserDAO;
 
 public class BoardSignUpCommand implements BoardCommand {
 	
@@ -18,8 +18,8 @@ public class BoardSignUpCommand implements BoardCommand {
 		String email = request.getParameter("email");
 		mascot = "emo/images/mascot/" + mascot + ".png";
 		
-		BoardDAO dao = new BoardDAO();
-		dao.signUp(id, password, name, nickname, mascot, phone, email);
+		UserDAO userdao = new UserDAO();
+		userdao.signUp(id, password, name, nickname, mascot, phone, email);
 		return "emo/join.jsp";
 	}
 

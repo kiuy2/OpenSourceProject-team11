@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
+import com.dao.UserDAO;
 import com.entity.User;
 
 public class BoardLikeCommand implements BoardCommand {
@@ -18,13 +19,13 @@ public class BoardLikeCommand implements BoardCommand {
 		
 		String num = request.getParameter("num");
 		String userid = request.getParameter("userid");
-		BoardDAO dao = new BoardDAO();
-		int likes=dao.setLikes(num,userid);
+		UserDAO userdao= new UserDAO();
+		int likes=userdao.setLikes(num,userid);
 		
 		PrintWriter out = response.getWriter();
 		out.println(likes);
 		if(user!=null) {
-			boolean isLike=dao.isLike(num,user.getId());
+			boolean isLike=userdao.isLike(num,user.getId());
 			out.println(isLike);
 		}
 		out.close();
