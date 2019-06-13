@@ -89,9 +89,10 @@ public class BoardDownloadCommand implements BoardCommand {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			zipFile.delete();
 		}
 
-		zipFile.delete();
 
 		return null;
 	}
