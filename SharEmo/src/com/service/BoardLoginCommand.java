@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
 import com.dao.UserDAO;
-import com.entity.User;
+import com.entity.UserTO;
 
 public class BoardLoginCommand implements BoardCommand {
 	
@@ -16,8 +16,8 @@ public class BoardLoginCommand implements BoardCommand {
 		String password =request.getParameter("password");
 		HttpSession session=request.getSession();
 		UserDAO userdao= new UserDAO();
-		User user=userdao.login(id, password);
-		if(user.islogin) {
+		UserTO user=userdao.login(id, password);
+		if(user!=null) {
 			//user 세션 데이터 저장
 			session.setAttribute("user", user);
 			return "emo/login.jsp";

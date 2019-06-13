@@ -9,19 +9,19 @@ import javax.servlet.http.HttpSession;
 import com.dao.BoardDAO;
 import com.dao.UserDAO;
 import com.entity.BoardDTO;
-import com.entity.Emoticon;
-import com.entity.User;
+import com.entity.EmoticonTO;
+import com.entity.UserTO;
 
 public class BoardRetrieveCommand implements BoardCommand {
 	
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("user");
+		UserTO user=(UserTO)session.getAttribute("user");
 		
 		String num = request.getParameter("num");
 		BoardDAO dao = new BoardDAO();
 		BoardDTO data = dao.retrieve(num);
-		ArrayList<Emoticon> ticon =dao.getEmoticon();
+		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
 		
 		UserDAO userdao = new UserDAO();
 		String follow=data.getUserid();

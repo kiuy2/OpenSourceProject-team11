@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.UserDAO;
-import com.entity.User;
+import com.entity.UserTO;
 
 public class BoardFollowCommand implements BoardCommand {
 	
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("user");
+		UserTO user=(UserTO)session.getAttribute("user");
 		
 		String follow = request.getParameter("follow");
 		String follower = request.getParameter("follower");

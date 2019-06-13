@@ -14,7 +14,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.dao.BoardDAO;
-import com.entity.User;
+import com.entity.UserTO;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 //BoardWriteCommand는 글쓰기 화면에서 저장 버튼을 눌렀을때 실행되는 기능입니다.
@@ -50,7 +50,7 @@ public class BoardUpdateCommand implements BoardCommand {
 		String content=""; 
 		BoardDAO dao = new BoardDAO();
 
-		User user= (User) session.getAttribute("user");
+		UserTO user= (UserTO) session.getAttribute("user");
 		String author =user.getNickname();
 		
 		// Create a disk file factory processing object

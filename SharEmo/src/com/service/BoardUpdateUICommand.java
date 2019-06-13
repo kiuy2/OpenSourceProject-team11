@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dao.BoardDAO;
 import com.entity.BoardDTO;
-import com.entity.Emoticon;
+import com.entity.EmoticonTO;
 
 public class BoardUpdateUICommand implements BoardCommand {
 	
@@ -16,7 +16,7 @@ public class BoardUpdateUICommand implements BoardCommand {
 		BoardDAO dao = new BoardDAO();
 		BoardDTO data = dao.retrieve(num);
 		
-		ArrayList<Emoticon> ticon =dao.getEmoticon();
+		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
 		//이모티콘 이미지 저장
 		request.setAttribute("ticon", ticon);
 		request.setAttribute("retrieve", data);

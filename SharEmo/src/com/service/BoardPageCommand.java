@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dao.BoardDAO;
-import com.entity.Emoticon;
+import com.entity.EmoticonTO;
 import com.entity.PageTO;
 
 public class BoardPageCommand implements BoardCommand{
@@ -31,9 +31,9 @@ public class BoardPageCommand implements BoardCommand{
 				list = dao.page(curPage, "readCnt", false);
 				break;
 		}
-		ArrayList<Emoticon> ticon =dao.getEmoticon();
+		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
 		//listPage.jsp에서 목록 리스트 데이터 저장
-		request.setAttribute("list", list.getList());
+		request.setAttribute("list", list.getBoardList());
 		//이모티콘 이미지 저장
 		request.setAttribute("ticon", ticon);
 		//page.jsp에서 페이징 처리 데이터 저장

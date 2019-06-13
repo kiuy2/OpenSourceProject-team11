@@ -9,13 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
 import com.dao.UserDAO;
-import com.entity.User;
+import com.entity.UserTO;
 
 public class BoardLikeCommand implements BoardCommand {
 	
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("user");
+		UserTO user=(UserTO)session.getAttribute("user");
 		
 		String num = request.getParameter("num");
 		String userid = request.getParameter("userid");
