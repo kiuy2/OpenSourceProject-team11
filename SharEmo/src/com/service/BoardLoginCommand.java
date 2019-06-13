@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
+import com.dao.UserDAO;
 import com.entity.User;
 
 public class BoardLoginCommand implements BoardCommand {
@@ -14,8 +15,8 @@ public class BoardLoginCommand implements BoardCommand {
 		String id =request.getParameter("id");
 		String password =request.getParameter("password");
 		HttpSession session=request.getSession();
-		BoardDAO dao = new BoardDAO();
-		User user=dao.login(id, password);
+		UserDAO userdao= new UserDAO();
+		User user=userdao.login(id, password);
 		if(user.islogin) {
 			//user 세션 데이터 저장
 			session.setAttribute("user", user);

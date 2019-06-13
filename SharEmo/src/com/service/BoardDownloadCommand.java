@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -58,30 +59,41 @@ public class BoardDownloadCommand implements BoardCommand {
 		}
 
 		File zipFile = new File(savePath, zipName);
-		response.setContentType("application/zip");
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + zipFile.getName() + "\";");
-		
+		response.setContentType("application/zip;charset=utf-8;");
 		ServletOutputStream os = null;
 		FileInputStream fin = null;
+		String orgfilename=zipFile.getName();
+		String client = request.getHeader("User-Agent");
 
 		try {
-			fin = new FileInputStream(savePath + "/" + zipName);
+			if (client.indexOf("MSIE") > -1 || client.indexOf("Trident") > -1 ) {
+				orgfilename= URLEncoder.encode(orgfilename, "utf-8");
+			} else {
+				// 한글 파일명 처리
+				orgfilename = new String(orgfilename.getBytes("utf-8"), "8859_1");
+				response.setHeader("Content-Type", "application/zip; charset=utf-8");
+			}
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + orgfilename + "\";");
+			fin = new FileInputStream(savePath + "\\" + zipName);
 			os = response.getOutputStream();
-			
+
 			int length = 0;
 			while ((length = fin.read(buf)) > 0) {
 				os.write(buf, 0, length);
 			}
-			
-			if(os!=null) os.close();
-			if(fin!=null) fin.close();
-			
+
+			if (os != null)
+				os.close();
+			if (fin != null)
+				fin.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			zipFile.delete();
 		}
-		
-		zipFile.delete();
-		
+
+
 		return null;
 	}
 }

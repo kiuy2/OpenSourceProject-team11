@@ -18,7 +18,12 @@ body {
     white-space: nowrap;
 	color: Black;
 }
+#navbar-top-right img {
+	width: 20px;
+	height: 20px;
+}
 .nav-top-item {
+	height: 21.6px;
     display: inline-block;
     background-color: rgba( 0, 0, 0, 0.09);
     border-radius: 5px;
@@ -116,6 +121,9 @@ body {
     display: flex;
     text-align: center;
     height: 50px;
+}
+.nav-mid-item-drop span {
+	margin: auto;
 }
 #container {
     display: flex;

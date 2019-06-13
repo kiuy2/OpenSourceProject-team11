@@ -36,7 +36,10 @@
 			<ul id="navbar-top-right">
 				<c:choose>
 					<c:when test="${user != null}">
-						<li class="nav-top-item"><a href='mypage.do'>${user.id}님</a></li>
+						<li class="nav-top-item">
+							<img src="${user.mascot}">
+							<a href='mypage.do'>${user.id}님</a>
+						</li>
 						<li class="nav-top-item"><a href='logout.do'>Logout</a></li>
 					</c:when>
 					<c:otherwise>
@@ -58,32 +61,37 @@
 		</form>
 		<ul>
 			<li class="nav-mid-item"><a href="main.do">Home</a></li>
-			<li class="nav-mid-item"><a href="listPage.do">Emotion</a>
+			<li class="nav-mid-item"><a href="listPage.do?method=1">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="listPage.do">New</a></li>
-						<li><a href="#">Popular</a></li>
-						<li><a href="#">Recent</a></li>
-						<li><a href="#">Category</a></li>
+						<a href="listPage.do?method=1"><li><span>New</span></li></a>
+						<a href="listPage.do?method=2"><li><span>Popular</span></li></a>
+						<a href="listPage.do?method=3"><li><span>Hot</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="#">Artist</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="#">New</a></li>
-						<li><a href="#">Popular</a></li>
-						<li><a href="#">Recent</a></li>
-						<li><a href="#">Most<br />followed
-						</a></li>
+						<a href="#"><li><span>New</span></li></a>
+						<a href="#"><li><span>Popular</span></li></a>
+						<a href="#"><li><span>Most<br/>Published</span></li></a>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="#">MyGallery</a>
+			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="#">Likes</a></li>
-						<li><a href="#">Following</a></li>
-						<li><a href="#">Upload</a></li>
-						<li><a href="#">Gallery</a></li>
+						<c:if test="${user!=null}">
+							<a href="#"><li><span>Like</span></li></a>
+							<a href="#"><li><span>Follow</span></li></a>
+							<a href="writeui.do"><li><span>Upload</span></li></a>
+							<a href="mypage.do"><li><span>My Gallery</span></li></a>
+						</c:if>
+						<c:if test="${user==null}">
+							<a href="loginUI.do"><li><span>Like</span></li></a>
+							<a href="loginUI.do"><li><span>Follow</span></li></a>
+							<a href="loginUI.do"><li><span>Upload</span></li></a>
+							<a href="loginUI.do"><li><span>My Gallery</span></li></a>
+						</c:if>
 					</ul>
 				</div></li>
 		</ul>
@@ -92,10 +100,9 @@
 	<section id="container">
 		<nav id="nav-mid-left">
 			<ul>
-				<li><a href="listPage.do">New Emoticon</a></li>
-				<li><a href="#">Popular Emoticon</a></li>
-				<li><a href="#">Recent Emoticon</a></li>
-				<li><a href="#">Category</a></li>
+				<li><a href="listPage.do?method=1">New Emoticon</a></li>
+				<li><a href="listPage.do?method=2">Popular Emoticon</a></li>
+				<li><a href="listPage.do?method=3">Hot Emoticon</a></li>
 			</ul>
 		</nav>
 		<section id="content">
@@ -106,17 +113,15 @@
 						<tr>
 					</c:if>
 					<td><a href="retrieve.do?num=${dto.num}">
-							<div class="emoticon-Thumbnail">
-								<c:set var="loop_flag" value="false" />
-								<c:forEach var="emo" items="${ticon}">
-									<c:if test="${not loop_flag }">
-										<c:if test="${dto.num eq emo.boardnum}">
-											<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
-											<c:set var="loop_flag" value="true" />
-										</c:if>
+							<c:set var="loop_flag" value="false" />
+							<c:forEach var="emo" items="${ticon}">
+								<c:if test="${not loop_flag }">
+									<c:if test="${dto.num eq emo.boardnum}">
+										<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
+										<c:set var="loop_flag" value="true" />
 									</c:if>
-								</c:forEach>
-							</div>
+								</c:if>
+							</c:forEach>
 						</a>
 						<p><a href="retrieve.do?num=${dto.num}">${dto.title}</a></p>
 						<p><a href="#">${dto.author}</a></p>
@@ -130,13 +135,16 @@
 			</table>
 			<div id="content-footer">
 				<div id="paging">
-					<a href="#"><img src="emo/images/page_left.png"></a>
-
+					<c:if test="${page.curPage >1 }">
+					<a href="listPage.do?curPage=${page.curPage - 1 }"><img src="emo/images/page_left.png"></a>
+					</c:if>
 					<p>
 						<!-- page -->
 						<jsp:include page="page.jsp" flush="true" />
 					</p>
-					<a href="#"><img src="emo/images/page_right.png"></a>
+					<c:if test="${page.curPage < page.totalCount / page.perPage}">
+					<a href="listPage.do?curPage=${page.curPage + 1 }"><img src="emo/images/page_right.png"></a>
+					</c:if>
 				</div>
 
 				<p id="upload">
