@@ -235,6 +235,11 @@
 		</div>
 	</section> 
 	-->
+	
+	 <div id="remote_control">
+        <a id="up_button" href="#navbar-top">UP</a>
+    </div>
+	
 
 	<section id="footer">
 		<img src="emo/images/cbnu_white.png" width="221" height="67">
