@@ -1,13 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	int Thumbnailnum = 0;
+	request.setAttribute("thumbnum", Thumbnailnum);
+%>
 <!DOCTYPE html>
 <html>
 
 <head>
-
+ 	
     <link href='https://fonts.googleapis.com/css?family=Dekko' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Didact Gothic' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-  <link type="text/css" rel="stylesheet"
-	href="emo/assets/css/write_style.css">
+   <link type="text/css" rel="stylesheet"
+	href="emo/assets/css/mypage.css">
 
     <title>SharEmo - Free Emoticon Share Website</title>
 
@@ -16,6 +25,10 @@
     </script>
     <script type="text/javascript" src="emo/assets/js/preview.js">
     </script>
+    
+<script type="text/javascript" src="emo/assets/js/dropbox.js">
+	
+</script>
     <script>
         $('.fun-btn').on('click', function (event) {
             $(this).toggleClass('start-fun');
@@ -38,7 +51,7 @@
             justify-content: center;
         }
 
-        button {
+        .button {
             width: 140px;
             height: 45px;
             font-family: 'Roboto', sans-serif;
@@ -56,7 +69,7 @@
             outline: none;
         }
 
-        button:hover {
+        .button:hover {
             background-color: #2EE59D;
             box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
             color: #fff;
@@ -69,6 +82,7 @@
 
     <section id="header">
         <div id="navbar-top">
+                           
             <a href="main.do"> <img src="emo/images/sharEmo_logo_2.png">
             </a>
             <ul id="navbar-top-right">
@@ -76,7 +90,7 @@
                     <c:when test="${user != null}">
                         <li class="nav-top-item">
                             <img src="${user.mascot}">
-                            <a href='mypage.do'>${user.id}님</a>
+                          <a href='mypage.do'>${user.id}님</a>
                         </li>
                         <li class="nav-top-item"><a href='logout.do'>Logout</a></li>
                     </c:when>
@@ -164,7 +178,7 @@
             </li>
         </ul>
     </nav>
-    
+   
     <section id="container_mypage">
         <section id="content_mypage">
             <div>
@@ -179,24 +193,52 @@
                 <hr />
                 <table>
                     <tr>
-                        <td style="width: 80%">
+                        <td style="width: 1100px">
                             <p style="text-align: left; padding-left:20px">upload</p>
                         </td>
                         <td>
-                            <div class="wrap"><button>Browse</button></div>
+                            <div class="wrap"><button class="button">Browse</button></div>
                         </td>
-                    </tr>
-                
+                    </tr>                
+                </table>
+                <table>
+                <div class="container-main"></div>
+			
+				<div class="emoticon-package">
+					<a href="retrieve.do?num=${dto.num}"></a>
+						<div class="emoticon-Thumbnail" >
+							<c:forEach var="emo" items="${ticon}" varStatus="status">
+								<c:if test="${thumbnum <6 && dto.num eq emo.boardnum}">
+									<%
+										Thumbnailnum++;
+										request.setAttribute("thumbnum", Thumbnailnum);
+									%>
+									<img id="Thumbnail${thumbnum}" src="emosave/${emo.boardnum}/${emo.src}">
+								</c:if>
+							</c:forEach>
+							<%
+								Thumbnailnum = 0;
+								request.setAttribute("thumbnum", Thumbnailnum);
+							%>
+						</div>
+					</a>
+					<p class="title">
+						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+					</p>
+					<p class="artist">Artist: ${dto.author}</p>
+					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
+						<img src="emo/images/view.png">${dto.readcnt}</div>
+				</div>
                 </table>
                 <hr />
                 <table>
                         <tr>
-                            <td style="width: 80%">
-                                <p style="text-align: left; padding-left:20px">like</p>
-                            </td>
-                            <td>
-                                <div class="wrap"><button>Browse</button></div>
-                            </td>
+                            <td style="width: 1100px">
+                            <p style="text-align: left; padding-left:20px">upload</p>
+                        </td>
+                        <td>
+                            <div class="wrap"><button class="button">Browse</button></div>
+                        </td>
                         </tr>
                       
                     </table>
@@ -205,12 +247,12 @@
                 <hr />
                 <table>
                         <tr>
-                            <td style="width: 80%">
-                                <p style="text-align: left; padding-left:20px">follow</p>
-                            </td>
-                            <td>
-                                <div class="wrap"><button>Browse</button></div>
-                            </td>
+                             <td style="width: 1100px">
+                            <p style="text-align: left; padding-left:20px">upload</p>
+                        </td>
+                        <td>
+                            <div class="wrap"><button class="button">Browse</button></div>
+                        </td>
                         </tr>
                         
                     </table>

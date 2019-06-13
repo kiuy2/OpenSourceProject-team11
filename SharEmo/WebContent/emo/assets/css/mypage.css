@@ -19,10 +19,12 @@ body {
     margin: 10 auto 10 10;
 }
 #navbar-top-right {
+	
     white-space: nowrap;
 	color: Black;
 }
 #navbar-top-right img {
+	
 	width: 20px;
 	height: 20px;
 }
@@ -233,3 +235,74 @@ body {
     color: white;
 }
 
+#container_mypage {
+    display: flex;
+    width: 100%;
+    background-image: url("images/stripes-light.png");
+}
+#content_mypage {
+    text-align: center;
+    background-color: white;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 3px 5px 10px rgba( 0, 0, 0, 0.5);
+    min-width: 1300px;
+    padding: 1em 1em 1em 1em;
+    font-family: "Didact Gothic";
+    margin: auto;
+    margin-top:50px;
+    margin-bottom:50px;
+    
+
+}
+#content_mypage textarea {
+        margin-top: 10px;
+        font-size: 12pt;
+        width: 100%;
+        resize: none;
+    }
+ .emoticon-package {
+    width: 270px;
+    background-color: lavender;
+    border-bottom: 2px grey solid;
+    margin: 10px;
+    padding: 15px;
+}
+.emoticon-Thumbnail {
+	width: 270px;
+	height: 270px;
+}
+.emoticon-Thumbnail img {
+	width: 33%;
+	height: 33%;
+	float: left;
+}
+.emoticon-Thumbnail #Thumbnail1 {
+	width: 66%;
+	height: 66%;
+}
+.emoticon-package p {
+    font-family: 'Didact Gothic';
+    margin: 8px 0;
+}
+.container-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.title {
+    font-weight: bold;
+}
+.artist {
+    font-size: 10pt;
+}
+.other {
+	display: flex;
+    font-size: 10pt;
+}
+.other img {
+	aling :right;
+	margin: auto 0.5em auto 0;
+	width: 15px;
+	height: 15px;
+}

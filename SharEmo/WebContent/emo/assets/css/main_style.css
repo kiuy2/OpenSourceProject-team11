@@ -38,7 +38,7 @@ body {
 #header {
     background-image: url("images/paisley.png");
     text-align: center;
-    padding: 4em 0 2em 0;
+    padding: 1em 0 2em 0;
 }
 #header-content {
     max-width: 56em;
