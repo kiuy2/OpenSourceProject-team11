@@ -552,8 +552,9 @@ public class BoardDAO {
 
 		try {
 			con = ds.getConnection();
-			String query = "SELECT num,author,title,content," + "DATE_FORMAT(writeday,'%Y/%M/%D') writeday,"
-					+ "readcnt,repRoot, repStep, repIndent FROM board order by ";
+			String query = "SELECT * FROM board order by ";
+			/*	String query = "SELECT num,author,title,content,likes," + "DATE_FORMAT(writeday,'%Y/%M/%D') writeday,"
+			+ "readcnt,repRoot, repStep, repIndent, FROM board order by ";*/
 			if (field_name != null) {
 				query += field_name;
 				if (method)
@@ -577,6 +578,7 @@ public class BoardDAO {
 				data.setNum(rs.getInt("num"));
 				data.setAuthor(rs.getString("author"));
 				data.setTitle(rs.getString("title"));
+				data.setLikes(rs.getInt("likes"));
 				data.setContent(rs.getString("content"));
 				data.setWriteday(rs.getString("writeday"));
 				data.setReadcnt(rs.getInt("readcnt"));
