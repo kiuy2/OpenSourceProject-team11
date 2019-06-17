@@ -127,14 +127,14 @@
 			<div id="content-footer">
 				<div id="paging">
 					<c:if test="${page.curPage > 1}">
-					<a href="artistListPage.do?curPage=${page.curPage - 1 }"><img src="emo/images/page_left.png"></a>
+					<a href="artistListPage.do?method=${method}&curPage=${page.curPage - 1 }"><img src="emo/images/page_left.png"></a>
 					</c:if>
 					<p>
 						<!-- page -->
 						<jsp:include page="page.jsp" flush="true" />
 					</p>
 					<c:if test="${page.curPage < page.totalCount / page.perPage}">
-					<a href="artistListPage.do?curPage=${page.curPage + 1 }"><img src="emo/images/page_right.png"></a>
+					<a href="artistListPage.do?method=${method}&curPage=${page.curPage + 1 }"><img src="emo/images/page_right.png"></a>
 					</c:if>
 				</div>
 

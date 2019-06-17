@@ -32,7 +32,9 @@ public class BoardArtistPageCommand implements BoardCommand{
 				list = dao.page(curPage, "postnum", false);
 				break;
 		}
-		
+
+		//메소드 데이터 저장
+		request.setAttribute("method", method);
 		//listPage.jsp에서 목록 리스트 데이터 저장
 		request.setAttribute("list", list.getUserList());
 		//page.jsp에서 페이징 처리 데이터 저장
