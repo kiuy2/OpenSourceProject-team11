@@ -12,6 +12,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.entity.BoardDTO;
+import com.entity.EmoticonTO;
+import com.entity.LikeTO;
 import com.entity.PageTO;
 
 public class BoardDAO {
@@ -402,7 +404,7 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 			String query = "SELECT num,author,title,content," + "DATE_FORMAT(writeday,'%Y/%M/%D') writeday, readcnt "
-					+ ",repRoot, repStep, repIndent FROM " + "board ";
+					+ ",repRoot, repStep, repIndent FROM board ";
 			if (_searchName.equals("title")) {
 				query += "WHERE title LIKE ? ";
 			} else {
@@ -520,7 +522,7 @@ public class BoardDAO {
 					query += " desc, ";
 			}
 			query += "UNIX_TIMESTAMP(writeday) desc";
-			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();
 
 			int perPage = to.getPerPage();// 5
@@ -563,6 +565,218 @@ public class BoardDAO {
 			}
 		}
 		return to;
+	}
+
+	public ArrayList<EmoticonTO> getEmoticon() {
+		ArrayList<EmoticonTO> ticon = new ArrayList<EmoticonTO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String query = "SELECT boardnum, sysname FROM emoticon;";
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int num = rs.getInt("boardnum");
+				String sysname = rs.getString("sysname");
+				EmoticonTO data = new EmoticonTO();
+				data.setBoardnum(num);
+				data.setSrc(sysname);
+				ticon.add(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ticon;
+	}
+
+	// 해당 게시물의 이모티콘만 추출
+	public ArrayList<EmoticonTO> getEmoticon(String _num) {
+		ArrayList<EmoticonTO> ticon = new ArrayList<EmoticonTO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String query = "SELECT * FROM emoticon where boardnum=" + _num;
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int num = rs.getInt("boardnum");
+				String sysname = rs.getString("sysname");
+				String orgname = rs.getString("orgname");
+				EmoticonTO data = new EmoticonTO();
+				data.setBoardnum(num);
+				data.setSrc(sysname);
+				data.setOrg(orgname);
+				ticon.add(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ticon;
+	}
+	
+	// 페이지 구현
+	public PageTO pageWhose(int _curPage, String _author) {
+		PageTO to = new PageTO();
+		int totalCount = totalCount();
+
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String query = "SELECT * FROM board WHERE author = ? ORDER BY UNIX_TIMESTAMP(writeday) desc";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, _author);
+			rs = pstmt.executeQuery();
+
+			int perPage = to.getPerPage();// 5
+
+			int skip = (_curPage - 1) * perPage;
+
+			if (skip > 0) {
+				rs.absolute(skip);
+			}
+			for (int i = 0; i < perPage && rs.next(); i++) {
+				BoardDTO data = new BoardDTO();
+				data.setNum(rs.getInt("num"));
+				data.setAuthor(rs.getString("author"));
+				data.setTitle(rs.getString("title"));
+				data.setLikes(rs.getInt("likes"));
+				data.setContent(rs.getString("content"));
+				data.setWriteday(rs.getString("writeday"));
+				data.setReadcnt(rs.getInt("readcnt"));
+				data.setRepRoot(rs.getInt("repRoot"));
+				data.setRepStep(rs.getInt("repStep"));
+				data.setRepIndent(rs.getInt("repIndent"));
+				list.add(data);
+			}
+			to.setBoardList(list);
+			to.setTotalCount(totalCount);
+			to.setCurPage(_curPage);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return to;
+	}
+	
+	// 좋아요를 누른 게시글
+	public PageTO pageLike(int _curPage, String _userid) {
+		PageTO to = new PageTO();
+		int totalCount = totalCount();
+
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		ArrayList<LikeTO> like_list = new ArrayList<LikeTO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String query = "SELECT * FROM likes WHERE like_userid = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, _userid);
+			rs = pstmt.executeQuery();
+
+			int perPage = to.getPerPage();// 5
+
+			int skip = (_curPage - 1) * perPage;
+
+			if (skip > 0) {
+				rs.absolute(skip);
+			}
+			for (int i = 0; i < perPage && rs.next(); i++) {
+				LikeTO like = new LikeTO();
+				like.setBoardnum(rs.getInt("like_boardnum"));
+				like.setUserid(rs.getString("like_userid"));
+				like_list.add(like);
+			}
+
+			for (LikeTO like: like_list) {
+				query = "SELECT * FROM board WHERE num = ?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, like.getBoardnum());
+				rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					BoardDTO data = new BoardDTO();
+					data.setNum(rs.getInt("num"));
+					data.setAuthor(rs.getString("author"));
+					data.setTitle(rs.getString("title"));
+					data.setLikes(rs.getInt("likes"));
+					data.setContent(rs.getString("content"));
+					data.setWriteday(rs.getString("writeday"));
+					data.setReadcnt(rs.getInt("readcnt"));
+					data.setRepRoot(rs.getInt("repRoot"));
+					data.setRepStep(rs.getInt("repStep"));
+					data.setRepIndent(rs.getInt("repIndent"));
+					list.add(data);
+				}
+			}
+			
+			to.setBoardList(list);
+			to.setTotalCount(totalCount);
+			to.setCurPage(_curPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return to;
+		
 	}
 
 }

@@ -100,6 +100,7 @@ body {
     width: 100px;
     top: 80px;
     display: none;
+    z-index: 10;
 }
 .nav-mid-item-drop ul{
     background-image: url("images/prism.png");
@@ -170,7 +171,7 @@ body {
 #content td {
     text-align: center;
 }
-#Thumbnail{
+.Thumbnail{
     width: 150px;
     height: 150px;
 }
@@ -181,18 +182,18 @@ body {
 a{
 	z-index : 3;
 }
-#view {
+.info {
 	display: flex;
-	align-content: center;
+	align-items: center;
+	justify-content: center;
 	margin: 5px 0 5px 0;
 }
-#view img {
+.info img {
 	width: 25px;
 	height: 25px;
-	margin-left: auto;
 }
-#view p {
-	margin: auto auto auto 10px;
+.info_item {
+	margin: 0 5px;
 }
 #content a {
 	text-decoration: none;

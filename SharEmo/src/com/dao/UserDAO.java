@@ -12,6 +12,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.entity.BoardDTO;
+import com.entity.FollowTO;
+import com.entity.LikeTO;
 import com.entity.PageTO;
 import com.entity.UserTO;
 
@@ -28,30 +30,29 @@ public class UserDAO {
 		}
 	}
 
-	public ArrayList<UserTO> getUser() {
-		ArrayList<UserTO> user = new ArrayList<UserTO>();
+	public UserTO getUser(String _id) {
+		UserTO user = new UserTO();
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
-			String query = "SELECT * from user";
+			String query = "SELECT * FROM user WHERE id = ?";
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, _id);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				UserTO data = new UserTO();
-				data.setId(rs.getString("id"));
-				data.setName(rs.getString("name"));
-				data.setNickname(rs.getString("nickname"));
-				data.setEmail(rs.getString("email"));
-				data.setFollowernum(rs.getInt("followernum"));
-				data.setMascot(rs.getString("mascot"));
-				data.setPhone(rs.getString("phone"));
-				data.setRegdate(rs.getString("regdate"));
-				data.setPostnum(rs.getInt("postnum"));
-				user.add(data);
+			if (rs.next()) {
+				user.setId(rs.getString("id"));
+				user.setName(rs.getString("name"));
+				user.setNickname(rs.getString("nickname"));
+				user.setEmail(rs.getString("email"));
+				user.setFollowernum(rs.getInt("followernum"));
+				user.setMascot(rs.getString("mascot"));
+				user.setPhone(rs.getString("phone"));
+				user.setRegdate(rs.getString("regdate"));
+				user.setPostnum(rs.getInt("postnum"));
 			}
 
 		} catch (Exception e) {
@@ -66,6 +67,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
+		
 		return user;
 	}
 
@@ -385,55 +387,6 @@ public class UserDAO {
 		}
 	}
 
-	public ArrayList<UserTO> getUser(String _fieldName, boolean _method) {
-		ArrayList<UserTO> user = new ArrayList<UserTO>();
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			con = ds.getConnection();
-			String query = "SELECT * from user order by ";
-			if (_fieldName != null) {
-				query += _fieldName;
-				if (_method)
-					query += " asc, ";
-				else
-					query += " desc, ";
-			}
-			query += "UNIX_TIMESTAMP(regdate) desc";
-			pstmt = con.prepareStatement(query);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				UserTO data = new UserTO();
-				data.setId(rs.getString("id"));
-				data.setName(rs.getString("name"));
-				data.setNickname(rs.getString("nickname"));
-				data.setEmail(rs.getString("email"));
-				data.setFollowernum(rs.getInt("followernum"));
-				data.setMascot(rs.getString("mascot"));
-				data.setPhone(rs.getString("phone"));
-				data.setRegdate(rs.getString("regdate"));
-				data.setPostnum(rs.getInt("postnum"));
-				user.add(data);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return user;
-	}
-
 	// 페이지 구현
 	public PageTO page(int curPage, String field_name, boolean method) {
 		PageTO to = new PageTO();
@@ -529,6 +482,82 @@ public class UserDAO {
 			}
 		}
 		return count;
+	}
+
+	// 좋아요를 누른 게시글
+	public PageTO pageFollow(int _curPage, String _userid) {
+		PageTO to = new PageTO();
+		int totalCount = totalCount();
+
+		ArrayList<UserTO> list = new ArrayList<UserTO>();
+		ArrayList<FollowTO> follow_list = new ArrayList<FollowTO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String query = "SELECT * FROM follow WHERE follower = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, _userid);
+			rs = pstmt.executeQuery();
+
+			int perPage = to.getPerPage();// 5
+
+			int skip = (_curPage - 1) * perPage;
+
+			if (skip > 0) {
+				rs.absolute(skip);
+			}
+			for (int i = 0; i < perPage && rs.next(); i++) {
+				FollowTO follow = new FollowTO();
+				follow.setFollow(rs.getString("follow"));
+				follow.setFollower(rs.getString("follower"));
+				follow_list.add(follow);
+			}
+
+			for (FollowTO follow: follow_list) {
+				query = "SELECT * FROM user WHERE id = ?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, follow.getFollow());
+				rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					
+					UserTO user = new UserTO();
+					user.setId(rs.getString("id"));
+					user.setName(rs.getString("name"));
+					user.setNickname(rs.getString("nickname"));
+					user.setEmail(rs.getString("email"));
+					user.setFollowernum(rs.getInt("followernum"));
+					user.setMascot(rs.getString("mascot"));
+					user.setPhone(rs.getString("phone"));
+					user.setRegdate(rs.getString("regdate"));
+					user.setPostnum(rs.getInt("postnum"));
+					list.add(user);
+				}
+			}
+			
+			to.setUserList(list);
+			to.setTotalCount(totalCount);
+			to.setCurPage(_curPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return to;
+		
 	}
 
 }
