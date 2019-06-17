@@ -69,12 +69,12 @@
 						<a href="listPage.do?method=3"><li><span>Hot</span></li></a>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="#">Artist</a>
+			<li class="nav-mid-item"><a href="artListPage.do?method=1">Artist</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<a href="#"><li><span>New</span></li></a>
-						<a href="#"><li><span>Popular</span></li></a>
-						<a href="#"><li><span>Most<br/>Published</span></li></a>
+						<a href="artListPage.do?method=1"><li><span>New</span></li></a>
+						<a href="artListPage.do?method=2"><li><span>Popular</span></li></a>
+						<a href="artListPage.do?method=3"><li><span>Most<br/>Published</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
@@ -102,7 +102,7 @@
 			<ul>
 				<li><a href="artistListPage.do?method=1">New Artist</a></li>
 				<li><a href="artistListPage.do?method=2">Popular Artist</a></li>
-				<li><a href="artistListPage.do?method=3">Following Artist</a></li>
+				<li><a href="artistListPage.do?method=3">Most Published</a></li>
 			</ul>
 		</nav>
 		<section id="content">
@@ -112,11 +112,11 @@
 					<c:if test="${status.index % 4 eq 0}">
 						<tr>
 					</c:if>
-					<td><a href="retrieveUser.do?id=${dto.num}">
-							<img src="${dto.mascot }">
+					<td><a href="mypage.do?id=${dto.id}">
+							<img id="Thumbnail" src="${dto.mascot}">
 						</a>
-						<p><a href="retrieveUser.do?id=${dto.num}">${dto.nickname}</a></p>
-						<div id="follow"><img src="emo/images/follow.png"><p>${dto.follownum}</p></div>
+						<p><a href="mypage.do?id=${dto.id}">${dto.nickname}</a></p>
+						<div id="view"><img src="emo/images/follow.png"><p>${dto.followernum}</p></div>
 					</td>
 					<c:if test="${status.count % 4 eq 0}">
 						</tr>
@@ -127,14 +127,14 @@
 			<div id="content-footer">
 				<div id="paging">
 					<c:if test="${page.curPage > 1}">
-					<a href="listPage.do?curPage=${page.curPage - 1 }"><img src="emo/images/page_left.png"></a>
+					<a href="artistListPage.do?curPage=${page.curPage - 1 }"><img src="emo/images/page_left.png"></a>
 					</c:if>
 					<p>
 						<!-- page -->
 						<jsp:include page="page.jsp" flush="true" />
 					</p>
 					<c:if test="${page.curPage < page.totalCount / page.perPage}">
-					<a href="listPage.do?curPage=${page.curPage + 1 }"><img src="emo/images/page_right.png"></a>
+					<a href="artistListPage.do?curPage=${page.curPage + 1 }"><img src="emo/images/page_right.png"></a>
 					</c:if>
 				</div>
 

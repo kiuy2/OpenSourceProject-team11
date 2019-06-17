@@ -22,7 +22,7 @@ public class BoardPageCommand implements BoardCommand{
 		PageTO list = null;
 		switch(method){
 			case 1:
-				list = dao.page(curPage, "writeday", true);
+				list = dao.page(curPage, null, true);
 				break;
 			case 2:
 				list = dao.page(curPage, "likes", false);

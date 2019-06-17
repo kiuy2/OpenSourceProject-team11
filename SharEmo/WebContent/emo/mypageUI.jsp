@@ -113,16 +113,16 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-mid-item"><a href="#">Artist</a>
+            <li class="nav-mid-item"><a href="artistListPage.do?method=1">Artist</a>
                 <div class="nav-mid-item-drop">
                     <ul>
-                        <a href="#">
+                        <a href="artistListPage.do?method=1">
                             <li><span>New</span></li>
                         </a>
-                        <a href="#">
+                        <a href="artistListPage.do?method=2">
                             <li><span>Popular</span></li>
                         </a>
-                        <a href="#">
+                        <a href="artistListPage.do?method=3">
                             <li><span>Most<br />followed</span></li>
                         </a>
                     </ul>

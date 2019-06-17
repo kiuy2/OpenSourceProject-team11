@@ -23,20 +23,20 @@ public class BoardArtistPageCommand implements BoardCommand{
 		PageTO list = null;
 		switch(method){
 			case 1:
-				list = dao.page(curPage, "writeday", true);
+				list = dao.page(curPage, null, true);
 				break;
 			case 2:
-				list = dao.page(curPage, "likes", false);
+				list = dao.page(curPage, "followernum", false);
 				break;
 			case 3:
-				list = dao.page(curPage, "readCnt", false);
+				list = dao.page(curPage, "postnum", false);
 				break;
 		}
-
+		
 		//listPage.jsp에서 목록 리스트 데이터 저장
-		request.setAttribute("list", list.getBoardList());
+		request.setAttribute("list", list.getUserList());
 		//page.jsp에서 페이징 처리 데이터 저장
 		request.setAttribute("page", list);
-		return "emo/listPage.jsp";
+		return "emo/artistListPage.jsp";
 	}
 }
