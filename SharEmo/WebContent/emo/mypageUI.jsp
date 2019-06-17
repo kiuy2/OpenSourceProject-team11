@@ -183,7 +183,7 @@
         <section id="content_mypage">
             <div>
                 <h1 style="text-align: center">${user.id}'s MY PAGE</h1>
-                <img src="에펠탑뺴꼼3.jpg" width="500" , height="500" />
+                <img src="${user.mascot}", width="300" , height="300" />
 
                 <p>Nickname : ${user.nickname}</p>
                 <p>Name : ${user.name}</p>
