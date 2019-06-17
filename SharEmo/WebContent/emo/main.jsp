@@ -70,7 +70,7 @@
 
 	<nav id="navbar-mid">
 		<ul>
-			<li class="nav-mid-item"><a href="#">Home</a></li>
+			<li class="nav-mid-item"><a href="main.do">Home</a></li>
 			<li class="nav-mid-item"><a href="listPage.do?method=1">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<img src="emo/images/말꼬리.png" width="180px" height="40px">
@@ -99,8 +99,8 @@
 					<img src="emo/images/말꼬리.png" width="180px" height="40px">
 					<ul>
 						<c:if test="${user!=null}">
-							<a href="#"><li><span>Liked Emoticon</span></li></a>
-							<a href="#"><li><span>Following Artist</span></li></a>
+							<a href="listPage.do?method=5&id=${user.id}"><li><span>Liked Emoticon</span></li></a>
+							<a href="artistListPage.do?method=4&id=${user.id}"><li><span>Following Artist</span></li></a>
 							<a href="writeui.do"><li><span>Upload Emoticon</span></li></a>
 							<a href="mypage.do"><li><span>My Gallery</span></li></a>
 						</c:if>
