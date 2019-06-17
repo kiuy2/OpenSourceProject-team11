@@ -6,7 +6,8 @@
 	PageTO to =(PageTO)request.getAttribute("page");
 	int curPage = to.getCurPage();
 	int perPage = to.getPerPage();
-	int totalCount = to.getTotalCount();
+	int method = (int)request.getAttribute("method");
+	int totalCount = to.getBoardList().size();
 	
 	int totalPage = totalCount / perPage; //보여줄 페이지 번호 개수
 	
@@ -14,12 +15,14 @@
 		totalPage++;
 	
 	for(int i=1; i<=totalPage; i++){
-		if( curPage ==i ){
-			out.print("<font size=3 color='red'>"+ i+ "</font>");
+		if( curPage ==i){
+			out.print("<font size=5 color='red'>"+ i+ "</font>");
 		}
 		else{
-			out.print("<a href='listPage.do?curPage="+ i+ "'> / "+i+"</a>&nbsp;");
+			out.print("<a href='listPage.do?method="+method+"&curPage="+ i+ "'>"+i+"</a>");
 		}
+		if(i!=totalPage)
+			out.print(" / ");
 	}
 
 %>

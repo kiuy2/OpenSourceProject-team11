@@ -53,7 +53,7 @@
 
 	<nav id="navbar-mid">
 		<form action="search.do" method="post">
-			<input type="search" name="q"
+			<input type="search" name="searchValue"
 				placeholder="Search for emoticons e.g. happy, sad, angry...">
 			<button type="submit">
 				<img src="emo/images/musica-searcher.png" width="20px" height="20px">
@@ -113,6 +113,7 @@
 						<label for="upload">Upload Images</label> <input type="file"
 							name="upload" id="input_images" value="폴더 선택" accept="image/*"
 							multiple>
+							<input type="button" value="파일 리셋" onclick="resetFiles()">이미지 클릭 시 개별 삭제
 					</div>
 					<div class="upload_images">
 						<c:forEach var="emo" items="${ticon}" varStatus="status">

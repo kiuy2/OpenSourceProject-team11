@@ -15,13 +15,20 @@
     <link href='https://fonts.googleapis.com/css?family=Dekko' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Didact Gothic' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="emo/assets/css/mypage.css">
+   <link type="text/css" rel="stylesheet"
+	href="emo/assets/css/mypage.css">
 
     <title>SharEmo - Free Emoticon Share Website</title>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript" src="emo/assets/js/dropbox2.js"></script>
-
+    <script type="text/javascript" src="emo/assets/js/dropbox2.js">
+    </script>
+    <script type="text/javascript" src="emo/assets/js/preview.js">
+    </script>
+    
+<script type="text/javascript" src="emo/assets/js/dropbox.js">
+	
+</script>
     <script>
         $('.fun-btn').on('click', function (event) {
             $(this).toggleClass('start-fun');
@@ -37,6 +44,13 @@
         });
     </script>
     <style>
+        .wrap {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .button {
             width: 140px;
             height: 45px;
@@ -91,7 +105,7 @@
 
     <nav id="navbar-mid">
         <form action="search.do" method="post">
-            <input type="search" name="q" placeholder="Search for emoticons e.g. happy, sad, angry...">
+            <input type="search" name="searchValue" placeholder="Search for emoticons e.g. happy, sad, angry...">
             <button type="submit">
                 <img src="emo/images/musica-searcher.png" width="20px" height="20px">
             </button>
@@ -113,16 +127,16 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-mid-item"><a href="artistListPage.do?method=1">Artist</a>
+            <li class="nav-mid-item"><a href="#">Artist</a>
                 <div class="nav-mid-item-drop">
                     <ul>
-                        <a href="artistListPage.do?method=1">
+                        <a href="#">
                             <li><span>New</span></li>
                         </a>
-                        <a href="artistListPage.do?method=2">
+                        <a href="#">
                             <li><span>Popular</span></li>
                         </a>
-                        <a href="artistListPage.do?method=3">
+                        <a href="#">
                             <li><span>Most<br />followed</span></li>
                         </a>
                     </ul>
@@ -165,64 +179,94 @@
         </ul>
     </nav>
    
-    <section id="container">
-    	<section id="content">
-        	<div id="content-wrapper">
+    <section id="container_mypage">
+        <section id="content_mypage">
+            <div>
                 <h1 style="text-align: center">(JANGTIST)'s MY PAGE</h1>
                 <img src="에펠탑뺴꼼3.jpg" width="100" height="100" />
+                <h1 style="text-align: center">${user.id}'s MY PAGE</h1>
+                <img src="${user.mascot}", width="300" , height="300" />
 
-                <p>Nickname</p>
-                <p>Name</p>
-                <p>Phone</p>
-                <p>Email</p>
+                <p>Nickname : ${user.nickname}</p>
+                <p>Name : ${user.name}</p>
+                <p>Phone : ${user.phone}</p>
+                <p>Email : ${user.email}</p>
 
-				<hr />
-
-				<div class="emoticon-container">
-					<div class="container-header">
-						<p>uploaded post</p>
-						<button class="button">Browse</button>
-					</div>
-					<div class="emoticon-package">
-						<c:forEach var="dto" items="${listUpload}" begin="0" end="3">
-							<a href="retrieve.do?num=${dto.num}"> <c:set var="loop_flag"
-									value="false" /> <c:forEach var="emo" items="${ticon}">
-									<c:if test="${not loop_flag}">
-										<c:if test="${dto.num eq emo.boardnum}">
-											<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
-											<c:set var="loop_flag" value="true" />
-										</c:if>
-									</c:if>
-								</c:forEach>
-							</a>
-							<p>
-								<a href="retrieve.do?num=${dto.num}">${dto.title}</a>
-							</p>
-							<div id="view">
-								<img src="emo/images/likes.png">
-								<p>${dto.likes}</p>
-								<img src="emo/images/view.png">
-								<p>${dto.readcnt}</p>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-                
                 <hr />
+                <table>
+                    <tr>
+                        <td style="width: 1100px">
+                            <p style="text-align: left; padding-left:20px">upload</p>
+                        </td>
+                        <td>
+                            <div class="wrap"><button class="button">Browse</button></div>
+                        </td>
+                    </tr>                
+                </table>
+                <table>
+                <div class="container-main"></div>
+			
+				<div class="emoticon-package">
+					<a href="retrieve.do?num=${dto.num}"></a>
+						<div class="emoticon-Thumbnail" >
+							<c:forEach var="emo" items="${ticon}" varStatus="status">
+								<c:if test="${thumbnum <6 && dto.num eq emo.boardnum}">
+									<%
+										Thumbnailnum++;
+										request.setAttribute("thumbnum", Thumbnailnum);
+									%>
+									<img id="Thumbnail${thumbnum}" src="emosave/${emo.boardnum}/${emo.src}">
+								</c:if>
+							</c:forEach>
+							<%
+								Thumbnailnum = 0;
+								request.setAttribute("thumbnum", Thumbnailnum);
+							%>
+						</div>
+					</a>
+					<p class="title">
+						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
+					</p>
+					<p class="artist">Artist: ${dto.author}</p>
+					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
+						<img src="emo/images/view.png">${dto.readcnt}</div>
+				</div>
+                </table>
+                <hr />
+                <table>
+                        <tr>
+                            <td style="width: 1100px">
+                            <p style="text-align: left; padding-left:20px">upload</p>
+                        </td>
+                        <td>
+                            <div class="wrap"><button class="button">Browse</button></div>
+                        </td>
+                        </tr>
+                      
+                    </table>
 
 
-				<hr />
-                
-                
-        	</div>
+                <hr />
+                <table>
+                        <tr>
+                             <td style="width: 1100px">
+                            <p style="text-align: left; padding-left:20px">upload</p>
+                        </td>
+                        <td>
+                            <div class="wrap"><button class="button">Browse</button></div>
+                        </td>
+                        </tr>
+                        
+                    </table>
+            </div>
         </section>
     </section>
 
     <section id="footer">
         <img src="emo/images/cbnu_white.png" width="221" height="67">
-        <p>2019, 오픈소스 전문 프로젝트, TEAM 11, 조 ??</p>
-        <p>윤송희 ~ 전준호, 정희주, 장형규</p>
-        <p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 / TEL : 043)261-2114</p>
+        <p>2019 오픈소스 전문 프로젝트 TEAM 11</p>
+		<p>윤송희 전준호 정희주 장형규</p>
+		<p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 S4-1 소프트웨어학과 / TEL : 043)261-2114</p>
     </section>
 
 </body>
