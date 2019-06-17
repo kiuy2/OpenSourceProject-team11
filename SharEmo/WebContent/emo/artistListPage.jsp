@@ -113,10 +113,13 @@
 						<tr>
 					</c:if>
 					<td><a href="mypage.do?id=${dto.id}">
-							<img id="Thumbnail" src="${dto.mascot}">
+							<img class="Thumbnail" src="${dto.mascot}">
 						</a>
 						<p><a href="mypage.do?id=${dto.id}">${dto.nickname}</a></p>
-						<div id="view"><img src="emo/images/follow.png"><p>${dto.followernum}</p></div>
+						<div class="info">
+							<img class="info_item" src="emo/images/follow.png">
+							<p class="info_item">${dto.followernum}</p>
+						</div>
 					</td>
 					<c:if test="${status.count % 4 eq 0}">
 						</tr>
@@ -160,9 +163,9 @@
 
 	<section id="footer">
 		<img src="emo/images/cbnu_white.png" width="221" height="67">
-		<p>2019, 오픈소스 전문 프로젝트, TEAM 11, 조 ??</p>
-		<p>윤송희 ~ 전준호, 정희주, 장형규</p>
-		<p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 / TEL : 043)261-2114</p>
+		<p>2019  오픈소스 전문 프로젝트 TEAM 11</p>
+		<p>윤송희  전준호  정희주  장형규</p>
+		<p>주소 : 충북 청주시 서원구 충대로 1, 충북대학교 S4-1 소프트웨어학과 / TEL : 043)261-2114</p>
 	</section>
 
 </body>

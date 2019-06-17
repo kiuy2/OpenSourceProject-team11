@@ -31,6 +31,10 @@ public class BoardArtistPageCommand implements BoardCommand{
 			case 3:
 				list = dao.page(curPage, "postnum", false);
 				break;
+			case 4:
+				String id = request.getParameter("id");
+				list = dao.pageFollow(curPage, id);
+				break;
 		}
 
 		//메소드 데이터 저장

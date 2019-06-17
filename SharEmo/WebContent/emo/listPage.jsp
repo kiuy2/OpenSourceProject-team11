@@ -117,15 +117,20 @@
 							<c:forEach var="emo" items="${ticon}">
 								<c:if test="${not loop_flag }">
 									<c:if test="${dto.num eq emo.boardnum}">
-										<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
+										<img class="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
 										<c:set var="loop_flag" value="true" />
 									</c:if>
 								</c:if>
 							</c:forEach>
 						</a>
 						<p><a href="retrieve.do?num=${dto.num}">${dto.title}</a></p>
-						<p><a href="#">${dto.author}</a></p>
-						<div id="view"><img src="emo/images/view.png"><p>${dto.readcnt}</p></div>
+						<p><a href="#">${dto.author}</a></p>					
+						<div class="info">
+							<img class="info_item" src="emo/images/likes.png">
+							<p class="info_item">${dto.likes}</p>
+							<img class="info_item" src="emo/images/view.png">
+							<p class="info_item">${dto.readcnt}</p>
+						</div>
 					</td>
 					<c:if test="${status.count % 4 eq 0}">
 						</tr>

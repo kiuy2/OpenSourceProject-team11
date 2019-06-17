@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
 import com.entity.EmoticonTO;
 import com.entity.PageTO;
+import com.entity.UserTO;
 
 public class BoardPageCommand implements BoardCommand{
 	static boolean start=false;
@@ -29,6 +31,14 @@ public class BoardPageCommand implements BoardCommand{
 				break;
 			case 3:
 				list = dao.page(curPage, "readCnt", false);
+				break;
+			case 4:
+				String author = request.getParameter("author");
+				list = dao.pageWhose(curPage, author);
+				break;
+			case 5:
+				String id = request.getParameter("id");
+				list = dao.pageLike(curPage, id);
 				break;
 		}
 		
