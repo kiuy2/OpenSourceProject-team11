@@ -69,20 +69,20 @@
 						<a href="listPage.do?method=3"><li><span>Hot</span></li></a>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="#">Artist</a>
+			<li class="nav-mid-item"><a href="artistListPage.do?method=1">Artist</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<a href="#"><li><span>New</span></li></a>
-						<a href="#"><li><span>Popular</span></li></a>
-						<a href="#"><li><span>Most<br/>Published</span></li></a>
+						<a href="artistListPage.do?method=1"><li><span>New</span></li></a>
+						<a href="artistListPage.do?method=2"><li><span>Popular</span></li></a>
+						<a href="artistListPage.do?method=3"><li><span>Most<br/>Published</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
 				<div class="nav-mid-item-drop">
 					<ul>
 						<c:if test="${user!=null}">
-							<a href="#"><li><span>Like</span></li></a>
-							<a href="#"><li><span>Follow</span></li></a>
+							<a href="listPage.do?method=5&id=${user.id}"><li><span>Like</span></li></a>
+							<a href="artistListPage.do?method=4&id=${user.id}"><li><span>Follow</span></li></a>
 							<a href="writeui.do"><li><span>Upload</span></li></a>
 							<a href="mypage.do"><li><span>My Gallery</span></li></a>
 						</c:if>
@@ -117,15 +117,20 @@
 							<c:forEach var="emo" items="${ticon}">
 								<c:if test="${not loop_flag }">
 									<c:if test="${dto.num eq emo.boardnum}">
-										<img id="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
+										<img class="Thumbnail" src="emosave/${emo.boardnum}/${emo.src}">
 										<c:set var="loop_flag" value="true" />
 									</c:if>
 								</c:if>
 							</c:forEach>
 						</a>
 						<p><a href="retrieve.do?num=${dto.num}">${dto.title}</a></p>
-						<p><a href="#">${dto.author}</a></p>
-						<div id="view"><img src="emo/images/view.png"><p>${dto.readcnt}</p></div>
+						<p><a href="#">${dto.author}</a></p>					
+						<div class="info">
+							<img class="info_item" src="emo/images/likes.png">
+							<p class="info_item">${dto.likes}</p>
+							<img class="info_item" src="emo/images/view.png">
+							<p class="info_item">${dto.readcnt}</p>
+						</div>
 					</td>
 					<c:if test="${status.count % 4 eq 0}">
 						</tr>

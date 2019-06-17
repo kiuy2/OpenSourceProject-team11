@@ -60,33 +60,38 @@
 			</button>
 		</form>
 		<ul>
-			<li class="nav-mid-item"><a href="#">Home</a></li>
-			<li class="nav-mid-item"><a href="#">Emotion</a>
+			<li class="nav-mid-item"><a href="main.do">Home</a></li>
+			<li class="nav-mid-item"><a href="listPage.do?method=1">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="#">New</a></li>
-						<li><a href="#">Popular</a></li>
-						<li><a href="#">Recent</a></li>
-						<li><a href="#">Category</a></li>
+						<a href="listPage.do?method=1"><li><span>New</span></li></a>
+						<a href="listPage.do?method=2"><li><span>Popular</span></li></a>
+						<a href="listPage.do?method=3"><li><span>Hot</span></li></a>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="#">Artist</a>
+			<li class="nav-mid-item"><a href="artistListPage.do?method=1">Artist</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="#">New</a></li>
-						<li><a href="#">Popular</a></li>
-						<li><a href="#">Recent</a></li>
-						<li><a href="#">Most<br />followed
-						</a></li>
+						<a href="artistListPage.do?method=1"><li><span>New</span></li></a>
+						<a href="artistListPage.do?method=2"><li><span>Popular</span></li></a>
+						<a href="artistListPage.do?method=3"><li><span>Most<br/>Published</span></li></a>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="#">MyGallery</a>
+			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<li><a href="#">Likes</a></li>
-						<li><a href="#">Following</a></li>
-						<li><a href="#">Upload</a></li>
-						<li><a href="#">Gallery</a></li>
+						<c:if test="${user!=null}">
+							<a href="listPage.do?method=5&id=${user.id}"><li><span>Like</span></li></a>
+							<a href="artistListPage.do?method=4&id=${user.id}"><li><span>Follow</span></li></a>
+							<a href="writeui.do"><li><span>Upload</span></li></a>
+							<a href="mypage.do"><li><span>My Gallery</span></li></a>
+						</c:if>
+						<c:if test="${user==null}">
+							<a href="loginUI.do"><li><span>Like</span></li></a>
+							<a href="loginUI.do"><li><span>Follow</span></li></a>
+							<a href="loginUI.do"><li><span>Upload</span></li></a>
+							<a href="loginUI.do"><li><span>My Gallery</span></li></a>
+						</c:if>
 					</ul>
 				</div></li>
 		</ul>

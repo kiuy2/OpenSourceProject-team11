@@ -70,7 +70,7 @@
 
 	<nav id="navbar-mid">
 		<ul>
-			<li class="nav-mid-item"><a href="#">Home</a></li>
+			<li class="nav-mid-item"><a href="main.do">Home</a></li>
 			<li class="nav-mid-item"><a href="listPage.do?method=1">Emotion</a>
 				<div class="nav-mid-item-drop">
 					<img src="emo/images/말꼬리.png" width="180px" height="40px">
@@ -80,22 +80,27 @@
 						<a href="listPage.do?method=3"><li><span>Hot Emoticon</span></li></a>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="#">Artist</a>
+			<li class="nav-mid-item"><a href="artistListPage.do?method=1">Artist</a>
 				<div class="nav-mid-item-drop">
 					<img src="emo/images/말꼬리.png" width="180px" height="40px">
 					<ul>
-						<a href="#"><li><span>New Artist</span></li></a>
-						<a href="#"><li><span>Popular Artist</span></li></a>
-						<a href="#"><li><span>Most Published Artist</span></li></a>
+						<a href="artistListPage.do?method=1"><li><span>New Artist</span></li></a>
+						<a href="artistListPage.do?method=2"><li><span>Popular Artist</span></li></a>
+						<a href="artistListPage.do?method=3"><li><span>Most Published Artist</span></li></a>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
+			<c:if test="${user!=null}">
+				<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
+			</c:if>
+			<c:if test="${user==null}">
+				<li class="nav-mid-item"><a href="loginUI.do">MyGallery</a>
+			</c:if>
 				<div class="nav-mid-item-drop">
 					<img src="emo/images/말꼬리.png" width="180px" height="40px">
 					<ul>
 						<c:if test="${user!=null}">
-							<a href="#"><li><span>Liked Emoticon</span></li></a>
-							<a href="#"><li><span>Following Artist</span></li></a>
+							<a href="listPage.do?method=5&id=${user.id}"><li><span>Liked Emoticon</span></li></a>
+							<a href="artistListPage.do?method=4&id=${user.id}"><li><span>Following Artist</span></li></a>
 							<a href="writeui.do"><li><span>Upload Emoticon</span></li></a>
 							<a href="mypage.do"><li><span>My Gallery</span></li></a>
 						</c:if>
@@ -136,7 +141,7 @@
 						</div>
 					</a>
 					<p class="title">
-						Title: <a style=" text-decoration: none;" href="retrieve.do?num=${dto.num}">${dto.title}</a>
+						Title: <a href="retrieve.do?num=${dto.num}">${dto.title}</a>
 					</p>
 					<p class="artist">Artist: ${dto.author}</p>
 					<div class="other"><img id="likes" src="emo/images/likes.png">${dto.likes}　　
