@@ -7,6 +7,7 @@ body {
     text-align: center;
 }
 #navbar-top {
+	
     display: flex;
     align-items: center;
     width: 100%;
@@ -15,12 +16,12 @@ body {
     margin: 10px auto 10px 10px;
 }
 #navbar-top-right {
-	
+	float :left;
     white-space: nowrap;
 	color: Black;
 }
 #navbar-top-right img {
-	
+
 	width: 20px;
 	height: 20px;
 }

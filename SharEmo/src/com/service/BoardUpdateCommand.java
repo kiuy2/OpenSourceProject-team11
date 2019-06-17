@@ -125,6 +125,6 @@ public class BoardUpdateCommand implements BoardCommand {
 		}
 	
 
-		return "listPage.do";
+		return "listPage.do?method=1";
 	}
 }

@@ -19,7 +19,7 @@ public class BoardArtistPageCommand implements BoardCommand{
 		}
 		int method = Integer.parseInt(request.getParameter("method"));
 		
-		BoardDAO dao = new BoardDAO();
+		UserDAO dao = new UserDAO();
 		PageTO list = null;
 		switch(method){
 			case 1:
@@ -32,11 +32,9 @@ public class BoardArtistPageCommand implements BoardCommand{
 				list = dao.page(curPage, "readCnt", false);
 				break;
 		}
-		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
+
 		//listPage.jsp에서 목록 리스트 데이터 저장
 		request.setAttribute("list", list.getBoardList());
-		//이모티콘 이미지 저장
-		request.setAttribute("ticon", ticon);
 		//page.jsp에서 페이징 처리 데이터 저장
 		request.setAttribute("page", list);
 		return "emo/listPage.jsp";
