@@ -2,6 +2,7 @@ package com.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.dao.BoardDAO;
+import com.dao.EmoticonDAO;
+import com.entity.EmoticonTO;
 import com.entity.UserTO;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -40,82 +43,10 @@ public class BoardUpdateCommand implements BoardCommand {
 
 		HttpSession session = request.getSession();
 		
-		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		String path = request.getRealPath("emosave");
-		int maxFileSize = 1024 * 1024 * 10;
-		String enc = "utf-8";
-		String num="";
-		String title="";
-		String content=""; 
-		BoardDAO dao = new BoardDAO();
 
-		UserTO user= (UserTO) session.getAttribute("user");
-		String author =user.getNickname();
-		
-		// Create a disk file factory processing object
-		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-		// Create a server file upload handler object
-		ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
-
-		// Set the maximum file upload size
-		servletFileUpload.setFileSizeMax(maxFileSize);// 10M
-		
-		DefaultFileRenamePolicy dp = new DefaultFileRenamePolicy();
-		
-		try {
-			// Field and request resolution in the request request content
-			List<FileItem> fileItems = servletFileUpload.parseRequest(request);
-
-			// Traversing the parsed list collection
-			for (FileItem fileItem : fileItems) {
-
-				if (fileItem.isFormField()) {
-					if(fileItem.getFieldName().equals("num")) {
-						num=fileItem.getString("UTF-8");
-					}
-					else if(fileItem.getFieldName().equals("title"))
-						title =fileItem.getString("UTF-8");
-					else if(fileItem.getFieldName().equals("description")) {
-						content =fileItem.getString("UTF-8");
-						dao.update(num, title, author, content);
-					}
-						
-				} else {
-					if (fileItem.getSize() <= maxFileSize) {
-						// To obtain the field name
-						String fileName = fileItem.getName();
-
-						if (!fileName.equals("")) {
-							// Gets the type of the upload file
-							if (fileItem.getContentType().contains("image/")) {
-
-								int index = fileName.lastIndexOf("\\");
-								if (index != -1) {
-									fileName = fileName.substring(index + 1);
-								}
-
-								File file = new File(path, newFileName(fileName));
-
-								fileItem.write(file);
-								dao.writeImage( file.getName(), fileName);
-								
-								fileItem.delete();
-							} 
-						} 
-					} 
-				}
-			}
-
-		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO 자동 생성된 catch 블록
-			e.printStackTrace();
-		}
 	
+		response.sendRedirect("listPage.do?method=1");
 
-		return "listPage.do?method=1";
+		return null;
 	}
 }

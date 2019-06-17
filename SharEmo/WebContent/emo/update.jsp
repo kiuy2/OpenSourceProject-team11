@@ -98,7 +98,7 @@
 				<h2>Update your COOL emoticon!</h2>
 				<form id="frm" name=form1 action='update.do' method=post
 					enctype="multipart/form-data">
-					<input type="text" name="name" hidden value="${retrieve.num }">
+					<input type="text" name="num" hidden value="${retrieve.num }">
 					<div id="title">
 						<label for="title">Title : </label> <input type="text"
 							name="title" value="${retrieve.title }" required>
@@ -112,16 +112,19 @@
 					<div id="file_label">
 						<label for="upload">Upload Images</label> <input type="file"
 							name="upload" id="input_images" value="폴더 선택" accept="image/*"
-							multiple>
-							<input type="button" value="파일 리셋" onclick="resetFiles()">이미지 클릭 시 개별 삭제
+							multiple> <input type="button" value="파일 리셋"
+							onclick="resetFiles()">이미지 클릭 시 개별 삭제
 					</div>
 					<div class="upload_images">
 						<c:forEach var="emo" items="${ticon}" varStatus="status">
 							<img src="emosave/${emo.boardnum}/${emo.src}" class='selFile'
 								title='Click to remove' />
+							<script>
+								setInitial("${emo.src}");
+							</script>
 						</c:forEach>
 					</div>
-					<span><button type="submit">SUBMIT</button></span>
+					<span><button onclick="submitUpdateAction()">SUBMIT</button></span>
 				</form>
 			</div>
 		</section>

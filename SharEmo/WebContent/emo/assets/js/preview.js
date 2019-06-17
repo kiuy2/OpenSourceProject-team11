@@ -7,11 +7,21 @@ var sel_files = [];
 
 function removeFile(e) {
 	var file = $(this).data("file");
-	for (var i = 0; i < sel_files.length; i++) {
-		if (sel_files[i].name === file) {
-			sel_files.splice(i, 1);
-			file.val("");
-			break;
+	if(file==null){
+		var f=$(this).attr("src");
+		for (var i = 0; i < sel_files.length; i++) {
+			if (f.indexOf(sel_files[i][1])>=0) {
+				sel_files.splice(i, 1);
+				break;
+			}
+		}
+	}
+	else{
+		for (var i = 0; i < sel_files.length; i++) {
+			if (sel_files[i].name === file) {
+				sel_files.splice(i, 1);
+				break;
+			}
 		}
 	}
 	$(this).remove();
@@ -19,6 +29,61 @@ function removeFile(e) {
 function resetFiles(){
 	$(".upload_images").empty();
 }
+
+function submitUpdateAction(){
+	var form = new FormData();
+	var num= frm.num.value;
+	for(var i=0, len=sel_files.length; i<len; i++){
+		var name= "image_"+i;
+		if(sel_files[i][0]=="check")
+			form.append(name, sel_files[i][1]);
+		else
+			form.append(name, sel_files[i]);
+	}
+	form.append("num", num);
+	$.ajax({
+	    type : "POST",
+	    url : "updateimg.do",
+	    data : form,
+	    processData: false,
+	    contentType: false,
+	    success : function(data) {
+	    },
+	    err : function(err) {
+	    }
+	});
+}
+
+function submitWriteAction(){
+	var form = new FormData();
+	for(var i=0, len=sel_files.length; i<len; i++){
+		var name= "image_"+i;
+		form.append(name, sel_files[i]);
+	}
+	form.append("title", form1.title.value);
+	form.append("content", form1.description.value);
+	
+	$.ajax({
+		url : "write.do",
+		type : "POST",
+		data : form,
+	    processData: false,
+	    contentType: false,
+		success : function(data) {
+		},
+		error : function(request, status, error) {
+		}
+	});
+}
+
+
+function setInitial(f) {
+	var file=[];
+	file[0]="check";
+	file[1]=f;
+	sel_files.push(file);
+}
+
 function ImgsFilesSelect(e) {
 
 	var files = e.target.files;
@@ -32,7 +97,6 @@ function ImgsFilesSelect(e) {
 			return;
 		}
 		sel_files.push(f);
-
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			var img_html = "<img src='" + e.target.result + "' data-file='"

@@ -34,16 +34,6 @@ public class UserDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int num = 0;
-		String id;
-		String name;
-		String nickname;
-		String mascot;
-		String regdate;
-		String phone;
-		String email;
-		int followernum;
-		int postnum;
 		try {
 			con = ds.getConnection();
 			String query = "SELECT * from user";

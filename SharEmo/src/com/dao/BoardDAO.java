@@ -12,13 +12,10 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.entity.BoardDTO;
-import com.entity.EmoticonTO;
 import com.entity.PageTO;
 
 public class BoardDAO {
-
 	DataSource ds;
-
 	// 생성자
 	public BoardDAO() {
 		try {
@@ -130,46 +127,6 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public int writeImage(String _sysname, String _orgname) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int boardnum = 0;
-		try {
-			con = ds.getConnection();
-			String sql = "select ifnull(max(num), 0) from board";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			if (rs.next())
-				boardnum = rs.getInt(1);
-
-			String query = "INSERT INTO emoticon( boardnum, sysname, orgname)" + " values (?,?,?)";
-			pstmt = con.prepareStatement(query);
-
-			pstmt.setInt(1, boardnum);
-			pstmt.setString(2, _sysname);
-			pstmt.setString(3, _orgname);
-			pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return boardnum;
 	}
 
 	// 조회수 1증가
@@ -606,83 +563,6 @@ public class BoardDAO {
 			}
 		}
 		return to;
-	}
-
-	public ArrayList<EmoticonTO> getEmoticon() {
-		ArrayList<EmoticonTO> ticon = new ArrayList<EmoticonTO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			con = ds.getConnection();
-			String query = "SELECT boardnum, sysname FROM emoticon;";
-			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				int num = rs.getInt("boardnum");
-				String sysname = rs.getString("sysname");
-				EmoticonTO data = new EmoticonTO();
-				data.setBoardnum(num);
-				data.setSrc(sysname);
-				ticon.add(data);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return ticon;
-	}
-
-	// 해당 게시물의 이모티콘만 추출
-	public ArrayList<EmoticonTO> getEmoticon(String _num) {
-		ArrayList<EmoticonTO> ticon = new ArrayList<EmoticonTO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			con = ds.getConnection();
-			String query = "SELECT * FROM emoticon where boardnum=" + _num;
-			pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				int num = rs.getInt("boardnum");
-				String sysname = rs.getString("sysname");
-				String orgname = rs.getString("orgname");
-				EmoticonTO data = new EmoticonTO();
-				data.setBoardnum(num);
-				data.setSrc(sysname);
-				data.setOrg(orgname);
-				ticon.add(data);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return ticon;
 	}
 
 }

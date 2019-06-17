@@ -209,8 +209,10 @@ $(document).ready(function changeColor(){
 				<h2>${retrieve.title}</h2>
 				<div id="detail-wrapper">
 					<div id="detail-image">
+						<c:if test="${ticon!=null}">
 						<img class="emoticon-Thumbnail"
-							src="emosave/${ticon[0].boardnum}/${ticon[0].src}"><br />
+							src="emosave/${ticon[0].boardnum}/${ticon[0].src}">
+							</c:if><br />
 						<button id="likes" type="button" onclick="return like();">
 							<img src="emo/images/likes_white.png">
 						</button>

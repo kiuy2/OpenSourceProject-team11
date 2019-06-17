@@ -115,11 +115,11 @@
 					<textarea name="description" rows="8" cols="100"></textarea>
 					<div id="file_label">
 						<label for="upload">Upload Images</label> <input type="file"
-							name="upload" id="input_images" value="폴더 선택" accept="image/*" multiple required>
+							name="upload" id="input_images" value="폴더 선택" accept="image/*" multiple>
 							<input type="button" value="파일 리셋" onclick="resetFiles()">이미지 클릭 시 개별 삭제
 					</div>
 					<div class="upload_images"></div>
-					<span><button type="submit" >SUBMIT</button></span>
+					<span><button onclick="submitWriteAction()">SUBMIT</button></span>
 				</form>
 			</div>
 		</section>

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dao.BoardDAO;
+import com.dao.EmoticonDAO;
 import com.entity.EmoticonTO;
 import com.entity.PageTO;
 
@@ -22,7 +23,8 @@ public class BoardSearchCommand implements BoardCommand {
 		
 		BoardDAO dao = new BoardDAO();
 		PageTO list = dao.search("title",searchValue, curPage);
-		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
+		EmoticonDAO emodao = new EmoticonDAO();
+		ArrayList<EmoticonTO> ticon =emodao.getEmoticon();
 		//이모티콘 이미지 저장
 		request.setAttribute("ticon", ticon);
 		//listPage.jsp에서 목록 리스트 데이터 저장

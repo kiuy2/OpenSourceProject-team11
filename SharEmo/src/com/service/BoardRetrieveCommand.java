@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.BoardDAO;
+import com.dao.EmoticonDAO;
 import com.dao.UserDAO;
 import com.entity.BoardDTO;
 import com.entity.EmoticonTO;
@@ -21,7 +22,8 @@ public class BoardRetrieveCommand implements BoardCommand {
 		String num = request.getParameter("num");
 		BoardDAO dao = new BoardDAO();
 		BoardDTO data = dao.retrieve(num);
-		ArrayList<EmoticonTO> ticon =dao.getEmoticon(num);
+		EmoticonDAO emodao = new EmoticonDAO();
+		ArrayList<EmoticonTO> ticon =emodao.getEmoticon(num);
 		
 		UserDAO userdao = new UserDAO();
 		String follow=data.getUserid();

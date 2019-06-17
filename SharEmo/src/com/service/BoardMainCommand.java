@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dao.BoardDAO;
+import com.dao.EmoticonDAO;
 import com.entity.EmoticonTO;
 import com.entity.PageTO;
 
@@ -21,8 +22,9 @@ public class BoardMainCommand implements BoardCommand{
 		PageTO listNew = dao.page(curPage, null, true);
 		PageTO listPop = dao.page(curPage, "likes", false);
 		PageTO listHot = dao.page(curPage, "readCnt", false);
-		
-		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
+
+		EmoticonDAO emodao = new EmoticonDAO();
+		ArrayList<EmoticonTO> ticon =emodao.getEmoticon();
 		//listPage.jsp에서 목록 리스트 데이터 저장
 		request.setAttribute("listNew", listNew.getBoardList());
 		request.setAttribute("listPop", listPop.getBoardList());
