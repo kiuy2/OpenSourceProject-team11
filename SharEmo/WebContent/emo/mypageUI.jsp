@@ -182,13 +182,13 @@
     <section id="container_mypage">
         <section id="content_mypage">
             <div>
-                <h1 style="text-align: center">(JANGTIST)'s MY PAGE</h1>
+                <h1 style="text-align: center">${user.id}'s MY PAGE</h1>
                 <img src="에펠탑뺴꼼3.jpg" width="500" , height="500" />
 
-                <p>Nickname</p>
-                <p>Name</p>
-                <p>Phone</p>
-                <p>Email</p>
+                <p>Nickname : ${user.nickname}</p>
+                <p>Name : ${user.name}</p>
+                <p>Phone : ${user.phone}</p>
+                <p>Email : ${user.email}</p>
 
                 <hr />
                 <table>
