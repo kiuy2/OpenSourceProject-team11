@@ -100,6 +100,7 @@ body {
     width: 100px;
     top: 80px;
     display: none;
+    z-index: 10;
 }
 .nav-mid-item-drop ul{
     background-image: url("images/prism.png");
