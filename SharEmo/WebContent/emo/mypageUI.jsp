@@ -21,14 +21,8 @@
     <title>SharEmo - Free Emoticon Share Website</title>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript" src="emo/assets/js/dropbox2.js">
-    </script>
-    <script type="text/javascript" src="emo/assets/js/preview.js">
-    </script>
+    <script type="text/javascript" src="emo/assets/js/dropbox2.js"></script>
     
-<script type="text/javascript" src="emo/assets/js/dropbox.js">
-	
-</script>
     <script>
         $('.fun-btn').on('click', function (event) {
             $(this).toggleClass('start-fun');
