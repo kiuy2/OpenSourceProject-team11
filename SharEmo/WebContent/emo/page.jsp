@@ -7,7 +7,16 @@
 	int curPage = to.getCurPage();
 	int perPage = to.getPerPage();
 	int method = (int)request.getAttribute("method");
-	int totalCount = to.getBoardList().size();
+	int totalCount;
+	String pageTag;
+	if(to.getBoardList() != null) {
+		totalCount = to.getBoardList().size();
+		pageTag = "listPage";
+	}
+	else {
+		totalCount = to.getUserList().size();
+		pageTag = "artistListPage";
+	}
 	
 	int totalPage = totalCount / perPage; //보여줄 페이지 번호 개수
 	
@@ -19,7 +28,7 @@
 			out.print("<font size=5 color='red'>"+ i+ "</font>");
 		}
 		else{
-			out.print("<a href='listPage.do?method="+method+"&curPage="+ i+ "'>"+i+"</a>");
+			out.print("<a href='"+pageTag+".do?method="+method+"&curPage="+ i+ "'>"+i+"</a>");
 		}
 		if(i!=totalPage)
 			out.print(" / ");

@@ -21,7 +21,7 @@ public class BoardSearchCommand implements BoardCommand {
 		}
 		
 		BoardDAO dao = new BoardDAO();
-		PageTO list = dao.search("title",searchValue, curPage);
+		PageTO list = dao.search("title", searchValue, curPage);
 		ArrayList<EmoticonTO> ticon =dao.getEmoticon();
 		//이모티콘 이미지 저장
 		request.setAttribute("ticon", ticon);

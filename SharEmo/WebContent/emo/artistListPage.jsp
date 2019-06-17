@@ -4,27 +4,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%@ page import="com.entity.PageTO"%>
+
 <! DOCTYPE html>
 <html>
 
 <head>
 
-<link href='https://fonts.googleapis.com/css?family=Dekko'
-	rel='stylesheet'>
+<link type="text/css" rel="stylesheet"
+	href="emo/assets/css/list_style.css">
 <link href='https://fonts.googleapis.com/css?family=Didact Gothic'
 	rel='stylesheet'>
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
-<link type="text/css" rel="stylesheet"
-	href="emo/assets/css/write_style.css">
 
 <title>SharEmo - Free Emoticon Share Website</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="emo/assets/js/dropbox2.js">
-</script>
-<script type="text/javascript" src="emo/assets/js/preview.js">
+	
 </script>
 </head>
 
@@ -70,12 +69,12 @@
 						<a href="listPage.do?method=3"><li><span>Hot</span></li></a>
 					</ul>
 				</div></li>
-			<li class="nav-mid-item"><a href="#">Artist</a>
+			<li class="nav-mid-item"><a href="artListPage.do?method=1">Artist</a>
 				<div class="nav-mid-item-drop">
 					<ul>
-						<a href="#"><li><span>New</span></li></a>
-						<a href="#"><li><span>Popular</span></li></a>
-						<a href="#"><li><span>Most<br/>Published</span></li></a>
+						<a href="artListPage.do?method=1"><li><span>New</span></li></a>
+						<a href="artListPage.do?method=2"><li><span>Popular</span></li></a>
+						<a href="artListPage.do?method=3"><li><span>Most<br/>Published</span></li></a>
 					</ul>
 				</div></li>
 			<li class="nav-mid-item"><a href="mypage.do">MyGallery</a>
@@ -99,35 +98,66 @@
 	</nav>
 
 	<section id="container">
+		<nav id="nav-mid-left">
+			<ul>
+				<li><a href="artistListPage.do?method=1">New Artist</a></li>
+				<li><a href="artistListPage.do?method=2">Popular Artist</a></li>
+				<li><a href="artistListPage.do?method=3">Most Published</a></li>
+			</ul>
+		</nav>
 		<section id="content">
-			<div id="content-wrapper">
-				<h2>Share your new COOL emoticon!</h2>
-				<form id="frm" name=form1 action='write.do' method=post enctype="multipart/form-data">
-					<div id="title">
-						<label for="title">Title : </label> <input type="text"
-							name="title" required>
-					</div>
-					<p>Artist : ${user.nickname}</p>
-					<div id="desc_label">
-						<label for="description">Description</label>
-						<p>0/500bytes</p>
-					</div>
-					<textarea name="description" rows="8" cols="100"></textarea>
-					<div id="file_label">
-						<label for="upload">Upload Images</label> <input type="file"
-							name="upload" id="input_images" value="폴더 선택" accept="image/*" multiple>
-							<input type="button" value="파일 리셋" onclick="resetFiles()">이미지 클릭 시 개별 삭제
-					</div>
-					<div class="upload_images"></div>
-					<span><button type="submit" >SUBMIT</button></span>
-				</form>
+			<table>
+
+				<c:forEach var="dto" items="${list}" varStatus="status">
+					<c:if test="${status.index % 4 eq 0}">
+						<tr>
+					</c:if>
+					<td><a href="mypage.do?id=${dto.id}">
+							<img class="Thumbnail" src="${dto.mascot}">
+						</a>
+						<p><a href="mypage.do?id=${dto.id}">${dto.nickname}</a></p>
+						<div class="info">
+							<img class="info_item" src="emo/images/follow.png">
+							<p class="info_item">${dto.followernum}</p>
+						</div>
+					</td>
+					<c:if test="${status.count % 4 eq 0}">
+						</tr>
+					</c:if>
+				</c:forEach>
+
+			</table>
+			<div id="content-footer">
+				<div id="paging">
+					<c:if test="${page.curPage > 1}">
+					<a href="artistListPage.do?method=${method}&curPage=${page.curPage - 1 }"><img src="emo/images/page_left.png"></a>
+					</c:if>
+					<p>
+						<!-- page -->
+						<jsp:include page="page.jsp" flush="true" />
+					</p>
+					<c:if test="${page.curPage < page.totalCount / page.perPage}">
+					<a href="artistListPage.do?method=${method}&curPage=${page.curPage + 1 }"><img src="emo/images/page_right.png"></a>
+					</c:if>
+				</div>
+
+				<p id="upload">
+					<c:if test="${user != null}">
+						<a href="writeui.do">Upload</a>
+					</c:if>
+					<c:if test="${user == null}">
+						<a href="loginerror.do">Upload</a>
+					</c:if>
+				</p>
 			</div>
 		</section>
 		<div id="ad">
-			<a href="https://www.idowell.co.kr/home/" target="_blank"><img
-				src="emo/images/ad/winnerstel.png"></a><br /> <a
-				href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F"
-				target="_blank"><img src="emo/images/ad/duo.jpg"></a>
+			<a href="https://www.idowell.co.kr/home/" target="_blank">
+				<img src="emo/images/ad/winnerstel.png">
+			</a><br/>
+			<a href="https://www.duo.co.kr/html/love_test/main.asp?u_div=agency1_DA5_2019&utm_medium=double&utm_source=kakao_banner&utm_campaign=DT_%EB%93%80%EC%98%A4pc&utm_term=%EB%A6%AC%ED%83%80%EA%B2%9F" target="_blank">
+				<img src="emo/images/ad/duo.jpg">
+			</a>
 		</div>
 	</section>
 
