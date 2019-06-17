@@ -182,6 +182,8 @@
     <section id="container_mypage">
         <section id="content_mypage">
             <div>
+                <h1 style="text-align: center">(JANGTIST)'s MY PAGE</h1>
+                <img src="에펠탑뺴꼼3.jpg" width="100" height="100" />
                 <h1 style="text-align: center">${user.id}'s MY PAGE</h1>
                 <img src="${user.mascot}", width="300" , height="300" />
 
